@@ -1,0 +1,9 @@
+.bolsas-despachar{
+    border: none;
+    outline: none;
+    padding: 3px 5px;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: rgb(168, 46, 46);
+}
