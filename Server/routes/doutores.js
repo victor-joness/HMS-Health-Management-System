@@ -214,7 +214,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//CREATE DOUTOR IN USERS
+//INSERT DOUTOR IN USERS
 router.post("/insert", async (req, res) => {
   const name = req.body.doutorName;
   const email = req.body.doutorEmail;
