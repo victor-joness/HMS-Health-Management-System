@@ -15,6 +15,15 @@
   gap: 2rem;
 }
 
+/* .header .infos .logout-header{
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  padding: .7rem;
+  border: 2px solid #ca79c6;
+  cursor: pointer;
+} */
+
 .header .infos .image {
   height: 5rem;
   width: 5rem;
@@ -36,4 +45,72 @@
   cursor: pointer;
   margin: 0;
   font-size: 1.5rem;
+}
+
+
+
+/* ========= MODAL =========== */
+
+.notification-container {
+  position: relative;
+}
+
+.notification-icon {
+  cursor: pointer;
+}
+
+.notification {
+  color: #9094AF;
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: 1;
+  width: 40rem;
+  border-radius: .5rem;
+}
+
+.modal.open {
+  display: block;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: .5rem;
+}
+
+.modal-content .modal-infos{
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  border: 2px solid #ca79c6;
+  padding: 1rem;
+  border-radius: .5rem;
+}
+
+.close {
+  display: flex;
+  right: 5px;
+  justify-content: center;  
+  align-items: center;
+  cursor: pointer;
+  color: #888;
+  line-height: 2rem;
+  font-size: 20px;
+  height: 2rem;
+  width: 2rem;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #ff0000;
 }
