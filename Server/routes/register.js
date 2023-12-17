@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
   const isDoutor = req.body.isDoutor;
   const isEnfermeira = req.body.isEnfermeira;
   const isPaciente = req.body.isPaciente;
-  const Img = req.body.Img;
+  const Img = "IMG-USER.png";
 
   db.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
     if (err) {
