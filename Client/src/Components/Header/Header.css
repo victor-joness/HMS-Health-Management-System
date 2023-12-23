@@ -47,6 +47,52 @@
   font-size: 1.5rem;
 }
 
+.header .infos-user{
+  height: 5rem;
+  width: auto;
+  margin-top: .5rem;
+}
+
+.header .infos-user h1 {
+  font-size: 2rem;
+}
+
+.header .infos-user h2 {
+  font-size: 1.5rem;
+  color: #7e7d7d;
+}
+
+.header .infos .image{
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  border: 2px solid #ca79c6;
+  cursor: pointer;
+}
+
+.header .infos .image img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.header .infos button{
+  display: flex;
+  justify-content: center;
+  width: 10rem;
+  background: #ca79c6;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.header .infos button:hover{
+  letter-spacing: 0.2rem;
+}
+
 
 
 /* ========= MODAL =========== */
