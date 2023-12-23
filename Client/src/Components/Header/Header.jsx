@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../Features/authSlice";
 import { Icons } from "../../Components/Icons/Icons";
 
-const Header = ({ auth, cargo }) => {
+const Header = ({ cargo }) => {
+  const auth = useSelector((state) => {
+    return state.auth;
+  });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -58,8 +62,8 @@ const Header = ({ auth, cargo }) => {
             </div>
           </div>
         </div>
-        <a className="image" href="/doutor-perfil">
-          <img src={`upload/${auth.Img}`} alt="" />
+        <a className="image" href={"/" + cargo + "-perfil"}>
+          <img src={`http://localhost:5173/upload/${auth.Img}`} alt="" />
         </a>
         <div className="infos-user">
           <h1>{auth.name}</h1>
