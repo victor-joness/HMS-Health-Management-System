@@ -1,0 +1,52 @@
+.container-home{
+    display: flex;
+    background: linear-gradient(#D8D2FC, #FDE2E0, #E6E4EA, #E0E9F4);
+    width: 100vw;
+    height: 100vh;
+}
+
+.container-home-center{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.432);
+    width: 70rem;
+    height: 25rem;
+    padding: 1rem;
+    border-radius: 5rem;
+}
+
+.container-home-center .image{
+    width: 20rem;
+    height: 6rem;
+    margin: 1rem auto 1rem auto;
+}
+
+.container-home-center .image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.container-home-center h1{
+    text-align: center;
+    font-size: 3rem;
+    text-shadow: .2rem .2rem #0000004b;
+    margin-top: 1rem;
+}
+
+.container-home-center .buttons{
+    display: flex;
+}
+
+.container-home-center .buttons button{
+    width: 30rem;
+    margin: auto;
+    background: #CA79C6;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
