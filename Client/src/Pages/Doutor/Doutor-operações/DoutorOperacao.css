@@ -1,0 +1,51 @@
+.add-cirurgia-container-bottom{
+    background: rgba(157, 201, 209, 0.315);
+    padding-bottom: 2.4rem;
+    height: auto;
+    width: auto;
+}
+
+.add-cirurgia-container-bottom .container {
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: auto;
+  box-shadow: 0px 1px 11px 2px #0000001f;
+  background: white;
+  margin: 2rem;
+}
+
+.add-cirurgia-container-bottom .buttons button {
+  display: flex;
+  justify-content: center;
+  width: 30rem;
+  background: #ca79c6;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.add-cirurgia-container-bottom .buttons {
+  display: flex;
+  justify-content: left;
+  margin-left: 2rem;
+  padding-top: 2rem;
+  gap: 2rem;
+}
+
+.update{
+  background-color: green;
+}
+
+.falha{
+  background-color: rgb(219, 141, 141);
+}
+
+.img-do-grid{
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    margin: auto;
+}
