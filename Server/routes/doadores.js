@@ -65,6 +65,7 @@ router.post("/", async (req, res) => {
     doadorEndereco,
     doadorDetalhes,
     doadorQTD,
+    doadorData
   } = req.body;
 
   try {
@@ -77,7 +78,7 @@ router.post("/", async (req, res) => {
         }
         if (result.length == 0) {
           db.query(
-            "INSERT INTO doadores (doadorName, doadorIdade, doadorNumero,doadorRG, doadorEmail, doadorSangue, doadorGenero,doadorAniversario, doadorEndereco, doadorDetalhes, doadorQTD) VALUE (?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO doadores (doadorName, doadorIdade, doadorNumero,doadorRG, doadorEmail, doadorSangue, doadorGenero,doadorAniversario, doadorEndereco, doadorDetalhes, doadorQTD, doadorData) VALUE (?,?,?,?,?,?,?,?,?,?,?,?)",
             [
               doadorName,
               doadorIdade,
@@ -90,6 +91,7 @@ router.post("/", async (req, res) => {
               doadorEndereco,
               doadorDetalhes,
               doadorQTD,
+              doadorData
             ],
             (error, response) => {
               if (error) {
@@ -109,6 +111,7 @@ router.post("/", async (req, res) => {
                   doadorEndereco: doadorEndereco,
                   doadorDetalhes: doadorDetalhes,
                   doadorQTD: doadorQTD,
+                  doadorData: doadorData
                 },
               });
             }
@@ -225,6 +228,7 @@ router.put("/doacao", async (req, res) => {
     doadorEndereco,
     doadorDetalhes,
     doadorQTD,
+    doadorData
   } = req.body;
 
   try {
@@ -295,6 +299,7 @@ router.put("/doacao", async (req, res) => {
                                 doadorEndereco: doadorEndereco,
                                 doadorDetalhes: doadorDetalhes,
                                 doadorQTD: qtd,
+                                doadorData: doadorData
                               },
                             });
                           }
@@ -331,6 +336,7 @@ router.put("/:id", async (req, res) => {
     doadorEndereco,
     doadorDetalhes,
     doadorQTD,
+    doadorData
   } = req.body;
 
   try {
@@ -340,7 +346,7 @@ router.put("/:id", async (req, res) => {
       }
       if (result.length > 0) {
         db.query(
-          "UPDATE doadores SET doadorName = ?, doadorIdade = ? ,doadorNumero = ?, doadorRG = ?, doadorEmail = ?, doadorSangue = ?, doadorGenero = ?, doadorAniversario = ?, doadorEndereco = ?, doadorDetalhes = ? , doadorQTD = ? WHERE id = ?",
+          "UPDATE doadores SET doadorName = ?, doadorIdade = ? ,doadorNumero = ?, doadorRG = ?, doadorEmail = ?, doadorSangue = ?, doadorGenero = ?, doadorAniversario = ?, doadorEndereco = ?, doadorDetalhes = ? , doadorQTD = ?, doadorData = ?, WHERE id = ?",
           [
             doadorName,
             doadorIdade,
@@ -353,6 +359,7 @@ router.put("/:id", async (req, res) => {
             doadorEndereco,
             doadorDetalhes,
             doadorQTD,
+            doadorData,
             id,
           ],
           (err, result) => {
@@ -373,6 +380,7 @@ router.put("/:id", async (req, res) => {
                   doadorEndereco: doadorEndereco,
                   doadorDetalhes: doadorDetalhes,
                   doadorQTD: doadorQTD,
+                  doadorData: doadorData
                 },
               });
             }
