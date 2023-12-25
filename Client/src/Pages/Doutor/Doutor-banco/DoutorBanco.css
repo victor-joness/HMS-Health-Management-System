@@ -1,0 +1,114 @@
+.doador-container {
+  display: flex;
+}
+
+.doador-container-direita {
+  width: 100vw;
+  background: rgba(157, 201, 209, 0.315);
+}
+
+.doador-container-bottom .container {
+  width: auto;
+  height: auto;
+  gap: 0;
+}
+
+.banco-container-bottom {
+  background: rgba(157, 201, 209, 0.315);
+  padding-bottom: 2rem;
+  height: auto;
+  width: auto;
+}
+
+.doador-container-bottom {
+  background: rgba(157, 201, 209, 0.315);
+}
+
+.AfterSideBar {
+  width: auto;
+  padding: 2rem;
+  margin: 0;
+}
+
+.Main_Add_Doctor_div {
+  margin: auto;
+  padding: 3rem;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0px 1px 11px 2px #0000001f;
+  background-color: white;
+}
+
+.Main_Add_Doctor_div h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0rem 0rem 1rem 0rem;
+}
+
+.Main_Add_Doctor_div img {
+  width: 10%;
+  display: block;
+  margin: auto;
+  margin-bottom: 2rem;
+  border-radius: 6rem;
+}
+
+.Main_Add_Doctor_div form div label {
+  width: 200px;
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin-top: 5px;
+}
+
+.Main_Add_Doctor_div .file {
+  width: 20%;
+  display: block;
+  margin: auto;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  background-color: rgba(157, 201, 209, 0.315);
+  padding: 0.6rem;
+  cursor: pointer;
+}
+
+.banco-container-bottom {
+  background: rgba(157, 201, 209, 0.315);
+  padding: 2.7rem;
+  height: auto;
+  width: auto;
+}
+
+.banco-container-bottom .container {
+  margin: auto;
+  padding: 3rem;
+  border-radius: 10px;
+  width: auto;
+  box-shadow: 0px 1px 11px 2px #0000001f;
+  background: white;
+  margin: 2rem;
+}
+
+.dispachar {
+  background-color: red;
+}
+
+.grid-banco {
+  height: 70.6vh;
+  width: auto;
+  font-size: 1.5rem;
+}
+
+@media (max-height:770px){
+  .grid-banco {
+    height: 90.6vh;
+    width: auto;
+    font-size: 1.5rem;
+  } 
+}
+
+@media (max-height:640px){
+  .home-container .home-direita .container{
+    height: 85.5%;
+  }
+}
