@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../Features/authSlice";
 import { Icons } from "../../Components/Icons/Icons";
 
-const Header = ({ cargo }) => {
+const Header = ({ cargo, title }) => {
   const auth = useSelector((state) => {
     return state.auth;
   });
@@ -35,7 +35,7 @@ const Header = ({ cargo }) => {
 
   return (
     <div className="header">
-      <h1>Dashboard</h1>
+      <h1>{title ? title : "dashboard"}</h1>
       <div className="infos">
         <div className="notification-container">
           <div className="notification-icon" onClick={handleModal}>
