@@ -51,7 +51,8 @@ export default function EditDoutor({ doadorId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //update de doador
+
+    const date = new Date();
 
     dispatch(
       doadorUpdate({
@@ -66,7 +67,8 @@ export default function EditDoutor({ doadorId }) {
         doadorAniversario: DoadorValue.doadorAniversario,
         doadorEndereco: DoadorValue.doadorEndereco,
         doadorDetalhes: DoadorValue.doadorDetalhes,
-        doadorQTD: DoadorValue.doadorQTD
+        doadorQTD: DoadorValue.doadorQTD,
+        doadorData: `${date.getDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`
       })
     ).then((res) => {
       if(res.payload.msg == "mudaça feita com sucesso"){
