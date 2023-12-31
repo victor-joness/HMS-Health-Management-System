@@ -1,5 +1,3 @@
-const { auth, isUser, isAdmin } = require("../middleware/auth");
-const bcript = require("bcrypt");
 const mysql = require("mysql2");
 
 const router = require("express").Router();
@@ -10,8 +8,6 @@ const db = mysql.createConnection({
   password: process.env.MYSQL_PASSWORD,
   database: "erp-hospitalar",
 });
-
-const saltRounds = 10;
 
 db.connect();
 
@@ -44,7 +40,7 @@ router.post("/", async (req, res) => {
       [camaNumero, camaQuarto, camaStatus, camaNivel, camaValor, camaDetalhes],
       (error, response) => {
         if (error) {
-            console.log(error);
+          console.log(error);
           res.send(error);
         }
         res.send({
@@ -66,21 +62,14 @@ router.post("/", async (req, res) => {
 });
 
 /* update cama */
-/* router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const {
     camaId,
-    camaName,
-    camaIdade,
     camaNumero,
-    camaEmail,
-    camaSangue,
-    camaGenero,
-    camaAniversario,
-    camaEndereco,
-    camaEducacao,
-    camaDepartamento,
-    docID,
-    camaPassword,
+    camaQuarto,
+    camaStatus,
+    camaNivel,
+    camaValor,
     camaDetalhes,
   } = req.body;
 
@@ -90,59 +79,45 @@ router.post("/", async (req, res) => {
         res.send(err);
       }
       if (result.length > 0) {
-        bcript.hash(camaPassword, saltRounds, (err, hash) => {
-          db.query(
-            "UPDATE camas SET camaName = ?, camaIdade = ? ,camaNumero = ?, camaEmail = ?, camaSangue = ?, camaGenero = ?, camaAniversario = ?, camaEndereco = ?, camaEducacao = ?, camaDepartamento = ? , camaPassword = ?, camaDetalhes = ? WHERE id = ?",
-            [
-              camaName,
-              camaIdade,
-              camaNumero,
-              camaEmail,
-              camaSangue,
-              camaGenero,
-              camaAniversario,
-              camaEndereco,
-              camaEducacao,
-              camaDepartamento,
-              hash,
-              camaDetalhes,
-              camaId,
-            ],
-            (err, result) => {
-              if (err) {
-                res.send(err);
-              } else {
-                res.send({
-                  msg: "mudaça feita com sucesso",
-                  cama: {
-                    camaName: camaName,
-                    camaIdade: camaIdade,
-                    camaNumero: camaNumero,
-                    camaEmail: camaEmail,
-                    camaSangue: camaSangue,
-                    camaGenero: camaGenero,
-                    camaAniversario: camaAniversario,
-                    camaEndereco: camaEndereco,
-                    camaEducacao: camaEducacao,
-                    camaDepartamento: camaDepartamento,
-                    docID: docID,
-                    camaPassword: hash,
-                    camaDetalhes: camaDetalhes,
-                  },
-                });
-              }
+        db.query(
+          "UPDATE camas SET camaNumero = ?, camaQuarto = ? ,camaStatus = ?, camaNivel = ?, camaValor = ?, camaDetalhes = ? WHERE id = ?",
+          [
+            camaNumero,
+            camaQuarto,
+            camaStatus,
+            camaNivel,
+            camaValor,
+            camaDetalhes,
+            camaId,
+          ],
+          (err, result) => {
+            if (err) {
+              res.send(err);
+            } else {
+              res.send({
+                msg: "mudaça feita com sucesso",
+                cama: {
+                  camaNumero:camaNumero,
+                  camaQuarto:camaQuarto,
+                  camaStatus:camaStatus,
+                  camaNivel:camaNivel,
+                  camaValor:camaValor,
+                  camaDetalhes:camaDetalhes,
+                  camaId:camaId,
+                },
+              });
             }
-          );
-        });
+          }
+        );
       }
     });
   } catch (error) {
     res.status(500).send(error);
   }
-}); */
+});
 
 /* delete cama */
-/* router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     db.query("SELECT * FROM camas WHERE id = ?", [id], (err, result) => {
@@ -154,15 +129,14 @@ router.post("/", async (req, res) => {
           if (err) {
             res.send(err);
           } else {
-            res.send({ msg: "Doutor deletado com Sucesso" });
+            res.send({ msg: "Cama deletada com Sucesso" });
           }
         });
       }
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send(error);
   }
-}); */
+});
 
 module.exports = router;
