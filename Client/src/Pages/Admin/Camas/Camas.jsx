@@ -4,7 +4,6 @@ import "./Camas.css";
 import { toast } from "react-toastify";
 
 import { DataGrid } from "@mui/x-data-grid";
-import axios from "axios";
 
 import Navbar from "../../../Components/Navbar/Navbar";
 import Header from "../../../Components/Header/Header";
@@ -17,7 +16,6 @@ import {
   camaCreate,
   camaFetch,
   camaDelete,
-  camaUpdate,
 } from "../../../Features/CamaSlice";
 
 const Camas = () => {
@@ -29,15 +27,14 @@ const Camas = () => {
     CamaNumero: "",
     CamaQuarto: "",
     CamaStatus: "circulo-vermelho.png", //tres nivies (disponivel, indisponivel, limpeza)
-    CamaNivel: 3,
-    CamaValor: "",
+    CamaNivel: "option-null",
+    CamaValor: "0",
     CamaDetalhes: "",
   };
 
   const [CamaValue, setCamaValue] = useState(initData);
 
   const [status, setStatus] = useState(true);
-  const [file, setFile] = useState(null);
 
   const [loading, setLoading] = useState(false);
 
@@ -51,6 +48,11 @@ const Camas = () => {
 
   const HandleCamaSubmit = async (e) => {
     e.preventDefault();
+
+    if(CamaValue.CamaNivel == "option-null"){
+      toast.error("Escolha um nivel valido para a cama");
+      return;
+    };
 
     dispatch(
       camaCreate({
@@ -73,6 +75,9 @@ const Camas = () => {
     });
   };
 
+  //QUEM EDITA E CRIA E APAGA É O ADMIN, O MEDICO, E ENFERMEIRO E PACIENTE APENAS
+  // CONSSEGUEM VER E MUDAR O STATUS DA CAMA, TALVEZ FAZER UMA TABELA DE HISTORICO
+
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "camaNumero", headerName: "Número da cama", width: 150 },
@@ -80,7 +85,7 @@ const Camas = () => {
     {
       field: "camaStatus",
       headerName: "Status",
-      width: 70,
+      width: 60,
       renderCell: (params) => {
         return (
           <img className="img-do-grid" src={`/upload/${params.value}`}></img>
@@ -90,11 +95,10 @@ const Camas = () => {
     {
       field: "camaNivel",
       headerName: "Nível da cama",
-      description: "O Nível da cama são 3 (Cama completa, Média, Basica)",
       width: 200,
     },
     { field: "camaValor", headerName: "Valor da cama", width: 120 },
-    { field: "camaDetalhes", headerName: "Detalhes da cama", width: 200 },
+    { field: "camaDetalhes", headerName: "Detalhes da cama", width: 250 },
     {
       field: "Ações",
       headerName: "Ações",
@@ -108,7 +112,7 @@ const Camas = () => {
               onClick={() => handleDelete(params.row.id)}
               className="delete"
             >
-              Delete
+              Deletar
             </button>
             <EditCama camaId={params.row.id}></EditCama>
           </div>
@@ -116,8 +120,6 @@ const Camas = () => {
       },
     },
   ];
-
-  const HandleGetCama = (e) => {};
 
   const HandleAddCama = () => {
     setStatus(false);
@@ -158,9 +160,6 @@ const Camas = () => {
                     pageSize={10}
                     rowsPerPageOptions={[10]}
                     checkboxSelection
-                    cellClassName={(params) =>
-                      params.field === 'description' ? 'custom-description-cell' : ''
-                    }
                   />
                 </div>
               </div>
@@ -236,9 +235,10 @@ const Camas = () => {
                           }
                           required
                         >
-                          <option value="1">Cama Completa</option>
-                          <option value="2">Cama Média</option>
-                          <option value="3">Cama Simples</option>
+                          <option value="option-null">Escolha uma opção</option>
+                          <option value="1 - Cama Completa">Cama Completa</option>
+                          <option value="2 - Cama Média">Cama Média</option>
+                          <option value="3 - Cama Simples">Cama Simples</option>
                         </select>
                       </div>
                     </div>
