@@ -68,8 +68,6 @@ export default function EditCama({ camaId }) {
     });
   };
 
-  console.log(CamaValue);
-
   return (
     <div>
       <div className="edit" variant="outlined" onClick={handleClickOpen}>
