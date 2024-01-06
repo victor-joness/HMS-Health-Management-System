@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 
 import DoutorReducer from './Features/DoutorSlice';
 import EnfermeiraReducer from './Features/EnfermeiraSlice';
+import FarmaciaReducer from './Features/FarmaciaSlice';
 import DoadorReducer from './Features/DoadorSlice';
 import CirurgiaReducer from "./Features/CirurgiaSlice";
 import CamasReducer from "./Features/CamaSlice";
@@ -20,7 +21,8 @@ const store = configureStore({
     cirurgias : CirurgiaReducer,
     doutores: DoutorReducer,
     doador: DoadorReducer,
-    enfermeiras: EnfermeiraReducer
+    enfermeiras: EnfermeiraReducer,
+    farmacia: FarmaciaReducer
   }
 });
 
