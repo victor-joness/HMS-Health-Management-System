@@ -15,6 +15,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 //Admin pages
 import Doutor from "./Pages/Admin/Doutor/Doutor";
 import Enfermeira from "./Pages/Admin/Enfermeira/Enfermeira";
+import Farmacia from "./Pages/Admin/Farmacia/Farmacia";
 import Camas from "./Pages/Admin/Camas/Camas";
 //Home
 import Home from "./Pages/Home/Home";
@@ -41,6 +42,7 @@ function App() {
             {/* Admin rotas */}
             <Route path="/admin/doutor" element={<Doutor />} />
             <Route path="/admin/enfermeira" element={<Enfermeira />} />
+            <Route path="/admin/farmacia" element={<Farmacia />} />
             <Route path="/admin/camas" element={<Camas />} />
 
             {/* Doutor rotas */}
