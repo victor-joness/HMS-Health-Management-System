@@ -5,6 +5,7 @@ require("dotenv").config();
 const users = require("./routes/users");
 const doutores = require("./routes/doutores");
 const enfermeiras = require("./routes/Enfermeira");
+const farmacias = require("./routes/farmacia");
 const register = require("./routes/register");
 const login = require("./routes/login");
 const doadores = require("./routes/doadores");
@@ -25,6 +26,7 @@ app.use("/api/users", users);
 app.use("/api/doutores", doutores);
 app.use("/api/doadores", doadores);
 app.use("/api/enfermeiras", enfermeiras);
+app.use("/api/farmacias", farmacias);
 app.use("/api/cirurgia", cirurgia);
 app.use("/api/camas", cama);
 
