@@ -44,7 +44,7 @@ const Register = () => {
   const validationRegister = yup.object().shape({
     username: yup
       .string()
-      .min(5, "Seu username deve ter pelo menos 5 caracteres")
+      .min(3, "Seu nome deve ter pelo menos 3 caracteres")
       .required("Este campo é obrigatório"),
     email: yup
       .string()
