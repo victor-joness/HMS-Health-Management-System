@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require("../server");
 
 describe("API Tests Users", () => {
-  it("Get all users", async () => {
+  it("Pegar todos os usuarios", async () => {
     const res = await request(app).get("/api/users");
 
     let usersBoolean = false;
@@ -13,10 +13,13 @@ describe("API Tests Users", () => {
 
     expect(res.status).toBe(200);
     expect(usersBoolean).toBe(true);
+  });
 
-    /*
-    expect(usersBoolean).toEqual(true);
-    expect(usersBoolean).toHaveProperty(true);
-    */
+  it("Pegar um usuário específico pelo ID", async () => {
+    const userId = 1; // Substitua pelo ID de um usuário existente no seu banco de dados
+    const res = await request(app).get(`/api/users/${userId}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("id", userId);
   });
 });

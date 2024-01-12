@@ -13,10 +13,11 @@ const cirurgia = require("./routes/cirurgias");
 const cama = require("./routes/camas");
 
 const multer = require("multer");
-const dbMiddleware = require("./middleware/dbMiddleware");
 
 const app = express();
+const dbMiddleware = require("./middleware/dbMiddleware");
 
+//MIDLEWARES
 app.use(express.json());
 app.use(cors());
 app.use(dbMiddleware);
