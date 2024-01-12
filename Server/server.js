@@ -12,12 +12,14 @@ const doadores = require("./routes/doadores");
 const cirurgia = require("./routes/cirurgias");
 const cama = require("./routes/camas");
 
-
 const multer = require("multer");
+const dbMiddleware = require("./middleware/dbMiddleware");
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
+app.use(dbMiddleware);
 
 //ENDPOINTS
 app.use("/api/register", register);
