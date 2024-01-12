@@ -1,28 +1,20 @@
-const { auth, isUser, isAdmin } = require("../middleware/auth");
-const bcript = require("bcrypt");
-const mysql = require("mysql2");
-
 const router = require("express").Router();
+const dbMiddleware = require("../middleware/dbMiddleware");
 
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: process.env.MYSQL_PASSWORD,
-    database: "erp-hospitalar",
-});
+// Rota protegida pelo middleware de conexão com o banco de dados
+router.use(dbMiddleware);
 
-db.connect();
-
-//GET ALL USERS
-router.get("/", async (req , res) => {
-    try {
-        db.query("SELECT * FROM users", (err, result) => {
-            const users = result;
-            res.status(200).send(users);
-        });
-      } catch (error) {
-        console.log(error);
-      }
+// GET ALL USERS
+router.get("/", async (req, res) => {
+  try {
+    const [users, fields] = await req.dbConnection.query("SELECT * FROM users");
+    res.status(200).send(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Erro ao buscar usuários");
+  } finally {
+     // O mysql2/promise cuidará automaticamente da liberação da conexão para o pool.
+  }
 });
 
 module.exports = router;
