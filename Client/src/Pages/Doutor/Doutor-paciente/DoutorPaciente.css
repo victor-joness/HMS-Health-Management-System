@@ -1,0 +1,89 @@
+.filters{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.container-paciente{
+    display: flex;
+    gap: 1rem;
+    background: rgba(157, 201, 209, 0.315);
+    padding: 1rem;
+    padding-bottom: 2rem;
+    height: auto;
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.container-paciente input, .container-paciente select, .container-paciente button{
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    margin: 0;
+    border-radius: .5rem;
+}
+
+.container-paciente input{
+    width: 40rem;
+    font-size: 1.7rem;
+}
+
+.container-paciente select{
+    width: auto;
+    font-size: 1.7rem;
+}
+
+.container-paciente button{
+    display: flex;
+    justify-content: center;
+    width: 10rem;
+    background: #ca79c6;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin: 0;
+    font-size: 1.5rem;
+}
+.container-paciente button:hover{
+    letter-spacing: .1rem;
+}
+
+.container-pagination{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 2rem;
+    display: flex;
+    background: rgba(157, 201, 209, 0.315);
+}
+
+.pagination{
+    display: flex;
+    gap: 1rem;
+    border: .1rem solid #bebebe;
+    padding: 1rem;
+    height: auto;
+    width: 100%;
+    border-radius: .5rem;
+}
+
+/* Os numeros dentro do pagination */
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root{
+    font-size: 1.7rem !important;
+}
+
+/* os 3 pontinhos do pagination */
+.css-1v2lvtn-MuiPaginationItem-root{
+    font-size: 1.7rem !important;
+}
+
+/* o icon de flecha nas laterais do pagination */
+.css-g2z002-MuiSvgIcon-root-MuiPaginationItem-icon{
+    font-size: 2.25rem !important;
+}
+
+/* o button do pagination que ta selecionado */
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: #ca79c6 !important;
+}
