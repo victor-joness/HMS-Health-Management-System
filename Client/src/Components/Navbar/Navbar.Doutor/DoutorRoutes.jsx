@@ -12,7 +12,7 @@ const DoutorRoutes = ({ auth, isOpen, handleLogout }) => {
       <LinkRoute to="/doutor-prescrições" icon={<Icons.GiMedicines />} text="Prescrições" isOpen={isOpen} />
       <LinkRoute to="/doutor-fila" icon={<Icons.MdQueue />} text="Fila" isOpen={isOpen} />
       <LinkRoute to="/doutor-sinaisvital" icon={<Icons.TbActivityHeartbeat />} text="Sinais Vitais" isOpen={isOpen} />
-      <LinkRoute to="/doutor-pacientes" icon={<Icons.FaUsers />} text="Pacientes" isOpen={isOpen} />
+      <LinkRoute to="/doutor/pacientes" icon={<Icons.FaUsers />} text="Pacientes" isOpen={isOpen} />
       <LinkRoute to="/doutor-consultas" icon={<Icons.AiOutlineClockCircle />} text="Consultas" isOpen={isOpen} />
       <LinkRoute to="/doutor-camas" icon={<Icons.TbBed />} text="Camas" isOpen={isOpen} />
 
