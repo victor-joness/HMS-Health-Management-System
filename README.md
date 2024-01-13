@@ -10,6 +10,9 @@
 
 <!-- EM ANALISE  -->
 
+### () -> () -> Fazer a refatoração do HandleLogout, pq ta sendo chamando em todas as telas, e podemos apenas importa isso.
+### () -> () -> Fazer a tela de pacientes na pagina de "Doutor" e "Enfermeira" que serao a mesma;
+
 <!-- BUGS/IMPROVEMENT -->
 
 ### () -> () -> Fazer a verificação do 
