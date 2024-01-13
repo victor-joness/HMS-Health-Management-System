@@ -12,6 +12,7 @@ import FarmaciaReducer from './Features/FarmaciaSlice';
 import DoadorReducer from './Features/DoadorSlice';
 import CirurgiaReducer from "./Features/CirurgiaSlice";
 import CamasReducer from "./Features/CamaSlice";
+import PacientesReducer from "./Features/PacientesSlice";
 import authReducer, { loadUser } from './Features/authSlice';
 
 const store = configureStore({
@@ -22,7 +23,8 @@ const store = configureStore({
     doutores: DoutorReducer,
     doador: DoadorReducer,
     enfermeiras: EnfermeiraReducer,
-    farmacia: FarmaciaReducer
+    farmacia: FarmaciaReducer,
+    pacientes: PacientesReducer
   }
 });
 
