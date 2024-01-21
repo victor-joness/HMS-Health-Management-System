@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../Components/Navbar/Navbar";
 import Dispachar from "../../../Components/Dispachar/Dispachar";
+import Header from "../../../Components/Header/Header";
 
 import { bolsasFetch } from "../../../Features/DoadorSlice";
 
@@ -74,25 +75,12 @@ const DoutorBanco = () => {
       <div className="home-container">
         <Navbar Cargo={auth}></Navbar>
         <div className="home-direita">
-          <div className="header">
-            <h1>Banco de Sangue</h1>
-            <div className="infos">
-              <div className="image">
-                <img src={`/upload/${auth.Img}`} alt="" />
-              </div>
-              <h1>{auth.name}</h1>
-              <button className="logout" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          </div>
+          <Header title={"Banco de Sangue"} cargo={"Doutor"} />
           <div className="container">
             <div className="banco-container-bottom">
               <div className="container">
                 <div className="table">
-                  <div
-                    className="grid-banco"
-                  >
+                  <div className="grid-banco">
                     <DataGrid
                       rows={linhas}
                       columns={columns}
