@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./DoutorDespachar.css";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../../../Components/Navbar/Navbar";
+import Header from "../../../Components/Header/Header";
 
 import { bolsasSaidasFetch } from "../../../Features/DoadorSlice";
 
@@ -19,7 +20,7 @@ const DoutorDespachar = () => {
 
   const retirada = useSelector((state) => {
     return state.doador.bolsasSaidas;
-  })
+  });
 
   const dispatch = useDispatch();
 
@@ -33,11 +34,11 @@ const DoutorDespachar = () => {
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150},
+    { field: "id", headerName: "ID", width: 150 },
     { field: "pacienteBolsas", headerName: "Nome do paciente", width: 250 },
     { field: "grupoBolsas", headerName: "Tipo S", width: 70 },
     { field: "qtdBolsas", headerName: "Qtd de bolsas", width: 110 },
-    { field: "valorBolsas", headerName: "valor das bolsas (R$)", width: 200},
+    { field: "valorBolsas", headerName: "valor das bolsas (R$)", width: 200 },
     { field: "dataBolsas", headerName: "data de retirada", width: 150 },
   ];
 
@@ -50,18 +51,7 @@ const DoutorDespachar = () => {
       <div className="home-container">
         <Navbar Cargo={auth}></Navbar>
         <div className="home-direita">
-          <div className="header">
-            <h1>Listagem de despachamento</h1>
-            <div className="infos">
-              <div className="image">
-                <img src={`/upload/${auth.Img}`} alt="" />
-              </div>
-              <h1>{auth.name}</h1>
-              <button className="logout" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          </div>
+          <Header title={"Listagem de despachamento"} cargo={"Doutor"} />
           <div className="container">
             <div className="banco-container-bottom">
               <div className="container">
@@ -81,7 +71,7 @@ const DoutorDespachar = () => {
                       checkboxSelection
                       initialState={{
                         sorting: {
-                          sortModel: [{ field: 'id', sort: 'desc' }],
+                          sortModel: [{ field: "id", sort: "desc" }],
                         },
                       }}
                     />
