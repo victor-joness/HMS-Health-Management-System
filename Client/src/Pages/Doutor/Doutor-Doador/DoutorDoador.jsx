@@ -3,6 +3,7 @@ import "./DoutorDoador.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../Components/Navbar/Navbar";
+import Header from "../../../Components/Header/Header";
 
 import { doadorFetch } from "../../../Features/DoadorSlice";
 
@@ -14,7 +15,7 @@ import BolsasDoador from "../../../Components/BolsasDoador/bolsasDoador";
 import doadorimg from "../../../Assets/doadoravatar.png";
 import { logoutUser } from "../../../Features/authSlice";
 
-import { doadorCreate, doadorDelete} from "../../../Features/DoadorSlice";
+import { doadorCreate, doadorDelete } from "../../../Features/DoadorSlice";
 
 const DoutorDoador = () => {
   const { doadores: doadores } = useSelector((state) => state.doador);
@@ -37,7 +38,7 @@ const DoutorDoador = () => {
     doadorAniversario: "",
     doadorEndereco: "",
     doadorDetalhes: "",
-    doadorQTD: ""
+    doadorQTD: "",
   };
 
   const [DoadorValue, setDoadorValue] = useState(initData);
@@ -88,7 +89,9 @@ const DoutorDoador = () => {
         doadorEndereco: DoadorValue.doadorEndereco,
         doadorDetalhes: DoadorValue.doadorDetalhes,
         doadorQTD: 0,
-        doadorData: `${date.getDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`
+        doadorData: `${date.getDate()}/${
+          date.getUTCMonth() + 1
+        }/${date.getFullYear()}`,
       })
     ).then((res) => {
       if (res.payload.msg == "Doador já cadastrado") {
@@ -157,18 +160,7 @@ const DoutorDoador = () => {
       <div className="home-container">
         <Navbar Cargo={auth}></Navbar>
         <div className="home-direita-doador">
-          <div className="header">
-            <h1>Doadores de Sangue</h1>
-            <div className="infos">
-              <div className="image">
-                <img src={`/upload/${auth.Img}`} alt="" />
-              </div>
-              <h1>{auth.name}</h1>
-              <button className="logout" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          </div>
+          <Header title={"Doadores de Sangue"} cargo={"Doutor"} />
           <div className="container">
             {status ? (
               <div className="add-doador-container-bottom">
