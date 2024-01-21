@@ -3,6 +3,7 @@ import "./DoutorOperacao.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../Components/Navbar/Navbar";
+import Header from "../../../Components/Header/Header";
 
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
@@ -146,8 +147,8 @@ const DoutorOperacao = () => {
     { field: "id", headerName: "ID", width: 50 },
     { field: "cirurgiaPaciente", headerName: "Nome do Paciente", width: 160 },
     { field: "cirurgiaMedico", headerName: "Nome do Médico", width: 160 },
-    { field: "cirurgiaAux1", headerName: "Nome do Aux1", width: 160 },
-    { field: "cirurgiaAux2", headerName: "Nome do Aux2", width: 160 },
+    { field: "cirurgiaAux1", headerName: "Nome do Aux1", width: 140 },
+    { field: "cirurgiaAux2", headerName: "Nome do Aux2", width: 140 },
     { field: "cirurgiaRG", headerName: "RG do paciente", width: 150 },
     { field: "cirurgiaNumero", headerName: "Número", width: 120 },
     { field: "cirurgiaIdade", headerName: "Idade", type: "number", width: 60 },
@@ -167,7 +168,7 @@ const DoutorOperacao = () => {
       headerName: "Detalhes do Paciente",
       width: 200,
     },
-    { field: "cirurgiaData", headerName: "Data", width: 80 },
+    { field: "cirurgiaData", headerName: "Data", width: 110 },
     {
       field: "cirurgiaEstado",
       headerName: "Status",
@@ -216,18 +217,7 @@ const DoutorOperacao = () => {
       <div className="home-container">
         <Navbar Cargo={auth}></Navbar>
         <div className="home-direita">
-          <div className="header">
-            <h1>Cirurgia / Operação</h1>
-            <div className="infos">
-              <div className="image">
-                <img src={`/upload/${auth.Img}`} alt="" />
-              </div>
-              <h1>{auth.name}</h1>
-              <button className="logout" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          </div>
+          <Header title={"Cirurgia / Operação"} cargo={"Doutor"} />
           <div className="container">
             {status ? (
               <div className="add-cirurgia-container-bottom">
