@@ -3,6 +3,7 @@ import "./DoutorPaciente.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import Header from "../../../Components/Header/Header";
 import Navbar from "../../../Components/Navbar/Navbar";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -76,18 +77,7 @@ const DoutorPaciente = () => {
       <div className="home-container">
         <Navbar Cargo={auth}></Navbar>
         <div className="home-direita">
-          <div className="header">
-            <h1>Listagem de pacientes</h1>
-            <div className="infos">
-              <div className="image">
-                <img src={`/upload/${auth.Img}`} alt="" />
-              </div>
-              <h1>{auth.name}</h1>
-              <button className="logout" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          </div>
+          <Header title={"Listagem de pacientes"} cargo={"Doutor"} />
           <div className="container">
             {status ? (
               <div>
@@ -117,7 +107,12 @@ const DoutorPaciente = () => {
                 {/* PAGINATION */}
                 <div className="container-pagination">
                   <Stack spacing={2}>
-                    <Pagination className="pagination" count={10} variant="outlined" shape="rounded" />
+                    <Pagination
+                      className="pagination"
+                      count={10}
+                      variant="outlined"
+                      shape="rounded"
+                    />
                   </Stack>
                 </div>
               </div>
