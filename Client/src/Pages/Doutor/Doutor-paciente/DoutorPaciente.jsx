@@ -5,13 +5,70 @@ import { useNavigate } from "react-router-dom";
 
 import Header from "../../../Components/Header/Header";
 import Navbar from "../../../Components/Navbar/Navbar";
+import Paciente from "../../../Components/Paciente/Paciente";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import {
+  DorStatus,
+  Genero,
+  TipoSanguineo,
+} from "../../../Components/Enums/Enums";
 
 import { logoutUser } from "../../../Features/authSlice";
 
 const DoutorPaciente = () => {
   const { pacientes: pacientes } = useSelector((state) => state.pacientes);
+
+  const pacientesStatic = [
+    {
+      pacienteId: 1,
+      pacienteName: "victor",
+      pacienteIdade: "",
+      pacienteNumero: "",
+      pacienteRG: "",
+      pacienteSUS: "",
+      pacienteEmail: "",
+      pacienteEndereco: "",
+      pacienteDetalhes: "Victor é um paciente frequente",
+      pacienteImg: "IMG-USER.png",
+      pacienteInfos: {
+        pacienteGenero: Genero.MASCULINO,
+        pacientePeso: "80",
+        pacienteTamanho: "170",
+        pacientePressao: "10/80",
+        pacienteGlucose: "",
+        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteAlergia: "Amendoin",
+        pacienteDoenças: "",
+        pacienteBPM: "75",
+        pacienteDor: DorStatus.ALTA,
+      },
+    },
+    {
+      pacienteId: 2,
+      pacienteName: "Joao",
+      pacienteIdade: "",
+      pacienteNumero: "",
+      pacienteRG: "",
+      pacienteSUS: "",
+      pacienteEmail: "",
+      pacienteEndereco: "",
+      pacienteDetalhes: "Joao é um paciente frequente",
+      pacienteImg: "IMG-USER.png",
+      pacienteInfos: {
+        pacienteGenero: Genero.MASCULINO,
+        pacientePeso: "80",
+        pacienteTamanho: "170",
+        pacientePressao: "10/80",
+        pacienteGlucose: "",
+        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteAlergia: "Amendoin",
+        pacienteDoenças: "",
+        pacienteBPM: "75",
+        pacienteDor: DorStatus.ALTA,
+      },
+    },
+  ];
 
   const auth = useSelector((state) => {
     return state.auth;
@@ -102,11 +159,15 @@ const DoutorPaciente = () => {
                 </form>
 
                 {/* MAP COM O COMPONENTE QUE VAMOS FAZER */}
-                <div className=""></div>
+                <div className="container-cards">
+                  {pacientesStatic.map((x) => (
+                    <Paciente key={x.pacienteId} paciente={x}></Paciente>
+                  ))}
+                </div>
 
                 {/* PAGINATION */}
                 <div className="container-pagination">
-                  <Stack spacing={2}>
+                  <Stack spacing={2} marginTop={1} marginBottom={1}>
                     <Pagination
                       className="pagination"
                       count={10}
