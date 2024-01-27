@@ -48,6 +48,17 @@
     letter-spacing: .1rem;
 }
 
+.container-cards{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 2rem;
+    display: flex;
+    gap: 1rem;
+    background: rgba(157, 201, 209, 0.315);
+}
+
 .container-pagination{
     display: flex;
     justify-content: center;
