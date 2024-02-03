@@ -22,9 +22,9 @@ export const Genero = {
 }
 
 /**
- * Nivel de dor do paciente
+ * Status do paciente
  */
-export const DorStatus = {
+export const PacienteStatus = {
     NENHUM: "NENHUM",
     LEVE: "LEVE",
     NORMAL: "NORMAL",
