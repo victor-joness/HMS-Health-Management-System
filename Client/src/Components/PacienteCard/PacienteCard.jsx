@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "./PacienteCard.css";
+import { Genero, PacienteStatus, TipoSanguineo } from "../Enums/Enums";
 
 const PacienteCard = ({ paciente }) => {
   const PacineteTemplate = {
@@ -27,37 +28,43 @@ const PacienteCard = ({ paciente }) => {
       pacienteGlucose: "",
       pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
       pacienteAlergia: "Amendoin",
-      pacienteDoenças: "",
       pacienteBPM: "75",
-      pacienteStatus: PacineteStatus.ALTA,
+      pacienteStatus: PacienteStatus.ALTA,
     },
-  }
+  };
 
   const PacienteImg = `../../../public/upload/${paciente.pacienteImg}`;
+  const statusClass = `PacienteStatus ${paciente.pacienteInfos.pacienteStatus}`;
 
   return (
     <div className="CardContainer">
-      <CardMedia
-        className="Img"
-        component="img"
-        alt="green iguana"
-        image={PacienteImg}
-      />
+      <div className="img">
+        <CardMedia
+          className="Img"
+          component="img"
+          alt="green iguana"
+          image={PacienteImg}
+        />
+        <div className={statusClass}></div>
+      </div>
+      
       <div className="PacienteInfos">
         <h3>{paciente.pacienteName}</h3>
         <h4 className="PacienteEndereco">{paciente.pacienteEndereco}</h4>
 
-        <p>Peso: {paciente.pacienteInfos.pacientePeso}</p>
-        <p>Pressão: {paciente.pacienteInfos.pacientePressao}</p>
-        <p>BPM: {paciente.pacienteInfos.pacienteBPM}</p>
-        <p>: {paciente.pacienteInfos.pacientePeso}</p>
+        <p className="PacienteIdade"><strong>Idade: </strong>{paciente.pacienteIdade} Anos</p>
+        <p>
+          <strong>Peso/Tamanho: </strong>{paciente.pacienteInfos.pacientePeso}Kg /{" "}
+          {paciente.pacienteInfos.pacienteTamanho}cm
+        </p>
+        <p><strong>Pressão: </strong>{paciente.pacienteInfos.pacientePressao}mmHg</p>
+        <p><strong>BPM: </strong>{paciente.pacienteInfos.pacienteBPM}Bpm</p>
+        <p><strong>Glicose: </strong>{paciente.pacienteInfos.pacienteGlicose}mg/dl</p>
+        <p><strong>Alergia: </strong>{paciente.pacienteInfos.pacienteAlergia}</p>
+        
       </div>
       <div className="PacinteButton">
         <button>Ver detalhes do Paciente</button>
-      </div>
-
-      <div className="PacienteStatus">
-        <p>Status: {paciente.pacienteInfos.pacienteStatus}</p>
       </div>
     </div>
   );
