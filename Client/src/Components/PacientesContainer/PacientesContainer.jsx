@@ -4,7 +4,7 @@ import PaginationComponent from "../Pagination/Pagination";
 
 const PacientesContainer = ({ pacientesData }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 15; // Número de cards por página
+  const cardsPerPage = 10; // Número de cards por página
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
