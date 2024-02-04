@@ -1,47 +1,95 @@
-.CardContainer{
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-radius: 4px;
-    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
-    overflow: hidden;
-    max-width: 345px;
-    padding: .5rem;
+.CardContainer {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  max-width: 345px;
+  padding: 0.5rem;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 400px;
+  height: 331px;
 }
 
-.CardContainer .Img{
-    height: 7rem;
-    width: 7rem;
-    border-radius: 50%;
-    border: 2px solid #ca79c6;
-    cursor: pointer;
+.CardContainer .img {
+  position: relative;
+  height: 6rem;
+  width: 6rem;
 }
 
-.CardContainer .PacienteInfos h4{
-    font-weight: 400;
-    color: #92a5a8;
-
-    border-bottom: 1px solid #92a5a8;
+.CardContainer .img .Img {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  border: 2px solid #ca79c6;
+  cursor: pointer;
 }
 
-.CardContainer .PacinteButton button{
-    display: flex;
-    justify-content: center;
-    width: auto;
-    text-align: center;
-    background: #ca79c6;
-    color: #fff;
-    padding: 1rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    margin: 0;
-    font-size: 1.5rem;
+.CardContainer .PacienteInfos h4 {
+  font-weight: 400;
+  color: #92a5a8;
+  margin-bottom: 0.5rem;
+
+  border-bottom: 1px solid #92a5a8;
+}
+
+.CardContainer .PacienteInfos p {
+  font-size: 1.5rem;
+}
+
+.CardContainer .PacienteInfos .PacienteIdade {
+  margin-top: 1rem;
+}
+
+.CardContainer .PacinteButton button {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  text-align: center;
+  background: #ca79c6;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Marcador */
+
+.PacienteStatus {
+  position: absolute;
+  top: -30px;
+  left: 150px;
+  padding: 0.8em;
+  width: 20px;
+  height: 70px;
+  border-radius: .5rem;
+}
+
+.CRITICA {
+  background-color: red;
+}
+
+.ALTA {
+  background-color: orange;
+}
+
+.NORMAL {
+  background-color: green;
+}
+
+.LEVE {
+  background-color: blue;
+}
+
+.NENHUM {
+  background-color: purple;
 }
