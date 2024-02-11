@@ -13,14 +13,13 @@ import {
   TipoSanguineo,
 } from "../../../Components/Enums/Enums";
 
-import { logoutUser } from "../../../Features/authSlice";
-
 const DoutorPaciente = () => {
   /* const { pacientes: pacientes } = useSelector((state) => state.pacientes); */
 
   const pacientesStatic = [
     {
       pacienteId: 1,
+      ligação: [2, 6],
       pacienteName: "victor mesquita",
       pacienteIdade: "20",
       pacienteNumero: "",
@@ -28,7 +27,8 @@ const DoutorPaciente = () => {
       pacienteSUS: "",
       pacienteEmail: "",
       pacienteEndereco: "rua do centro, 123",
-      pacienteDetalhes: "Victor é um paciente frequente e tbm gosta de chocolate e tem 20 anos",
+      pacienteDetalhes:
+        "Victor é um paciente frequente e tbm gosta de chocolate e tem 20 anos",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
         pacienteGenero: Genero.MASCULINO,
@@ -44,6 +44,7 @@ const DoutorPaciente = () => {
     },
     {
       pacienteId: 2,
+      ligação: [15, 5],
       pacienteName: "Joao",
       pacienteIdade: "20",
       pacienteNumero: "",
@@ -67,6 +68,7 @@ const DoutorPaciente = () => {
     },
     {
       pacienteId: 3,
+      ligação: [1, 11],
       pacienteName: "Joao",
       pacienteIdade: "20",
       pacienteNumero: "",
@@ -90,6 +92,7 @@ const DoutorPaciente = () => {
     },
     {
       pacienteId: 4,
+      ligação: [7, 12],
       pacienteName: "Joao",
       pacienteIdade: "20",
       pacienteNumero: "",
@@ -108,12 +111,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.NENHUM,
+        pacienteStatus: PacienteStatus.LEVE,
       },
     },
     {
       pacienteId: 5,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Pedro",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -131,12 +135,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.NORMAL,
+        pacienteStatus: PacienteStatus.NENHUM,
       },
     },
     {
       pacienteId: 6,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Pedro",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -154,12 +159,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.NORMAL,
       },
     },
     {
       pacienteId: 7,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Augusto",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -177,12 +183,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.NENHUM,
       },
     },
     {
       pacienteId: 8,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Augusto",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -200,12 +207,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.CRITICA,
       },
     },
     {
       pacienteId: 9,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Jorge",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -228,7 +236,8 @@ const DoutorPaciente = () => {
     },
     {
       pacienteId: 10,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Jorge",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -246,12 +255,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.LEVE,
       },
     },
     {
       pacienteId: 11,
-      pacienteName: "Joao",
+      ligação: [4, 13],
+      pacienteName: "Maria",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -269,12 +279,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.NORMAL,
       },
     },
     {
       pacienteId: 12,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Maria",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -292,12 +303,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.CRITICA,
       },
     },
     {
       pacienteId: 13,
-      pacienteName: "Joao",
+      ligação: [6, 9],
+      pacienteName: "Marcelo",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -320,7 +332,8 @@ const DoutorPaciente = () => {
     },
     {
       pacienteId: 14,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Marcelo",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -338,12 +351,13 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.NENHUM,
       },
     },
     {
       pacienteId: 15,
-      pacienteName: "Joao",
+      ligação: [],
+      pacienteName: "Rafaela",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -361,12 +375,12 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.LEVE,
       },
     },
     {
       pacienteId: 16,
-      pacienteName: "Joao",
+      pacienteName: "Rafaela",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -384,12 +398,12 @@ const DoutorPaciente = () => {
         pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
+        pacienteStatus: PacienteStatus.CRITICA,
       },
     },
     {
       pacienteId: 17,
-      pacienteName: "Joao",
+      pacienteName: "Baiano",
       pacienteIdade: "20",
       pacienteNumero: "",
       pacienteRG: "",
@@ -416,59 +430,23 @@ const DoutorPaciente = () => {
     return state.auth;
   });
 
-  const [currPage, setCurrPage] = useState(1);
   const [status, setStatus] = useState(true);
+  const [searchPalavra, setSearchPalavra] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const HandlelistingPacientes = () => {};
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    toast.warning("Logout com sucesso");
-
-    setTimeout(() => {
-      navigate("/");
-    }, "0");
-  };
-
-  const [filteredItems, setFilteredItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState(pacientesStatic);
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
 
-    const keyword = e.target.elements.keyword.value;
-    const type = e.target.elements.type.value;
-
-    let newFilteredItems;
-
-    if (keyword && type) {
-      newFilteredItems = items.filter(
-        (el) =>
-          el.classList.contains(type) &&
-          el.querySelector("h3").innerText.indexOf(keyword) > -1
-      );
-    } else if (!keyword && type) {
-      newFilteredItems = items.filter((el) => el.classList.contains(type));
-    } else if (keyword && !type) {
-      newFilteredItems = items.filter(
-        (el) => el.querySelector("h3").innerText.indexOf(keyword) > -1
-      );
-    } else {
-      newFilteredItems = items;
-    }
-
-    setCurrPage(1);
-
-    if (newFilteredItems.length !== 0) {
-      setFilteredItems(newFilteredItems);
-    } else {
-      // Handle case where no data is found
-    }
-  };
-
-  const handlePageChange = (page) => {
-    setCurrPage(page);
+    setFilteredItems(
+      pacientesStatic.filter((paciente) =>
+        paciente.pacienteName
+          .toLowerCase()
+          .includes(searchPalavra.toLowerCase())
+      )
+    );
   };
 
   return (
@@ -479,7 +457,7 @@ const DoutorPaciente = () => {
           <Header title={"Listagem de pacientes"} cargo={"Doutor"} />
           <div className="container">
             {status ? (
-              <div>
+              <div className="container-pacientes">
                 <form id="" className="filters" onSubmit={handleFilterSubmit}>
                   <div className="container-paciente">
                     <input
@@ -487,6 +465,8 @@ const DoutorPaciente = () => {
                       name="keyword"
                       className=""
                       placeholder="Buscar por paciente"
+                      value={searchPalavra}
+                      onChange={(e) => setSearchPalavra(e.target.value)}
                     />
                     <select name="type" id="type" className="">
                       <option value="" selected>
@@ -503,7 +483,7 @@ const DoutorPaciente = () => {
                     </select>
                     <button className="">Buscar</button>
                     <div className="legenda">
-                      Prioridade: 
+                      Prioridade:
                       <p className="NENHUM">Nenhum</p>
                       <p className="LEVE">Leve</p>
                       <p className="NORMAL">Normal</p>
@@ -513,7 +493,9 @@ const DoutorPaciente = () => {
                   </div>
                 </form>
 
-                <PacientesContainer pacientesData={pacientesStatic}></PacientesContainer>
+                <PacientesContainer
+                  pacientesData={filteredItems}
+                ></PacientesContainer>
               </div>
             ) : (
               <div>qualquer coisa</div>
