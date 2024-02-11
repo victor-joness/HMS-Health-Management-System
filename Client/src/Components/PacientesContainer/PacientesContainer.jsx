@@ -24,13 +24,13 @@ const PacientesContainer = ({ pacientesData }) => {
         {currentPacientes.map((paciente) => (
           <PacienteCard key={paciente.pacienteId} paciente={paciente} />
         ))}
-
-        <PaginationComponent
+      </div>
+      
+      <PaginationComponent
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
-      </div>
     </div>
   );
 };
