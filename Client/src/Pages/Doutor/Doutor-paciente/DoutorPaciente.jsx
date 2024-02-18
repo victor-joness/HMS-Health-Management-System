@@ -167,7 +167,7 @@ const DoutorPaciente = () => {
       pacienteEmail: "",
       pacienteDataInicio: "18/01/2024 10:00:00",
       pacienteDataFim: "18/02/2024 10:00:00",
-      pacienteEndereco: "",
+      pacienteEndereco: "Mora em crateus",
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
@@ -194,7 +194,7 @@ const DoutorPaciente = () => {
       pacienteEmail: "",
       pacienteDataInicio: "18/02/2023 10:00:00",
       pacienteDataFim: "",
-      pacienteEndereco: "",
+      pacienteEndereco: "mora em tamboril ",
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
@@ -490,6 +490,10 @@ const DoutorPaciente = () => {
 
   const [filteredItems, setFilteredItems] = useState(pacientesStatic);
 
+
+
+
+
   const handleFilterSubmit = (e) => {
     e.preventDefault();
 
@@ -518,10 +522,14 @@ const DoutorPaciente = () => {
       if (searchCategoria == "hoje") {
         setFilteredItems(
           pacientesStatic.filter((paciente) => {
-            const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+            const dataInicio = converterStringParaData(
+              paciente.pacienteDataInicio
+            );
             const dataAtual = new Date();
             return (
-              paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+              paciente.pacienteName
+                .toLowerCase()
+                .includes(searchPalavra.toLowerCase()) &&
               dataInicio.dia === dataAtual.getDate() &&
               dataInicio.mes === dataAtual.getMonth() + 1 &&
               dataInicio.ano === dataAtual.getFullYear()
@@ -531,10 +539,14 @@ const DoutorPaciente = () => {
       } else if (searchCategoria == "mes") {
         setFilteredItems(
           pacientesStatic.filter((paciente) => {
-            const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+            const dataInicio = converterStringParaData(
+              paciente.pacienteDataInicio
+            );
             const dataAtual = new Date();
             return (
-              paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+              paciente.pacienteName
+                .toLowerCase()
+                .includes(searchPalavra.toLowerCase()) &&
               dataInicio.mes === dataAtual.getMonth() &&
               dataInicio.ano === dataAtual.getFullYear()
             );
@@ -543,11 +555,16 @@ const DoutorPaciente = () => {
       } else {
         setFilteredItems(
           pacientesStatic.filter((paciente) => {
-            const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+            const dataInicio = converterStringParaData(
+              paciente.pacienteDataInicio
+            );
             const dataAtual = new Date();
             return (
-              paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
-              dataInicio.ano === dataAtual.getFullYear() || dataInicio.ano === dataAtual.getFullYear() - 1
+              (paciente.pacienteName
+                .toLowerCase()
+                .includes(searchPalavra.toLowerCase()) &&
+                dataInicio.ano === dataAtual.getFullYear()) ||
+              dataInicio.ano === dataAtual.getFullYear() - 1
             );
           })
         );
@@ -561,6 +578,31 @@ const DoutorPaciente = () => {
         )
       );
     }
+  };
+
+  const [prioridades, setPrioridade] = useState({
+    NENHUM: false,
+    LEVE: false,
+    NORMAL: false,
+    ALTA: false,
+    CRITICA: false,
+  });
+
+  const mudarPrioridade = (prioridade) => {
+    setPrioridade((prevPrioridade) => ({
+      ...prevPrioridade,
+      [prioridade]: !prevPrioridade[prioridade],
+    }));
+  };
+
+  const mudarTodasPrioridade = () => {
+    //verifica se todas estão ativas, caso sim retorna true, se não false, e ai o reduce faz o inverso
+    const allActive = Object.values(prioridades).every((isActive) => isActive);
+    const novasPrioridade = Object.keys(prioridades).reduce((acc, prioridade) => {
+      acc[prioridade] = !allActive;
+      return acc;
+    }, {});
+    setPrioridade(novasPrioridade);
   };
 
   return (
@@ -598,11 +640,20 @@ const DoutorPaciente = () => {
                     <button className="">Buscar</button>
                     <div className="legenda">
                       Prioridade:
-                      <p className="NENHUM">Nenhum</p>
-                      <p className="LEVE">Leve</p>
-                      <p className="NORMAL">Normal</p>
-                      <p className="ALTA">Alta</p>
-                      <p className="CRITICA">Critica</p>
+                      {Object.entries(prioridades).map(
+                        ([prioridade, isActive]) => (
+                          <p
+                            key={prioridade}
+                            className={`${prioridade} ${
+                              isActive ? "isActive" : ""
+                            }`}
+                            onClick={() => mudarPrioridade(prioridade)}
+                          >
+                            {prioridade.charAt(0) + prioridade.slice(1).toLowerCase()}
+                          </p>
+                        )
+                      )}
+                      <button onClick={mudarTodasPrioridade}>Alterar todos</button>
                     </div>
                   </div>
                 </form>
