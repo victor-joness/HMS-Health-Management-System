@@ -65,6 +65,16 @@
   border-radius: .5rem;
   color: white;
   line-height: 4rem;
+  cursor: pointer;
+  opacity: .5;
+}
+
+.container-paciente .legenda button {
+  width: 15rem;
+}
+
+.isActive{
+  opacity: 1 !important;
 }
 
 .CRITICA {
