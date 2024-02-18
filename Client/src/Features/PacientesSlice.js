@@ -11,6 +11,10 @@ const initialState = {
   updateStatus: null,
 };
 
+/* 
+ TENHO QUE TRAZER OS PACIENTE COM OS FILTRO AQUI, PQ NÃO POSSO TRAZER TODOS E FAZER O FILTRO NO FRONT, IMAGINA SE TEM 200 MIL PACIENTE, E AI VOU TRAZER TUDO PRA DEPOIS FAZER O FILTRO ?
+*/
+
 /* export const farmaciaFetch = createAsyncThunk(
   "farmacias/farmaciaFetch",
   async () => {
