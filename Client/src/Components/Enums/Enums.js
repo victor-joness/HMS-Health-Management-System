@@ -31,3 +31,15 @@ export const PacienteStatus = {
     ALTA: "ALTA",
     CRITICA: "CRITICA"
 }
+
+/**
+ * Fluxo de paciente
+ */
+export const PacienteFluxo = {
+    EM_ESPERA: 1,
+    EM_ATENDIMENTO: 2,
+    EM_COLETA: 3,
+    INTERNADO: 4,
+    EM_ANALISE: 5,
+    CONCLUIDO: 6
+}
