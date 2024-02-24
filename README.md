@@ -20,6 +20,8 @@
 <!-- PRONTAS PARA SEREM FEITAS -->
 
 
+### () -> () -> trocar todos os icons com GI, pois eles pesam 7mb e estão atrasando o carregamento do site.
+
 ### (0000A) -> PACOTE DE DEMANDA (00001) A (00007)
 Foi juntada em um pacote, pois vai ser um só componente reaproveitado para as 4 telas.
 
