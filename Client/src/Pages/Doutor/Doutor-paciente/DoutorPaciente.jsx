@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DoutorPaciente.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -29,8 +29,8 @@ const DoutorPaciente = () => {
       pacienteRG: "",
       pacienteSUS: "",
       pacienteEmail: "",
-      pacienteDataInicio: "18/02/2024 10:00:00",
-      pacienteDataFim: "18/02/2024 10:00:00",
+      pacienteDataInicio: "25/02/2024 10:00:00",
+      pacienteDataFim: "25/02/2024 10:00:00",
       pacienteEndereco: "rua do centro, 123",
       pacienteDetalhes:
         "Victor é um paciente frequente e tbm gosta de chocolate e tem 20 anos",
@@ -57,8 +57,8 @@ const DoutorPaciente = () => {
       pacienteRG: "",
       pacienteSUS: "",
       pacienteEmail: "",
-      pacienteDataInicio: "18/02/2024 10:00:00",
-      pacienteDataFim: "18/02/2024 10:00:00",
+      pacienteDataInicio: "25/02/2024 10:00:00",
+      pacienteDataFim: "25/02/2024 10:00:00",
       pacienteEndereco: "Rua dos tabajara",
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
@@ -84,8 +84,8 @@ const DoutorPaciente = () => {
       pacienteRG: "",
       pacienteSUS: "",
       pacienteEmail: "",
-      pacienteDataInicio: "18/02/2024 10:00:00",
-      pacienteDataFim: "18/02/2024 10:00:00",
+      pacienteDataInicio: "25/02/2024 10:00:00",
+      pacienteDataFim: "25/02/2024 10:00:00",
       pacienteEndereco: "Rua dos tabajara, 456",
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
@@ -490,29 +490,22 @@ const DoutorPaciente = () => {
 
   const [filteredItems, setFilteredItems] = useState(pacientesStatic);
 
-
-
-
-
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-
+  
     let searchCategoria = window.document.getElementById("type").value;
-
+  
+    let filteredByCategory = [];
     if (
       searchCategoria == "1" ||
       searchCategoria == "2" ||
       searchCategoria == "4" ||
       searchCategoria == "6"
     ) {
-      setFilteredItems(
-        pacientesStatic.filter(
-          (paciente) =>
-            paciente.pacienteName
-              .toLowerCase()
-              .includes(searchPalavra.toLowerCase()) &&
-            paciente.pacienteInfos.pacienteFluxo == searchCategoria
-        )
+      filteredByCategory = pacientesStatic.filter(
+        (paciente) =>
+          paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+          paciente.pacienteInfos.pacienteFluxo == searchCategoria
       );
     } else if (
       searchCategoria == "hoje" ||
@@ -520,73 +513,71 @@ const DoutorPaciente = () => {
       searchCategoria == "ano"
     ) {
       if (searchCategoria == "hoje") {
-        setFilteredItems(
-          pacientesStatic.filter((paciente) => {
-            const dataInicio = converterStringParaData(
-              paciente.pacienteDataInicio
-            );
-            const dataAtual = new Date();
-            return (
-              paciente.pacienteName
-                .toLowerCase()
-                .includes(searchPalavra.toLowerCase()) &&
-              dataInicio.dia === dataAtual.getDate() &&
-              dataInicio.mes === dataAtual.getMonth() + 1 &&
-              dataInicio.ano === dataAtual.getFullYear()
-            );
-          })
-        );
+        filteredByCategory = pacientesStatic.filter((paciente) => {
+          const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+          const dataAtual = new Date();
+          return (
+            paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+            dataInicio.dia === dataAtual.getDate() &&
+            dataInicio.mes === dataAtual.getMonth() + 1 &&
+            dataInicio.ano === dataAtual.getFullYear()
+          );
+        });
       } else if (searchCategoria == "mes") {
-        setFilteredItems(
-          pacientesStatic.filter((paciente) => {
-            const dataInicio = converterStringParaData(
-              paciente.pacienteDataInicio
-            );
-            const dataAtual = new Date();
-            return (
-              paciente.pacienteName
-                .toLowerCase()
-                .includes(searchPalavra.toLowerCase()) &&
-              dataInicio.mes === dataAtual.getMonth() &&
-              dataInicio.ano === dataAtual.getFullYear()
-            );
-          })
-        );
+        filteredByCategory = pacientesStatic.filter((paciente) => {
+          const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+          const dataAtual = new Date();
+          return (
+            paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+            dataInicio.mes === dataAtual.getMonth() &&
+            dataInicio.ano === dataAtual.getFullYear()
+          );
+        });
       } else {
-        setFilteredItems(
-          pacientesStatic.filter((paciente) => {
-            const dataInicio = converterStringParaData(
-              paciente.pacienteDataInicio
-            );
-            const dataAtual = new Date();
-            return (
-              (paciente.pacienteName
-                .toLowerCase()
-                .includes(searchPalavra.toLowerCase()) &&
-                dataInicio.ano === dataAtual.getFullYear()) ||
-              dataInicio.ano === dataAtual.getFullYear() - 1
-            );
-          })
-        );
+        filteredByCategory = pacientesStatic.filter((paciente) => {
+          const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+          const dataAtual = new Date();
+          const mesmoAno =
+            dataInicio.ano === dataAtual.getFullYear() ||
+            dataInicio.ano === dataAtual.getFullYear() - 1;
+          const nomeIncluido =
+            searchPalavra.trim() === "" ||
+            paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase());
+          return mesmoAno && nomeIncluido;
+        });
       }
     } else {
-      setFilteredItems(
-        pacientesStatic.filter((paciente) =>
-          paciente.pacienteName
-            .toLowerCase()
-            .includes(searchPalavra.toLowerCase())
-        )
+      filteredByCategory = pacientesStatic.filter((paciente) =>
+        paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase())
       );
     }
+  
+    const prioAtiva = Object.keys(prioridades).filter((key) => prioridades[key]);
+    const filteredItems = filteredByCategory.filter((paciente) =>
+      prioAtiva.includes(paciente.pacienteInfos.pacienteStatus)
+    );
+  
+    setFilteredItems(filteredItems);
   };
 
   const [prioridades, setPrioridade] = useState({
-    NENHUM: false,
-    LEVE: false,
-    NORMAL: false,
-    ALTA: false,
-    CRITICA: false,
+    NENHUM: true,
+    LEVE: true,
+    NORMAL: true,
+    ALTA: true,
+    CRITICA: true,
   });
+
+  useEffect(() => {
+    const prioAtiva = Object.keys(prioridades).filter(
+      (key) => prioridades[key]
+    );
+
+    const prioItems = pacientesStatic.filter((paciente) =>
+      prioAtiva.includes(paciente.pacienteInfos.pacienteStatus)
+    );
+    setFilteredItems(prioItems);
+  }, [prioridades]);
 
   const mudarPrioridade = (prioridade) => {
     setPrioridade((prevPrioridade) => ({
@@ -598,10 +589,13 @@ const DoutorPaciente = () => {
   const mudarTodasPrioridade = () => {
     //verifica se todas estão ativas, caso sim retorna true, se não false, e ai o reduce faz o inverso
     const allActive = Object.values(prioridades).every((isActive) => isActive);
-    const novasPrioridade = Object.keys(prioridades).reduce((acc, prioridade) => {
-      acc[prioridade] = !allActive;
-      return acc;
-    }, {});
+    const novasPrioridade = Object.keys(prioridades).reduce(
+      (acc, prioridade) => {
+        acc[prioridade] = !allActive;
+        return acc;
+      },
+      {}
+    );
     setPrioridade(novasPrioridade);
   };
 
@@ -649,11 +643,14 @@ const DoutorPaciente = () => {
                             }`}
                             onClick={() => mudarPrioridade(prioridade)}
                           >
-                            {prioridade.charAt(0) + prioridade.slice(1).toLowerCase()}
+                            {prioridade.charAt(0) +
+                              prioridade.slice(1).toLowerCase()}
                           </p>
                         )
                       )}
-                      <button onClick={mudarTodasPrioridade}>Alterar todos</button>
+                      <button onClick={mudarTodasPrioridade}>
+                        Alterar todos
+                      </button>
                     </div>
                   </div>
                 </form>

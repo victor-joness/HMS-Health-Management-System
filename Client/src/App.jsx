@@ -5,8 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { ToastContainer } from "react-toastify";
 
-import Navbar from "./Components/Navbar/Navbar";
-
 //Pages
 import NotFound from "./Pages/NotFound/NotFound";
 import Login from "./Pages/Login/Login";
