@@ -159,7 +159,7 @@ const DoutorDoador = () => {
     <div>
       <div className="home-container">
         <Navbar Cargo={auth}></Navbar>
-        <div className="home-direita-doador">
+        <div className="home-direita">
           <Header title={"Doadores de Sangue"} cargo={"Doutor"} />
           <div className="container">
             {status ? (
@@ -174,7 +174,7 @@ const DoutorDoador = () => {
                   <div className="table">
                     <div
                       style={{
-                        height: "70.5vh",
+                        height: "70vh",
                         width: "auto",
                         fontSize: "1.5rem",
                       }}
