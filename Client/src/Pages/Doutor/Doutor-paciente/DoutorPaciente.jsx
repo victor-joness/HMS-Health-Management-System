@@ -492,9 +492,9 @@ const DoutorPaciente = () => {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-  
+
     let searchCategoria = window.document.getElementById("type").value;
-  
+
     let filteredByCategory = [];
     if (
       searchCategoria == "1" ||
@@ -504,9 +504,22 @@ const DoutorPaciente = () => {
     ) {
       filteredByCategory = pacientesStatic.filter(
         (paciente) =>
-          paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+          paciente.pacienteName
+            .toLowerCase()
+            .includes(searchPalavra.toLowerCase()) &&
           paciente.pacienteInfos.pacienteFluxo == searchCategoria
       );
+    } else if (searchCategoria == "7") {
+      filteredByCategory = pacientesStatic.filter((paciente) => {
+        return (
+          (paciente.pacienteName
+            .toLowerCase()
+            .includes(searchPalavra.toLowerCase()) &&
+            paciente.pacienteInfos.pacienteFluxo == 1) ||
+          paciente.pacienteInfos.pacienteFluxo == 2 ||
+          paciente.pacienteInfos.pacienteFluxo == 4
+        );
+      });
     } else if (
       searchCategoria == "hoje" ||
       searchCategoria == "mes" ||
@@ -514,10 +527,14 @@ const DoutorPaciente = () => {
     ) {
       if (searchCategoria == "hoje") {
         filteredByCategory = pacientesStatic.filter((paciente) => {
-          const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+          const dataInicio = converterStringParaData(
+            paciente.pacienteDataInicio
+          );
           const dataAtual = new Date();
           return (
-            paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+            paciente.pacienteName
+              .toLowerCase()
+              .includes(searchPalavra.toLowerCase()) &&
             dataInicio.dia === dataAtual.getDate() &&
             dataInicio.mes === dataAtual.getMonth() + 1 &&
             dataInicio.ano === dataAtual.getFullYear()
@@ -525,38 +542,50 @@ const DoutorPaciente = () => {
         });
       } else if (searchCategoria == "mes") {
         filteredByCategory = pacientesStatic.filter((paciente) => {
-          const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+          const dataInicio = converterStringParaData(
+            paciente.pacienteDataInicio
+          );
           const dataAtual = new Date();
           return (
-            paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase()) &&
+            paciente.pacienteName
+              .toLowerCase()
+              .includes(searchPalavra.toLowerCase()) &&
             dataInicio.mes === dataAtual.getMonth() &&
             dataInicio.ano === dataAtual.getFullYear()
           );
         });
       } else {
         filteredByCategory = pacientesStatic.filter((paciente) => {
-          const dataInicio = converterStringParaData(paciente.pacienteDataInicio);
+          const dataInicio = converterStringParaData(
+            paciente.pacienteDataInicio
+          );
           const dataAtual = new Date();
           const mesmoAno =
             dataInicio.ano === dataAtual.getFullYear() ||
             dataInicio.ano === dataAtual.getFullYear() - 1;
           const nomeIncluido =
             searchPalavra.trim() === "" ||
-            paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase());
+            paciente.pacienteName
+              .toLowerCase()
+              .includes(searchPalavra.toLowerCase());
           return mesmoAno && nomeIncluido;
         });
       }
     } else {
       filteredByCategory = pacientesStatic.filter((paciente) =>
-        paciente.pacienteName.toLowerCase().includes(searchPalavra.toLowerCase())
+        paciente.pacienteName
+          .toLowerCase()
+          .includes(searchPalavra.toLowerCase())
       );
     }
-  
-    const prioAtiva = Object.keys(prioridades).filter((key) => prioridades[key]);
+
+    const prioAtiva = Object.keys(prioridades).filter(
+      (key) => prioridades[key]
+    );
     const filteredItems = filteredByCategory.filter((paciente) =>
       prioAtiva.includes(paciente.pacienteInfos.pacienteStatus)
     );
-  
+
     setFilteredItems(filteredItems);
   };
 
@@ -625,6 +654,7 @@ const DoutorPaciente = () => {
                       <option value="1">Em Espera</option>
                       <option value="2">Em Atendimento</option>
                       <option value="4">Internados</option>
+                      <option value="7">Não-Concluidos</option>
                       <option value="6">Concluidos</option>
                       <option value="hoje">Hoje</option>
                       <option value="mes">Mês</option>
