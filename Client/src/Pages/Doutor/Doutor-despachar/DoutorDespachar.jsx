@@ -58,7 +58,7 @@ const DoutorDespachar = () => {
                 <div className="table">
                   <div
                     style={{
-                      height: "70.6vh",
+                      height: "72.9vh",
                       width: "auto",
                       fontSize: "1.5rem",
                     }}
