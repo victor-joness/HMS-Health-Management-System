@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./DoutorBanco.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../../Components/Navbar/Navbar";
 import Dispachar from "../../../Components/Dispachar/Dispachar";
 import Header from "../../../Components/Header/Header";
@@ -20,15 +19,6 @@ const DoutorBanco = () => {
   });
 
   const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    toast.warning("Logout com sucesso");
-
-    setTimeout(() => {
-      navigate("/");
-    }, "0");
-  };
 
   const handleDispatch = () => {};
 
