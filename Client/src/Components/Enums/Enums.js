@@ -41,5 +41,6 @@ export const PacienteFluxo = {
     EM_COLETA: 3,
     INTERNADO: 4,
     EM_ANALISE: 5,
-    CONCLUIDO: 6
+    CONCLUIDO: 6,
+    NAO_CONCLUIDO: 7
 }
