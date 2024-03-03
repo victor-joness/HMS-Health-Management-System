@@ -62,7 +62,7 @@ const Header = ({ cargo, title }) => {
             </div>
           </div>
         </div>
-        <a className="image" href={"/" + cargo + "-perfil"}>
+        <a className="image" href={"/" + cargo + "/perfil"}>
           <img src={`http://localhost:5173/upload/${auth.Img}`} alt="" />
         </a>
         <div className="infos-user">
