@@ -1,3 +1,10 @@
+/* TODAS AS PAGINAS TEM ESSA DIVISÃO */
+.home-direita {
+  width: 100vw;
+  background: rgba(157, 201, 209, 0.315);
+  height: 100vh;
+}
+
 /* TODOS OS EDIT TEM ISSO */
 .edit {
   border: none;
