@@ -119,9 +119,9 @@ const Farmacia = () => {
   }, [dispatch, farmaciaFetch]);
 
   return (
-    <div className="farmacia-container">
+    <div className="home-container">
       <Navbar />
-      <div className="farmacia-container-direita">
+      <div className="home-direita">
         <Header cargo={"Admin"} title={"Gerenciamento de farmacias"} />
         {status ? (
           <div className="add-farmacia-container-bottom">
