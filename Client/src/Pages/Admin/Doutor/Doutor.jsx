@@ -186,9 +186,9 @@ const Doutor = () => {
   }, [dispatch, doutorFetch]);
 
   return (
-    <div className="doutor-container">
+    <div className="home-container">
       <Navbar />
-      <div className="doutor-container-direita">
+      <div className="home-direita">
         <Header cargo={"Admin"}/>
         {status ? (
           <div className="add-doutor-container-bottom">
