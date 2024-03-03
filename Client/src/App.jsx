@@ -23,6 +23,7 @@ import DoutorBanco from "./Pages/Doutor/Doutor-banco/DoutorBanco";
 import DoutorDespachar from "./Pages/Doutor/Doutor-despachar/DoutorDespachar";
 import DoutorOperacao from "./Pages/Doutor/Doutor-operações/DoutorOperacao";
 import DoutorPaciente from "./Pages/Doutor/Doutor-paciente/DoutorPaciente";
+import DoutorPerfil from "./Pages/Doutor/Doutor-perfil/DoutorPerfil";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <Route path="/doutor/despachar" element={<DoutorDespachar />} />
             <Route path="/doutor/operacoes" element={<DoutorOperacao />} />
             <Route path="/doutor/pacientes" element={<DoutorPaciente />} />
+            <Route path="/doutor/perfil" element={<DoutorPerfil/>}/>
           </Routes>
         </div>
       </BrowserRouter>
