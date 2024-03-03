@@ -177,9 +177,9 @@ const Enfermeira = () => {
   }, [dispatch, enfermeiraFetch]);
 
   return (
-    <div className="doutor-container">
+    <div className="home-container">
       <Navbar />
-      <div className="doutor-container-direita">
+      <div className="home-direita">
         <Header cargo={"Admin"}/>
         {status ? (
           <div className="add-doutor-container-bottom">
@@ -191,7 +191,7 @@ const Enfermeira = () => {
               <div className="table">
                 <div
                   style={{
-                    height: "70.6vh",
+                    height: "70vh",
                     width: "auto",
                     fontSize: "1.5rem",
                   }}
