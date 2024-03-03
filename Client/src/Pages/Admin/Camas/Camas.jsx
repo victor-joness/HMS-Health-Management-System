@@ -135,9 +135,9 @@ const Camas = () => {
   }, [dispatch, camaFetch]);
 
   return (
-    <div className="cama-container">
+    <div className="home-container">
       <Navbar />
-      <div className="cama-container-direita">
+      <div className="home-direita">
         <Header cargo={"Admin"} title={"Gerenciamento de camas"} />
         {status ? (
           <div className="add-cama-container-bottom">
