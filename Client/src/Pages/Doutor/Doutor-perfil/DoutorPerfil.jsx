@@ -1,7 +1,7 @@
 import React from "react";
 import "./DoutorPerfil.css";
 import { useSelector } from "react-redux";
-import getCargo from "../../../Utils/GetCargo";
+import {getCargo} from "../../../Utils/GetFunctions";
 import Perfil from "../../../Components/Perfil/Perfil";
 
 import {
@@ -21,6 +21,7 @@ const DoutorPerfil = () => {
     Name: auth.name,
     Email: auth.email,
     Img: auth.Img,
+    Idade: auth.Idade,
     Cargo: getCargo(auth),
     Descricao:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis excepturi qui ipsa nostrum nihil debitis aperiam illo voluptates et rerum doloremque velit vel quis dolores ullam molestiae quo, incidunt officia Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, consequuntur excepturi explicabo doloribus quos enim dolorum dicta reprehenderit ut ipsum aspernatur odit quisquam neque porro delectus suscipit quas. Magni, aut!",
