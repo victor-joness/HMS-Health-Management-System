@@ -3,35 +3,77 @@ import "./Perfil.css";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
 
-import PropTypes from "prop-types";
-import LinearProgress from "@mui/material/LinearProgress";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import { Icons } from "../Icons/Icons";
 
-function LinearProgressWithLabel(props) {
-  return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Box sx={{ width: "100%", mr: 1 }}>
-        <LinearProgress variant="determinate" {...props} />
-      </Box>
-      <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" color="text.secondary">{`${Math.round(
-          props.value
-        )}%`}</Typography>
-      </Box>
-    </Box>
-  );
+function getArrowIcon(value) {
+  if (value.BPM) {
+    if (value.BPM < 60) {
+      return <Icons.BiDownArrowAlt color="error" />;
+    } else if (value.BPM >= 60 && value.BPM < 100) {
+      return <Icons.FaGripLines color="error" />;
+    } else if (value.BPM >= 100 && value.BPM < 120) {
+      return <Icons.BiUpArrowAlt color="error" />;
+    } else if (value.BPM >= 120 && value.BPM < 140) {
+      return <Icons.BiUpArrowAlt color="error" />;
+    } else {
+      return <Icons.BiUpArrowAlt color="error" />;
+    }
+  } else if (value.Pressao) {
+    const [sistolica, diastolica] = value.Pressao.split("/").map(Number);
+
+    if (sistolica < 90 || diastolica < 60) {
+      return <Icons.BiDownArrowAlt color="error" />;
+    } else if (
+      sistolica >= 90 &&
+      sistolica < 120 &&
+      diastolica >= 60 &&
+      diastolica < 80
+    ) {
+      return <Icons.FaGripLines color="error" />;
+    } else if (
+      sistolica >= 120 &&
+      sistolica < 140 &&
+      diastolica >= 80 &&
+      diastolica < 90
+    ) {
+      return <Icons.BiUpArrowAlt color="error" />;
+    } else if (
+      (sistolica >= 140 && sistolica < 160) ||
+      (diastolica >= 90 && diastolica < 100)
+    ) {
+      return <Icons.BiUpArrowAlt color="error" />;
+    } else {
+      return <Icons.BiUpArrowAlt color="error" />;
+    }
+  } else if (value.IMC) {
+    if (value.IMC < 18.5) {
+      return <Icons.BiDownArrowAlt color="error" />;
+    } else if (value.IMC >= 18.5 && value.IMC < 25.0) {
+      return <Icons.FaGripLines color="error" />;
+    } else if (value.IMC >= 25.0 && value.IMC < 30.0) {
+      return <Icons.BiUpArrowAlt color="error" />;
+    } else {
+      return <Icons.BiUpArrowAlt color="error" />;
+    }
+  } else {
+    if (value.Glicose >= 70 && value.Glicose <= 100) {
+      return <Icons.FaGripLines color="error" />;
+    } else if (value.Glicose > 100) {
+      return <Icons.BiUpArrowAlt color="error" />;
+    }else{
+      return <Icons.BiDownArrowAlt color="error" />;
+    }
+  }
 }
-
-LinearProgressWithLabel.propTypes = {
-  /*Valor entre 0 e 100 da barra*/
-  value: PropTypes.number.isRequired,
-};
 
 const Perfil = ({ User }) => {
   const HandleEditPerfil = () => {
     console.log("teste");
   };
+
+  //fazer depois uma função que faz o calculo automatico da frequencia calcularFrequencia(User.Report.BPM, User.Idade, User.Report.Genero);
 
   const IMC =
     (User.Report.Peso / (User.Report.Tamanho * User.Report.Tamanho)) * 10000;
@@ -40,11 +82,11 @@ const Perfil = ({ User }) => {
     (User.Report.Pressao.split("/")[0] / User.Report.Pressao.split("/")[1]) *
     100;
 
-  const [progressBPM, setProgressBPM] = React.useState(User.Report.BPM);
+  const [progressBPM, setProgressBPM] = React.useState(parseInt(User.Report.BPM));
   const [progressIMC, setProgressIMC] = React.useState(IMC);
   const [progressPressao, setProgressPressao] = React.useState(PRESSAO);
   const [progressGlicose, setProgressGlicose] = React.useState(
-    User.Report.Glicose
+    parseInt(User.Report.Glicose)
   );
 
   return (
@@ -89,6 +131,14 @@ const Perfil = ({ User }) => {
                       <h2>Altura</h2>
                       <p>{User.Report.Tamanho}</p>
                     </div>
+                    <div className="container-perfil-pessoal-dados-idade">
+                      <h2>Idade</h2>
+                      <p>{User.Idade}</p>
+                    </div>
+                    <div className="container-perfil-pessoal-dados-peso">
+                      <h2>Peso</h2>
+                      <p>{User.Report.Peso}</p>
+                    </div>
                     <div className="container-perfil-pessoal-dados-id">
                       <h2>ID</h2>
                       <p>{User.Id}</p>
@@ -99,27 +149,87 @@ const Perfil = ({ User }) => {
                 <div className="container-perfil-report">
                   <h2>Report</h2>
                   <div className="container-perfil-report-BPM">
-                    <h2>BPM</h2>
-                    <Box sx={{ width: "100%" }}>
-                      <LinearProgressWithLabel value={progressBPM} />
+                    <div className="container-perfil-report-text">
+                      <h2>BPM</h2>
+                      <p>{User.Report.BPM}</p>
+                    </div>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={progressBPM}
+                          sx={{
+                            marginRight: getArrowIcon({ BPM: progressBPM })
+                              ? 1
+                              : 0,
+                          }}
+                        />
+                      </Box>
+                      {getArrowIcon({ BPM: progressBPM })}
                     </Box>
                   </div>
                   <div className="container-perfil-report-pressao">
-                    <h2>Pressão</h2>
-                    <Box sx={{ width: "100%" }}>
-                      <LinearProgressWithLabel value={progressPressao} />
+                    <div className="container-perfil-report-text">
+                      <h2>Pressão</h2>
+                      <p>{User.Report.Pressao}</p>
+                    </div>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={progressPressao}
+                          sx={{
+                            marginRight: getArrowIcon({
+                              Pressao: User.Report.Pressao,
+                            })
+                              ? 1
+                              : 0,
+                          }}
+                        />
+                      </Box>
+                      {getArrowIcon({ Pressao: User.Report.Pressao })}
                     </Box>
                   </div>
                   <div className="container-perfil-report-imc">
-                    <h2>IMC</h2>
-                    <Box sx={{ width: "100%" }}>
-                      <LinearProgressWithLabel value={progressIMC} />
+                    <div className="container-perfil-report-text">
+                      <h2>IMC</h2>
+                      <p>{parseInt(IMC)}</p>
+                    </div>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={progressIMC}
+                          sx={{
+                            marginRight: getArrowIcon({ IMC: progressIMC })
+                              ? 1
+                              : 0,
+                          }}
+                        />
+                      </Box>
+                      {getArrowIcon({ IMC: progressIMC })}
                     </Box>
                   </div>
                   <div className="container-perfil-report-glicose">
-                    <h2>Glicose</h2>
-                    <Box sx={{ width: "100%" }}>
-                      <LinearProgressWithLabel value={progressGlicose} />
+                    <div className="container-perfil-report-text">
+                      <h2>Glicose</h2>
+                      <p>{User.Report.Glicose}</p>
+                    </div>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={progressGlicose}
+                          sx={{
+                            marginRight: getArrowIcon({
+                              Glicose: progressGlicose,
+                            })
+                              ? 1
+                              : 0,
+                          }}
+                        />
+                      </Box>
+                      {getArrowIcon({ Glicose: progressGlicose })}
                     </Box>
                   </div>
                 </div>
