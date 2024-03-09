@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 const genAuthToken = (user) => {
   const secretKey = process.env.JWT_SECRET_KEY;
-
   const token = jwt.sign(
     {
       id: user.id,
@@ -12,7 +11,8 @@ const genAuthToken = (user) => {
       isDoutor: user.isDoutor,
       isEnfermeira: user.isEnfermeira,
       isPaciente: user.isPaciente,
-      Img: user.Img
+      Img: user.Img,
+      Idade: user.Idade
     },
     secretKey
   );
