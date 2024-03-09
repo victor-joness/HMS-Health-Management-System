@@ -83,7 +83,7 @@
 
 .container-perfil-pessoal-dados {
   display: flex;
-  gap: 10rem;
+  gap: 6rem;
   margin-top: 2rem;
 }
 
@@ -91,7 +91,9 @@
 .container-perfil-pessoal-dados-numero,
 .container-perfil-pessoal-dados-endereco,
 .container-perfil-pessoal-dados-id,
-.container-perfil-pessoal-dados-altura {
+.container-perfil-pessoal-dados-altura,
+.container-perfil-pessoal-dados-peso,
+.container-perfil-pessoal-dados-idade {
   display: flex;
   flex-direction: column;
 }
@@ -111,4 +113,55 @@
   height: 35rem;
   margin-right: 4rem;
   border-radius: 1rem;
+  padding: 2rem;
+  font-size: 2rem;
+}
+
+.container-perfil-report-BPM{
+  margin-top: 2rem;
+}
+
+.container-perfil-report-text{
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+
+.container-perfil-report-text p{
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.container-perfil-report-pressao{
+  margin-top: 1rem;
+}
+
+.container-perfil-report-imc{
+  margin-top: 1rem;
+}
+
+.container-perfil-report-glicose{
+  margin-top: 1rem;
+}
+/* COR DA BARRA */
+.container-perfil-report-BPM .css-5xe99f-MuiLinearProgress-bar1 {
+  background-color: #ca79c6 !important;
+}
+
+.container-perfil-report-pressao .css-5xe99f-MuiLinearProgress-bar1 {
+  background-color: #79CFA6 !important;
+}
+
+.container-perfil-report-imc .css-5xe99f-MuiLinearProgress-bar1 {
+  background-color: #77BEEB !important;
+}
+
+.container-perfil-report-glicose .css-5xe99f-MuiLinearProgress-bar1 {
+  background-color: #FF706F !important;
+}
+
+/* TAMANHO DA BARRA */
+
+.css-1b0sx55-MuiLinearProgress-root{
+  height: 25px !important;
 }
