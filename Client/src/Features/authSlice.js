@@ -16,6 +16,7 @@ const initialState = {
   isEnfermeira: "",
   isPaciente: "",
   Img: "",
+  Idade: "",
   registerStatus: "",
   registerError: "",
   loginStatus: "",
@@ -28,7 +29,6 @@ const initialState = {
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (user, { rejectWithValue }) => {
-    console.log(user);
     try {
       const data = await axios.post(`${url}/register`, {
         name: user.username,
@@ -88,6 +88,7 @@ const authSlice = createSlice({
           isEnfermeira: user.isEnfermeira,
           isPaciente: user.isPaciente,
           Img: user.Img,
+          Idade: user.Idade,
           userLoaded: true,
         };
       }
@@ -106,6 +107,7 @@ const authSlice = createSlice({
         isEnfermeira: "",
         isPaciente: "",
         Img: "",
+        Idade: "",
         registerStatus: "",
         registerError: "",
         loginStatus: "",
@@ -134,6 +136,7 @@ const authSlice = createSlice({
           isEnfermeira: user.isEnfermeira,
           isPaciente: user.isPaciente,
           Img: user.Img,
+          Idade: user.Idade,
           registerStatus: "success",
         };
       } else {
@@ -170,6 +173,7 @@ const authSlice = createSlice({
           isEnfermeira: user.isEnfermeira,
           isPaciente: user.isPaciente,
           Img: user.Img,
+          Idade: user.Idade,
           loginStatus: "success",
         };
       } else {
