@@ -3,8 +3,8 @@ import { GiNurseFemale, GiMedicines, GiSurroundedShield, GiSurprisedSkull } from
 import { AiOutlineUserAdd, AiOutlineClockCircle, AiOutlineUser} from "react-icons/ai";
 import { RiSecurePaymentLine, RiAdminLine, RiUserReceivedFill, RiEmpathizeLine} from "react-icons/ri";
 import { MdDashboardCustomize, MdOutlineGroups, MdQueue, MdPersonAdd, MdPayment, MdAddToQueue, MdBloodtype} from "react-icons/md";
-import { FaAmbulance, FaHandHoldingMedical, FaFileMedical, FaUsers, FaBaby, FaBed, FaUserNurse} from "react-icons/fa";
-import { BiDetail, BiDonateBlood } from "react-icons/bi";
+import { FaAmbulance, FaHandHoldingMedical, FaFileMedical, FaUsers, FaBaby, FaBed, FaUserNurse, FaGripLines } from "react-icons/fa";
+import { BiDetail, BiDonateBlood, BiUpArrowAlt, BiDownArrowAlt} from "react-icons/bi";
 import { TbActivityHeartbeat, TbReportMedical, TbBed } from "react-icons/tb";
 import { BsBank, BsFillBookmarkCheckFill, BsFillCalendarDateFill, BsFillGearFill} from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
@@ -56,5 +56,8 @@ export const Icons = {
   ImMenu,
   FiLogOut,
   FiUsers,
-  IoMdNotifications
+  IoMdNotifications,
+  BiUpArrowAlt,
+  BiDownArrowAlt,
+  FaGripLines
 };
