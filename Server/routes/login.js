@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
               isEnfermeira: result[0].isEnfermeira,
               isPaciente: result[0].isPaciente,
               Img: result[0].Img,
+              Idade: result[0].Idade,
             }),
           },
         });
