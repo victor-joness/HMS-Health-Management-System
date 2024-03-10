@@ -11,6 +11,7 @@ const login = require("./routes/login");
 const doadores = require("./routes/doadores");
 const cirurgia = require("./routes/cirurgias");
 const cama = require("./routes/camas");
+const pacientes = require("./routes/pacientes");
 
 const multer = require("multer");
 
@@ -32,6 +33,7 @@ app.use("/api/enfermeiras", enfermeiras);
 app.use("/api/farmacias", farmacias);
 app.use("/api/cirurgia", cirurgia);
 app.use("/api/camas", cama);
+app.use("/api/pacientes", pacientes);
 
 //Multer Storage
 const storage = multer.diskStorage({
