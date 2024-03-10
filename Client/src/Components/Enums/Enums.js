@@ -2,14 +2,14 @@
  * Tipo Sanguineo do paciente
  */
 export const TipoSanguineo = {
-    A_POSITIVO: "A_POSITIVO",
-    A_NEGATIVO: "A_NEGATIVO",
-    B_POSITIVO: "B_POSITIVO",
-    B_NEGATIVO: "B_NEGATIVO",
-    O_POSITIVO: "O_POSITIVO",
-    O_NEGATIVO: "O_NEGATIVO",
-    AB_POSITIVO: "AB_POSITIVO",
-    AB_NEGATIVO: "AB_NEGATIVO"
+    A_POSITIVO: 1,
+    A_NEGATIVO: 2,
+    B_POSITIVO: 3,
+    B_NEGATIVO: 4,
+    O_POSITIVO: 5,
+    O_NEGATIVO: 6,
+    AB_POSITIVO: 7,
+    AB_NEGATIVO: 8
 }
 
 /**
