@@ -1,12 +1,9 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import "./PacienteCard.css";
 import { Genero, PacienteStatus, TipoSanguineo } from "../Enums/Enums";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const PacienteCard = ({ paciente }) => {
   const PacineteTemplate = {
@@ -33,6 +30,8 @@ const PacienteCard = ({ paciente }) => {
     },
   };
 
+  const [isTransitioning, setIsTransitioning] = React.useState(false);
+
   const PacienteImg = `../../../public/upload/${paciente.pacienteImg}`;
   const statusClass = `PacienteStatus ${paciente.pacienteInfos.pacienteStatus}`;
 
@@ -47,24 +46,48 @@ const PacienteCard = ({ paciente }) => {
         />
         <div className={statusClass}></div>
       </div>
-      
+
       <div className="PacienteInfos">
         <h3>{paciente.pacienteName}</h3>
         <h4 className="PacienteEndereco">{paciente.pacienteEndereco}</h4>
 
-        <p className="PacienteIdade"><strong>Idade: </strong>{paciente.pacienteIdade} Anos</p>
+        <p className="PacienteIdade">
+          <strong>Idade: </strong>
+          {paciente.pacienteIdade} Anos
+        </p>
         <p>
-          <strong>Peso/Tamanho: </strong>{paciente.pacienteInfos.pacientePeso}Kg /{" "}
+          <strong>Peso/Tamanho: </strong>
+          {paciente.pacienteInfos.pacientePeso}Kg /{" "}
           {paciente.pacienteInfos.pacienteTamanho}cm
         </p>
-        <p><strong>Pressão: </strong>{paciente.pacienteInfos.pacientePressao}mmHg</p>
-        <p><strong>BPM: </strong>{paciente.pacienteInfos.pacienteBPM}Bpm</p>
-        <p><strong>Glicose: </strong>{paciente.pacienteInfos.pacienteGlicose}mg/dl</p>
-        <p><strong>Alergia: </strong>{paciente.pacienteInfos.pacienteAlergia}</p>
-        
+        <p>
+          <strong>Pressão: </strong>
+          {paciente.pacienteInfos.pacientePressao}mmHg
+        </p>
+        <p>
+          <strong>BPM: </strong>
+          {paciente.pacienteInfos.pacienteBPM}Bpm
+        </p>
+        <p>
+          <strong>Glicose: </strong>
+          {paciente.pacienteInfos.pacienteGlicose}mg/dl
+        </p>
+        <p>
+          <strong>Alergia: </strong>
+          {paciente.pacienteInfos.pacienteAlergia}
+        </p>
       </div>
       <div className="PacinteButton">
-        <button>Ver detalhes do Paciente</button>
+        <NavLink
+          to={`/doutor/pacientes/perfil/id/${paciente.pacienteId}`}
+          style={() => {
+            return {
+              color: "white",
+            };
+          }}
+        >
+          <button>Ver Detalhes do paciente</button>
+        </NavLink>
       </div>
     </div>
   );
