@@ -4,23 +4,39 @@ import { url, setHeaders } from "./api";
 import { toast } from "react-toastify";
 
 const initialState = {
-  farmacias: [],
+  pacientes: [],
   status: null,
   createStatus: null,
   deleteStatus: null,
   updateStatus: null,
 };
 
+
 /* 
  TENHO QUE TRAZER OS PACIENTE COM OS FILTRO AQUI, PQ NÃO POSSO TRAZER TODOS E FAZER O FILTRO NO FRONT, IMAGINA SE TEM 200 MIL PACIENTE, E AI VOU TRAZER TUDO PRA DEPOIS FAZER O FILTRO ?
 */
 
-/* export const farmaciaFetch = createAsyncThunk(
-  "farmacias/farmaciaFetch",
+export const pacientesFetch = createAsyncThunk(
+  "pacientes/pacientesFetch",
   async () => {
     try {
       const response = await axios.get(
-        `${url}/farmacias/getFarmacias`,
+        `${url}/pacientes/getPacientes`,
+        setHeaders()
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const pacienteFetch = createAsyncThunk(
+  "pacientes/pacienteFetch",
+  async (id) => {
+    try {
+      const response = await axios.get(
+        `${url}/pacientes/getPaciente/${id}`,
         setHeaders()
       );
       return response.data;
@@ -31,7 +47,7 @@ const initialState = {
 );
 
 //axios fazendo a resuisinção da api, ele vai enviar os valores que eu recebo dos input pra api, na api ele vai salvar no banco de dados.
-export const farmaciaCreate = createAsyncThunk(
+/*export const farmaciaCreate = createAsyncThunk(
   "farmacias/farmaciaCreate",
   async (values) => {
     try {
@@ -105,17 +121,27 @@ const PacientesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    /* [farmaciaFetch.pending]: (state, action) => {
+    [pacientesFetch.pending]: (state, action) => {
       state.status = "pending";
     },
-    [farmaciaFetch.fulfilled]: (state, action) => {
+    [pacientesFetch.fulfilled]: (state, action) => {
       state.status = "success";
-      state.farmacias = action.payload;
+      state.pacientes = action.payload;
     },
-    [farmaciaFetch.rejected]: (state, action) => {
+    [pacientesFetch.rejected]: (state, action) => {
       state.status = "rejected";
     },
-    [farmaciaCreate.pending]: (state, action) => {
+    [pacienteFetch.pending]: (state, action) => {
+      state.status = "pending";
+    },
+    [pacienteFetch.fulfilled]: (state, action) => {
+      state.status = "success";
+      state.pacientes = action.payload;
+    },
+    [pacienteFetch.rejected]: (state, action) => {
+      state.status = "rejected";
+    },
+    /* [farmaciaCreate.pending]: (state, action) => {
       state.createStatus = "pending";
     },
     [farmaciaCreate.fulfilled]: (state, action) => {
