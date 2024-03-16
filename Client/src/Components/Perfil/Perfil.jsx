@@ -94,7 +94,7 @@ const Perfil = ({ User }) => {
       <div className="home-container">
         <Navbar></Navbar>
         <div className="home-direita">
-          <Header title={"Perfil"} cargo={User.Cargo} />
+          <Header title={"Perfil"}/>
           <div className="container-perfil">
             <div className="buttons">
               <button onClick={HandleEditPerfil}>Editar Perfil</button>
