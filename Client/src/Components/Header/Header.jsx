@@ -5,8 +5,9 @@ import { useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../Features/authSlice";
 import { Icons } from "../../Components/Icons/Icons";
+import { getCargo } from "../../Utils/GetFunctions";
 
-const Header = ({ cargo, title }) => {
+const Header = ({title}) => {
   const auth = useSelector((state) => {
     return state.auth;
   });
@@ -22,6 +23,8 @@ const Header = ({ cargo, title }) => {
       navigate("/");
     }, "0");
   };
+
+  const cargo = getCargo(auth);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
