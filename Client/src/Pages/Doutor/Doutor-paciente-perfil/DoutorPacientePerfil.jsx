@@ -24,8 +24,8 @@ const DoutorPacientePerfil = () => {
   if (pacientes.status != "success") {
     return <Loading />;
   } else {
-    return <Loading />;
-    //return <Perfil User={pacientes.pacientes[0]} />;
+    //return <Loading />;
+    return <Perfil User={pacientes.pacientes[0]} />;
   }
 };
 
