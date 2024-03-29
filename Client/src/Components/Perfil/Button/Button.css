@@ -1,0 +1,40 @@
+.button {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  gap: 1rem;
+  border-radius: 0.25rem;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.icon-button {
+  font-size: 2rem;
+  line-height: 1.75rem;
+  color: #ffffff;
+}
+
+.animate-spin-button {
+  font-size: 2rem;
+  line-height: 2rem;
+  color: #ffffff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
