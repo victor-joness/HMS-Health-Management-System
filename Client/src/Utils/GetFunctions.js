@@ -46,4 +46,4 @@ function calcularFrequencia(frequenciaCardiaca, idade, sexo) {
   return "indefinido"; // Cor padrão
 }
 
-export {calcularFrequencia, getCargo};
+export { calcularFrequencia, getCargo };
