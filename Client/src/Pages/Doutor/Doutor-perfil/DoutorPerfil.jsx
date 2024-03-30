@@ -4,6 +4,7 @@ import Navbar from "../../../Components/Navbar/Navbar";
 import Header from "../../../Components/Header/Header";
 import Button from "../../../Components/Perfil/Button/Button";
 import Input from "../../../Components/Perfil/Input/Input";
+import Uploader from "../../../Components/Perfil/Uploader/Uploader";
 import { HiOutlineCheckCircle } from "react-icons/hi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
@@ -70,9 +71,11 @@ const DoutorPerfil = () => {
             </div>
             {status ? (
               <div className="user-perfil-editar">
-                <div class="flex gap-3 flex-col w-full col-span-6">
-                  <p class="text-sm">Profile Image</p>
-                  <input type="file" />
+                <div className="uploader">
+                  <p style={{ fontSize: ".875rem", lineHeight: "1.25rem" }}>
+                    Profile Image
+                  </p>
+                  <Uploader />
                 </div>
                 <div class="flex w-full flex-col gap-3">
                   <p class="text-black text-sm">Title</p>
