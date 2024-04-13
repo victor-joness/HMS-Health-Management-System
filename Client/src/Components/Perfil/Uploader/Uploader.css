@@ -16,6 +16,13 @@
   border-width: 2px;
   border-style: dashed;
   cursor: pointer;
+  border-color: #e5e7eb;
+}
+
+.uploader-container .uploader .text-dentro-uploader{
+  font-size: 2rem;
+  line-height: 1.25rem;
+  margin-top: .5rem;
 }
 
 @media (min-width: 640px) {
@@ -37,6 +44,13 @@
 
 .image-preview-container {
   grid-column: span 12 / span 12;
+}
+
+.image-preview-container img{
+  height: 13rem;
+  width: 100%;
+  border-radius: .25rem;
+  object-fit: cover;
 }
 
 @media (min-width: 640px) {
