@@ -72,45 +72,57 @@ const DoutorPerfil = () => {
             {status ? (
               <div className="user-perfil-editar">
                 <div className="uploader">
-                  <p style={{ fontSize: ".875rem", lineHeight: "1.25rem" }}>
-                    Profile Image
+                  <p style={{ fontSize: "2rem", lineHeight: "1.25rem" }}>
+                    Imagem de perfil
                   </p>
                   <Uploader />
                 </div>
-                <div class="flex w-full flex-col gap-3">
-                  <p class="text-black text-sm">Title</p>
-                  <select>
-                    <option value="title1">Title 1</option>
-                    <option value="title2">Title 2</option>
-                    <option value="title3">Title 3</option>
-                  </select>
-                </div>
-                <label for="full-name" class="text-sm">
-                  Full Name
-                </label>
-                <input id="full-name" type="text" />
+                <div className="user-perfil-editar-input-select">
+                  <div className="user-perfil-editar-input-select-titulo">
+                    <p>Título</p>
+                    <select>
+                      <option value="Dr">Dr</option>
+                      <option value="Mr">Mr</option>
+                      <option value="Mrs">Mrs</option>
+                      <option value="Ms">Ms</option>
+                    </select>
+                  </div>
 
-                <label for="phone-number" class="text-sm">
-                  Phone Number
-                </label>
-                <input id="phone-number" type="tel" />
+                  <div className="user-perfil-editar-input-select-genero">
+                    <p>Gênero</p>
+                    <select>
+                      <option value="masculino">Masculino</option>
+                      <option value="feminino">Feminino</option>
+                      <option value="outro">Outro</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="user-perfil-editar-input-nome">
+                  <label for="nome-completo" class="text-sm">
+                    Nome Completo
+                  </label>
+                  <input id="nome-completo" type="text" />
+                </div>
+
+                <div className="user-perfil-editar-input-contato">
+                  <div className="user-perfil-editar-input-contato-numero">
+                    <label for="numero-telefone">Número de telefone</label>
+                    <input id="numero-telefone" type="tel" placeholder="" />
+                  </div>
+                  <div className="user-perfil-editar-input-contato-emergencia">
+                    <label for="numero-emergencia" class="text-sm">
+                      Número de emergência
+                    </label>
+                    <input id="numero-emergencia" type="tel" placeholder="" />
+                  </div>
+                </div>
 
                 <label for="email" class="text-sm">
                   Email
                 </label>
                 <input id="email" type="email" />
-                <div class="flex w-full flex-col gap-3">
-                  <p class="text-black text-sm">Gender</p>
-                  <select>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <label for="emergency-contact" class="text-sm">
-                  Emergency Contact
-                </label>
-                <input id="emergency-contact" type="tel" />
+
                 <label for="date-of-birth" class="text-sm">
                   Date of Birth
                 </label>
