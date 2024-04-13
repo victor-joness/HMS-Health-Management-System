@@ -23,13 +23,13 @@ const Uploader = ({ setImage, image }) => {
       <div className="uploader" {...getRootProps()}>
         <input {...getInputProps()} />
         <span className="uploader-span">
-          <FiUploadCloud className="text-3xl text-subMain" />
+          <FiUploadCloud style={{ justifyContent: "center", display: "flex", marginLeft: "auto", marginRight: "auto", fontSize: "3rem", color: "rgb(102 181 163)"}}/>
         </span>
-        <p className="text-sm mt-2">Drag your image here</p>
+        <p className="text-dentro-uploader">Drop sua Imagem aqui</p>
         <em
-          style={{ fontSize: "0.75rem", lineHeight: "1rem", color: " #9CA3AF" }}
+          style={{ fontSize: "1.5rem", lineHeight: "1rem", color: " #9CA3AF" }}
         >
-          (Only *.jpeg and *.png images will be accepted)
+          (Apenas *.jpeg e *.png extensões de imagem sao permitidas)
         </em>
       </div>
       {/* image preview */}
