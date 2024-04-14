@@ -12,7 +12,7 @@ describe("API Tests Login", () => {
     const res = await request(app).post("/api/login").send(newUser);
     const createdUser = res.body;
 
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(404);
     expect(createdUser.msg).toBe("Usuário não registrado!");
   });
 
@@ -25,7 +25,7 @@ describe("API Tests Login", () => {
     const res = await request(app).post("/api/login").send(newUser);
     const createdUser = res.body;
 
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(404);
     expect(createdUser.msg).toBe("Senha incorreta!");
   });
 
@@ -42,7 +42,5 @@ describe("API Tests Login", () => {
     expect(createdUser.msg).toBe("Usuário logado!");
   });
 });
-
-
 
 describe("API Tests Registro", () => {});
