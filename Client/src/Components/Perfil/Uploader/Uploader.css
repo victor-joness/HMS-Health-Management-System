@@ -17,6 +17,7 @@
   border-style: dashed;
   cursor: pointer;
   border-color: #e5e7eb;
+  height: 12rem;
 }
 
 .uploader-container .uploader .text-dentro-uploader{
@@ -47,7 +48,7 @@
 }
 
 .image-preview-container img{
-  height: 13rem;
+  height: 12rem;
   width: 100%;
   border-radius: .25rem;
   object-fit: cover;
