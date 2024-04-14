@@ -10,7 +10,10 @@ router.post("/", async (req, res) => {
     const password = req.body.password;
 
     //Usando a dbConnection do middleware
-    const [result] = await req.dbConnection.query("SELECT * FROM users WHERE email = ?", [email]);
+    const [result] = await req.dbConnection.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
 
     if (result.length > 0) {
       const match = await bcrypt.compare(password, result[0].password);
@@ -32,6 +35,8 @@ router.post("/", async (req, res) => {
               isPaciente: result[0].isPaciente,
               Img: result[0].Img,
               Idade: result[0].Idade,
+              numero: result[0].numero,
+              numeroEmergencia: result[0].numeroEmergencia
             }),
           },
         });
