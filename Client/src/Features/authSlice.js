@@ -17,6 +17,8 @@ const initialState = {
   isPaciente: "",
   Img: "",
   Idade: "",
+  Numero: "",
+  NumeroEmergencia: "",
   registerStatus: "",
   registerError: "",
   loginStatus: "",
@@ -89,6 +91,8 @@ const authSlice = createSlice({
           isPaciente: user.isPaciente,
           Img: user.Img,
           Idade: user.Idade,
+          Numero: user.Numero,
+          NumeroEmergencia: user.NumeroEmergencia,
           userLoaded: true,
         };
       }
@@ -108,6 +112,8 @@ const authSlice = createSlice({
         isPaciente: "",
         Img: "",
         Idade: "",
+        Numero: "",
+        NumeroEmergencia: "",
         registerStatus: "",
         registerError: "",
         loginStatus: "",
@@ -174,6 +180,8 @@ const authSlice = createSlice({
           isPaciente: user.isPaciente,
           Img: user.Img,
           Idade: user.Idade,
+          Numero: user.Numero,
+          NumeroEmergencia: user.NumeroEmergencia,
           loginStatus: "success",
         };
       } else {
