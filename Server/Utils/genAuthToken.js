@@ -12,7 +12,9 @@ const genAuthToken = (user) => {
       isEnfermeira: user.isEnfermeira,
       isPaciente: user.isPaciente,
       Img: user.Img,
-      Idade: user.Idade
+      Idade: user.Idade,
+      Numero: user.numero,
+      NumeroEmergencia: user.numeroEmergencia
     },
     secretKey
   );
