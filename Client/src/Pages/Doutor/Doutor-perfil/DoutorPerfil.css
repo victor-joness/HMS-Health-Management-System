@@ -117,21 +117,43 @@
   color: #000000;
 }
 
-.user-perfil-editar .user-perfil-editar-input-nome{
+.user-perfil-editar .user-perfil-editar-input-data-aniversario {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+}
+
+.user-perfil-editar .user-perfil-editar-input-nome,
+.user-perfil-editar .user-perfil-editar-input-email,
+.user-perfil-editar .user-perfil-editar-input-endereço {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.user-perfil-editar .user-perfil-editar-input-nome label{
+.user-perfil-editar .user-perfil-editar-input-nome label,
+.user-perfil-editar .user-perfil-editar-input-email label,
+.user-perfil-editar .user-perfil-editar-input-endereço label,
+.user-perfil-editar .user-perfil-editar-input-data-aniversario label {
   font-size: 2rem;
   line-height: 1.25rem;
   color: #000000;
   margin-bottom: 1rem;
 }
 
+.user-perfil-editar .user-perfil-editar-input-data-aniversario input{
+  font-size: 2rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgb(232 235 238);
+  border-radius: 0.5rem;
+  width: 100%;
+  color: rgb(160 160 160);
+}
 
-.user-perfil-editar .user-perfil-editar-input-nome input{
+.user-perfil-editar .user-perfil-editar-input-nome input,
+.user-perfil-editar .user-perfil-editar-input-email input,
+.user-perfil-editar .user-perfil-editar-input-endereço input {
   font-size: 2rem;
   line-height: 1.25rem;
   width: 100%;
@@ -242,7 +264,7 @@
   width: 100%;
 }
 
-.user-perfil-informacoes-buttons:hover {
+.user-perfil-informacoes-buttons button:hover {
   opacity: 0.8;
 }
 
