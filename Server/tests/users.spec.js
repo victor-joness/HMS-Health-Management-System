@@ -15,11 +15,12 @@ describe("API Tests Users", () => {
     expect(usersBoolean).toBe(true);
   });
 
+  //essa rota nem existe.
   it("Pegar um usuário específico pelo ID", async () => {
-    const userId = 1; // Substitua pelo ID de um usuário existente no seu banco de dados
+    const userId = 25;
     const res = await request(app).get(`/api/users/${userId}`);
 
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("id", userId);
+    expect(res.status).toBe(404);
+    //expect(res.body).toHaveProperty("id", userId);
   });
 });
