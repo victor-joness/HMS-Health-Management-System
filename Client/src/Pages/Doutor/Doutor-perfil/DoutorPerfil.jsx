@@ -6,7 +6,9 @@ import Button from "../../../Components/Perfil/Button/Button";
 import Input from "../../../Components/Perfil/Input/Input";
 import Uploader from "../../../Components/Perfil/Uploader/Uploader";
 import { HiOutlineCheckCircle } from "react-icons/hi";
-import { RiDeleteBin5Line } from "react-icons/ri";
+import { RiDeleteBin5Line, RiLockPasswordLine } from "react-icons/ri";
+
+import { BiUserPlus } from "react-icons/bi";
 
 import { useSelector } from "react-redux";
 import { getCargo } from "../../../Utils/GetFunctions";
@@ -16,7 +18,7 @@ const DoutorPerfil = () => {
     return state.auth;
   });
 
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState("informacoes_pessoais");
 
   return (
     <div>
@@ -43,33 +45,71 @@ const DoutorPerfil = () => {
                   {getCargo(auth)}
                 </span>
               </p>
-              <p>Celular: </p>
+              <p>Celular: {auth.Numero}</p>
               <div className="user-perfil-informacoes-buttons">
                 <button
-                  className="user-perfil-informacoes-buttons"
-                  onClick={(e) => setStatus(true)}
+                  className="user-perfil-informacoes-button"
+                  onClick={(e) => setStatus("informacoes_pessoais")}
                   style={
-                    status
-                      ? { backgroundColor: "rgba(157, 201, 209, 0.315)" }
-                      : { backgroundColor: "rgb(248 249 250/1)" }
+                    status == "informacoes_pessoais"
+                      ? {
+                          backgroundColor: "rgba(157, 201, 209, 0.315)",
+                          lineHeight: "1.5rem",
+                          gap: "1rem",
+                        }
+                      : {
+                          backgroundColor: "rgb(248 249 250/1)",
+                          lineHeight: "1.5rem",
+                          gap: "1rem",
+                        }
                   }
                 >
+                  <BiUserPlus />
                   Informações Pessoais
                 </button>
                 <button
-                  className="user-perfil-informacoes-buttons"
-                  onClick={(e) => setStatus(false)}
+                  className="user-perfil-informacoes-button"
+                  onClick={(e) => setStatus("definir_senha")}
                   style={
-                    !status
-                      ? { backgroundColor: "rgba(157, 201, 209, 0.315)" }
-                      : { backgroundColor: "rgb(248 249 250/1)" }
+                    status == "definir_senha"
+                      ? {
+                          backgroundColor: "rgba(157, 201, 209, 0.315)",
+                          lineHeight: "1.5rem",
+                          gap: "1rem",
+                        }
+                      : {
+                          backgroundColor: "rgb(248 249 250/1)",
+                          lineHeight: "1.5rem",
+                          gap: "1rem",
+                        }
                   }
                 >
+                  <RiLockPasswordLine />
                   Editar Senha
+                </button>
+
+                <button
+                  className="user-perfil-informacoes-button"
+                  onClick={(e) => setStatus("definir_cargos")}
+                  style={
+                    status == "definir_cargos"
+                      ? {
+                          backgroundColor: "rgba(157, 201, 209, 0.315)",
+                          lineHeight: "1.5rem",
+                          gap: "1rem",
+                        }
+                      : {
+                          backgroundColor: "rgb(248 249 250/1)",
+                          lineHeight: "1.5rem",
+                          gap: "1rem",
+                        }
+                  }
+                >
+                  Definir cargos
                 </button>
               </div>
             </div>
-            {status ? (
+            {status == "informacoes_pessoais" ? (
               <div className="user-perfil-editar">
                 <div className="uploader">
                   <p style={{ fontSize: "2rem", lineHeight: "1.25rem" }}>
@@ -99,9 +139,7 @@ const DoutorPerfil = () => {
                 </div>
 
                 <div className="user-perfil-editar-input-nome">
-                  <label for="nome-completo" class="text-sm">
-                    Nome Completo
-                  </label>
+                  <label for="nome-completo">Nome Completo</label>
                   <input id="nome-completo" type="text" />
                 </div>
 
@@ -111,26 +149,30 @@ const DoutorPerfil = () => {
                     <input id="numero-telefone" type="tel" placeholder="" />
                   </div>
                   <div className="user-perfil-editar-input-contato-emergencia">
-                    <label for="numero-emergencia" class="text-sm">
-                      Número de emergência
-                    </label>
+                    <label for="numero-emergencia">Número de emergência</label>
                     <input id="numero-emergencia" type="tel" placeholder="" />
                   </div>
                 </div>
 
-                <label for="email" class="text-sm">
-                  Email
-                </label>
-                <input id="email" type="email" />
+                <div className="user-perfil-editar-input-email">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" />
+                </div>
 
-                <label for="date-of-birth" class="text-sm">
-                  Date of Birth
-                </label>
-                <input id="date-of-birth" type="date" />
-                <label for="address" class="text-sm">
-                  Address
-                </label>
-                <input id="address" type="text" />
+                <div className="user-perfil-editar-input-data-aniversario">
+                  <label for="data-aniversario" class="text-sm">
+                    Data de aniversario
+                  </label>
+                  <input id="data-aniversario" type="date" />
+                </div>
+
+                <div className="user-perfil-editar-input-endereço">
+                  <label for="endereço" class="text-sm">
+                    Endereço
+                  </label>
+                  <input id="endereço" type="text" />
+                </div>
+
                 <div className="button-perfil">
                   <Button
                     label={"Deletar Conta"}
@@ -148,9 +190,8 @@ const DoutorPerfil = () => {
                   />
                 </div>
               </div>
-            ) : (
+            ) : status == "definir_senha" ? (
               <div className="user-perfil-editar">
-                return (
                 <div className="flex-colo gap-4">
                   {/* old password */}
                   <Input label="Old Password" color={true} type="password" />
@@ -171,8 +212,9 @@ const DoutorPerfil = () => {
                     }}
                   />
                 </div>
-                );
               </div>
+            ) : (
+              <div className="user-perfil-editar"></div>
             )}
           </div>
         </div>
