@@ -62,6 +62,8 @@ const Enfermeira = () => {
     }
   };
 
+  console.log(file);
+
   const HandleEnfermeiraSubmit = async (e) => {
     e.preventDefault();
 
