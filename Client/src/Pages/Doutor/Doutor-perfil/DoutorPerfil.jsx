@@ -12,13 +12,62 @@ import { BiUserPlus } from "react-icons/bi";
 
 import { useSelector } from "react-redux";
 import { getCargo } from "../../../Utils/GetFunctions";
+import { toast } from "react-toastify";
+import DoutorPerfilEditarSenha from "./Doutor-perfil-editar-senha/DoutorPerfilEditarSenha";
 
 const DoutorPerfil = () => {
   const auth = useSelector((state) => {
     return state.auth;
   });
 
+  const initData = {
+    PerfilName: "",
+    PerfilImg: "",
+    PerfilIdade: "",
+    PerfilNumero: "",
+    PerfilEmail: "",
+    PerfilGenero: "",
+    PerfilAniversario: "",
+    PerfilEndereco: "",
+    PerfilCargo: "",
+    PerfilDepartamento: "",
+  };
+
   const [status, setStatus] = useState("informacoes_pessoais");
+
+  const HandlePerfilSubmit = async (e) => {
+    e.preventDefault();
+
+    dispatch(
+      perfilUpdate({
+        PerfilName: "",
+        PerfilImg: DataFromUploaderIMG ? DataFromUploaderIMG[0] : "",
+        PerfilIdade: "",
+        PerfilNumero: "",
+        PerfilEmail: "",
+        PerfilGenero: "",
+        PerfilAniversario: "",
+        PerfilEndereco: "",
+        PerfilCargo: "",
+        PerfilDepartamento: "",
+      })
+    ).then((res) => {
+      if (res.payload.msg == "Não foi possivel fazer o update") {
+        toast.error(res.payload.msg);
+      } else {
+        toast.success(res.payload.msg);
+        setTimeout(() => {
+          HandlelistenEnfermeira();
+        }, "2000");
+      }
+    });
+  };
+
+  const [DataFromUploaderIMG, setDataFromUploaderIMG] = useState(null);
+
+  const handleDataFromUploader = (data) => {
+    setDataFromUploaderIMG(data);
+  };
 
   return (
     <div>
@@ -37,7 +86,7 @@ const DoutorPerfil = () => {
               <p>
                 Cargos:
                 <span
-                  class="cargo"
+                  className="cargo"
                   style={
                     "background-color: rgba(157, 201, 209, 0.315); padding: 0.5rem; border-radius: 5px; margin-left: .5rem"
                   }
@@ -115,7 +164,7 @@ const DoutorPerfil = () => {
                   <p style={{ fontSize: "2rem", lineHeight: "1.25rem" }}>
                     Imagem de perfil
                   </p>
-                  <Uploader />
+                  <Uploader onData={handleDataFromUploader} />
                 </div>
                 <div className="user-perfil-editar-input-select">
                   <div className="user-perfil-editar-input-select-titulo">
@@ -139,37 +188,35 @@ const DoutorPerfil = () => {
                 </div>
 
                 <div className="user-perfil-editar-input-nome">
-                  <label for="nome-completo">Nome Completo</label>
+                  <label htmlFor="nome-completo">Nome Completo</label>
                   <input id="nome-completo" type="text" />
                 </div>
 
                 <div className="user-perfil-editar-input-contato">
                   <div className="user-perfil-editar-input-contato-numero">
-                    <label for="numero-telefone">Número de telefone</label>
+                    <label htmlFor="numero-telefone">Número de telefone</label>
                     <input id="numero-telefone" type="tel" placeholder="" />
                   </div>
                   <div className="user-perfil-editar-input-contato-emergencia">
-                    <label for="numero-emergencia">Número de emergência</label>
+                    <label htmlFor="numero-emergencia">
+                      Número de emergência
+                    </label>
                     <input id="numero-emergencia" type="tel" placeholder="" />
                   </div>
                 </div>
 
                 <div className="user-perfil-editar-input-email">
-                  <label for="email">Email</label>
+                  <label htmlFor="email">Email</label>
                   <input id="email" type="email" />
                 </div>
 
                 <div className="user-perfil-editar-input-data-aniversario">
-                  <label for="data-aniversario" class="text-sm">
-                    Data de aniversario
-                  </label>
+                  <label htmlFor="data-aniversario">Data de aniversario</label>
                   <input id="data-aniversario" type="date" />
                 </div>
 
                 <div className="user-perfil-editar-input-endereço">
-                  <label for="endereço" class="text-sm">
-                    Endereço
-                  </label>
+                  <label htmlFor="endereço">Endereço</label>
                   <input id="endereço" type="text" />
                 </div>
 
@@ -191,28 +238,7 @@ const DoutorPerfil = () => {
                 </div>
               </div>
             ) : status == "definir_senha" ? (
-              <div className="user-perfil-editar">
-                <div className="flex-colo gap-4">
-                  {/* old password */}
-                  <Input label="Old Password" color={true} type="password" />
-                  {/* new password */}
-                  <Input label="New Password" color={true} type="password" />
-                  {/* confirm password */}
-                  <Input
-                    label="Confirm Password"
-                    color={true}
-                    type="password"
-                  />
-                  {/* submit */}
-                  <Button
-                    label={"Save Changes"}
-                    Icon={HiOutlineCheckCircle}
-                    onClick={() => {
-                      console.log("teste");
-                    }}
-                  />
-                </div>
-              </div>
+              <DoutorPerfilEditarSenha/>
             ) : (
               <div className="user-perfil-editar"></div>
             )}
