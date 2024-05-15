@@ -171,7 +171,7 @@ const Enfermeira = () => {
 
   const HandlelistenEnfermeira = () => {
     setStatus(true);
-    window.location.reload(false);
+    dispatch(enfermeiraFetch());
   };
 
   useEffect(() => {
