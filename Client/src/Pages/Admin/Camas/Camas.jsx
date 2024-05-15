@@ -127,7 +127,7 @@ const Camas = () => {
 
   const HandlelistenCama = () => {
     setStatus(true);
-    window.location.reload(false);
+    dispatch(camaFetch());
   };
 
   useEffect(() => {
