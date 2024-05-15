@@ -178,7 +178,7 @@ const Doutor = () => {
 
   const HandlelistenDoutor = () => {
     setStatus(true);
-    window.location.reload(false);
+    dispatch(doutorFetch());
   };
 
   useEffect(() => {
