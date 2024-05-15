@@ -111,7 +111,7 @@ const Farmacia = () => {
 
   const HandlelistenFarmacia = () => {
     setStatus(true);
-    window.location.reload(false);
+    dispatch(farmaciaFetch());
   };
 
   useEffect(() => {
