@@ -3,8 +3,8 @@ const router = require("express").Router();
 // GET ALL USERS
 router.get("/", async (req, res) => {
   try {
-    const [users, fields] = await  req.dbConnection.query("SELECT * FROM users");
-    res.status(200).send(users);
+    const [users] = await  req.dbConnection.query("CALL GetAllUsers();");   
+    res.status(200).send(users[0]);
   } catch (error) {
     console.error(error);
     res.status(500).send("Erro ao buscar usuários");
