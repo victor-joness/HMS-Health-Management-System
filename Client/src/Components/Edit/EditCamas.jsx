@@ -11,22 +11,11 @@ import { camaUpdate } from "../../Features/CamaSlice";
 export default function EditCama({ camaId }) {
   const { camas: camas } = useSelector((state) => state.camas);
 
-  const initData = {
-    CamaNumero: "",
-    CamaQuarto: "",
-    CamaStatus: "", //tres nivies (disponivel, indisponivel, limpeza)
-    CamaNivel: "", //nivel da cama pq pode ser de uti, cama normal, ou cama media
-    CamaValor: "",
-    CamaDetalhes: "",
-  };
-
-  let selectedCama = camas.filter((item) => item.id === camaId)[0];
+  let selectedCama = camas.filter((item) => item.Id === camaId)[0];
 
   const [CamaValue, setCamaValue] = useState(selectedCama);
 
   const HandleCamaChange = (e, k) => {
-    console.log(e);
-    console.log(k);
     setCamaValue({ ...CamaValue, [e]: k });
   };
 
@@ -47,23 +36,20 @@ export default function EditCama({ camaId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(CamaValue);
     dispatch(
       camaUpdate({
-        camaId: CamaValue.id,
-        camaNumero: CamaValue.camaNumero,
-        camaQuarto: CamaValue.camaQuarto,
-        camaStatus: CamaValue.camaStatus, //tres status (disponivel, indisponivel, limpeza)
-        camaNivel: CamaValue.camaNivel, //nivel da cama pq pode ser de uti, cama normal, ou cama media
-        camaValor: CamaValue.camaValor,
-        camaDetalhes: CamaValue.camaDetalhes,
+        Id: CamaValue.Id,
+        Numero: CamaValue.Numero,
+        Quarto: CamaValue.Quarto,
+        Status: CamaValue.Status,
+        Nivel: CamaValue.Nivel,
+        Valor: CamaValue.Valor,
+        Detalhes: CamaValue.Detalhes,
       })
     ).then((res) => {
-      if (res.payload.msg == "mudaça feita com sucesso") {
+      console.log(res)
+      if (res.payload.message == "Cama atualizada com sucesso") {
         handleClose();
-        setTimeout(() => {
-          window.location.reload(false);
-        }, "1000");
       }
     });
   };
@@ -88,8 +74,8 @@ export default function EditCama({ camaId }) {
                 <input
                   type="number"
                   placeholder="Número da cama"
-                  name="camaNumero"
-                  value={CamaValue.camaNumero}
+                  name="Numero"
+                  value={CamaValue.Numero}
                   onChange={(e) =>
                     HandleCamaChange(e.target.name, e.target.value)
                   }
@@ -103,8 +89,8 @@ export default function EditCama({ camaId }) {
                 <input
                   type="number"
                   placeholder="Quarto da cama"
-                  name="camaQuarto"
-                  value={CamaValue.camaQuarto}
+                  name="Quarto"
+                  value={CamaValue.Quarto}
                   onChange={(e) =>
                     HandleCamaChange(e.target.name, e.target.value)
                   }
@@ -116,8 +102,8 @@ export default function EditCama({ camaId }) {
               <label>Status da cama</label>
               <div className="inputdiv">
                 <select
-                  name="camaStatus"
-                  value={CamaValue.camaStatus}
+                  name="Status"
+                  value={CamaValue.Status}
                   onChange={(e) =>
                     HandleCamaChange(e.target.name, e.target.value)
                   }
@@ -133,8 +119,8 @@ export default function EditCama({ camaId }) {
               <label>Nível da cama</label>
               <div className="inputdiv">
                 <select
-                  name="camaNivel"
-                  value={CamaValue.camaNivel}
+                  name="Nivel"
+                  value={CamaValue.Nivel}
                   onChange={(e) =>
                     HandleCamaChange(e.target.name, e.target.value)
                   }
@@ -152,8 +138,8 @@ export default function EditCama({ camaId }) {
               <div className="inputdiv">
                 <input
                   type="number"
-                  name="camaValor"
-                  value={CamaValue.camaValor}
+                  name="Valor"
+                  value={CamaValue.Valor}
                   onChange={(e) =>
                     HandleCamaChange(e.target.name, e.target.value)
                   }
@@ -169,8 +155,8 @@ export default function EditCama({ camaId }) {
                   placeholder="Informações extras"
                   rows="4"
                   cols="50"
-                  name="camaDetalhes"
-                  value={CamaValue.camaDetalhes}
+                  name="Detalhes"
+                  value={CamaValue.Detalhes}
                   onChange={(e) =>
                     HandleCamaChange(e.target.name, e.target.value)
                   }
@@ -179,7 +165,7 @@ export default function EditCama({ camaId }) {
               </div>
             </div>
             <button type="submit" className="formsubmitbutton">
-              {loading ? "Loading..." : "Submit"}
+              {loading ? "Loading..." : "Editar"}
             </button>
           </form>
         </DialogContent>

@@ -15,7 +15,7 @@
 
 .add-cama-container-bottom {
   background: rgba(157, 201, 209, 0.315);
-  padding-bottom: 2rem;
+  padding-bottom: 5rem;
   height: auto;
   width: auto;
 }
@@ -23,12 +23,6 @@
 .cama-container-bottom {
   height: 89.5vh;
   background: rgba(157, 201, 209, 0.315);
-}
-
-.AfterSideBar {
-  width: auto;
-  padding: 2rem;
-  margin: 0;
 }
 
 .Main_Add_Cama_div {

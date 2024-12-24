@@ -1,0 +1,93 @@
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-username,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-email,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-confirmPassword,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-password,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-img {
+  width: 40rem;
+  margin: auto;
+  text-align: center;
+}
+
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-username
+  .form-field,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-img
+  .form-field,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-email
+  .form-field,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-confirmPassword
+  .form-field,
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-password
+  .form-field {
+  width: 100%;
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-submit {
+  width: 40rem;
+  margin: auto;
+  background: #ca79c6;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-account {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.container-register
+  .container-register-center
+  .Form-container
+  .form-container-account
+  p {
+  text-align: center;
+  color: #ff706f;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-size: 2rem;
+}

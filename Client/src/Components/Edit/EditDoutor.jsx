@@ -77,9 +77,6 @@ export default function EditDoutor({doutorId}) {
     ).then((res) => {
       if(res.payload.msg == "mudaça feita com sucesso"){
         handleClose();
-        setTimeout(() => {
-          window.location.reload(false);
-        }, "1000");
       }
     });
   };

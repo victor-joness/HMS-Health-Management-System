@@ -1,6 +1,7 @@
-const mysql = require("mysql2");
+import { Router } from "express";
+import mysql from "mysql2";
 
-const router = require("express").Router();
+const router = Router();
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -156,4 +157,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

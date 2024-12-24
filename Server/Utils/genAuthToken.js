@@ -1,25 +1,19 @@
 const jwt = require("jsonwebtoken");
 
-const genAuthToken = (user) => {
+export const genAuthToken = (user) => {
   const secretKey = process.env.JWT_SECRET_KEY;
   const token = jwt.sign(
     {
       id: user.id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
-      isDoutor: user.isDoutor,
-      isEnfermeira: user.isEnfermeira,
-      isPaciente: user.isPaciente,
-      Img: user.Img,
-      Idade: user.Idade,
-      Numero: user.numero,
-      NumeroEmergencia: user.numeroEmergencia
+      role: user.role,
+      img: user.img,
+      phoneNumber: user.phoneNumber,
+      phoneEmergency: user.phoneEmergency
     },
     secretKey
   );
 
   return token;
 };
-
-module.exports = genAuthToken;

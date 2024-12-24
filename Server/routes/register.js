@@ -1,75 +1,82 @@
-const bcript = require("bcrypt");
-const express = require("express");
-const genAuthToken = require("../Utils/genAuthToken");
-const mysql = require("mysql2");
+import { Router } from "express";
+import bcrypt from "bcrypt";
+import mysql from "mysql2/promise";
+import { UserRole } from "../Utils/Enum.js";
+import { sendResponse } from "../Utils/ResponseContainer.js";
+import { genAuthToken } from "../Utils/genAuthToken";
 
-const router = express.Router();
+const router = Router();
 
-const db = mysql.createConnection({
+const dbConfig = {
   host: "localhost",
   user: "root",
   password: process.env.MYSQL_PASSWORD,
   database: "erp-hospitalar",
-});
+};
 
-const saltRounds = 10;
-
-db.connect();
-
+// POST - Criar usuário
 router.post("/", async (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
-  const isAdmin = req.body.isAdmin;
-  const isDoutor = req.body.isDoutor;
-  const isEnfermeira = req.body.isEnfermeira;
-  const isPaciente = req.body.isPaciente;
-  const Img = "IMG-USER.png";
+  const { name, email, password, img } = req.body;
+  const Img = img == "" ? "IMG-USER.png" : img;
+  const role = req.body.role || UserRole.VIEWER;
+  const phoneNumber = req.body.phoneNumber || null;
+  const phoneEmergency = req.body.phoneEmergency || null;
+  const createdUser = req.body.createdUser || 0;
+  const deletionDate = req.body.deletionDate || null;
+  const creationDate = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-  db.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
-    if (err) {
-      res.send(err);
-    }
+  let connection;
+  try {
+    connection = await mysql.createConnection(dbConfig);
+
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const [result] = await connection.execute(
+      "CALL InsertUser(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [
+        name,
+        email,
+        hashedPassword,
+        role,
+        Img,
+        phoneNumber,
+        phoneEmergency,
+        creationDate,
+        createdUser,
+      ]
+    );
     
-    if (result.length == 0) {
-      bcript.hash(password, saltRounds, (err, hash) => {
-        db.query(
-          "INSERT INTO users (name, email, password, isAdmin, isDoutor, isEnfermeira,isPaciente, Img) VALUE (?,?,?,?,?,?,?,?)",
-          [name, email, hash, isAdmin, isDoutor, isEnfermeira, isPaciente, Img],
-          (error, response) => {
-            if (err) {
-              res.send(err);
-            }
-            res.send({
-              msg: "Usuário cadastrado com sucesso",
-              user: {
-                id: response.insertId,
-                name: name,
-                email: email,
-                isAdmin: isAdmin,
-                isDoutor: isDoutor,
-                isEnfermeira: isEnfermeira,
-                isPaciente: isPaciente,
-                Img: Img
-              }, 
-              token: genAuthToken({
-                id: response.insertId,
-                name: name,
-                email: email,
-                isAdmin: isAdmin,
-                isDoutor: isDoutor,
-                isEnfermeira: isEnfermeira,
-                isPaciente: isPaciente,
-                Img: Img
-              })
-            });
-          }
-        );
-      });
-    } else {
-      res.send({ msg: "Email já cadastrado" });
-    }
-  });
+    const userData = {
+      id: result[0][0].insertId,
+      name: name,
+      email: email,
+      role: role,
+      img: Img,
+      phoneNumber: phoneNumber,
+      phoneEmergency: phoneEmergency,
+      creationDate: creationDate,
+      createdUser: createdUser,
+      deletionDate: deletionDate,
+  };
+
+    const token = genAuthToken(userData);
+
+    sendResponse(res, "ok", 200, "sucess", {
+      user: userData,
+      token: token,
+    });
+    
+  } catch (error) {
+    sendResponse(
+      res,
+      "error",
+      500,
+      error.sqlMessage || "Erro ao cadastrar usuário",
+      null
+    );
+  } finally {
+    if (connection) await connection.end();
+  }
 });
 
-module.exports = router;
+export default router;

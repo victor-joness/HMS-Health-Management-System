@@ -1,4 +1,10 @@
-const port = process.env.PORT || 5005;
-const app =  require('./server')
+import dotenv from "dotenv";
+import app from "./server.js"
 
-app.listen(port, console.log(`server Online na porta ${port}`));
+dotenv.config();
+
+const port = process.env.PORT || 3000; // Define a default value if PORT is not set
+
+app.listen(port, () => {
+  console.log(`Server online na porta ${port}`);
+});

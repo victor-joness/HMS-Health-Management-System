@@ -11,14 +11,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import { logoutUser } from "../../../Features/authSlice";
 
 import {
-  cirurgiaCreate,
-  cirurgiaDelete,
-  cirurgiaFetch,
-  cirurgiaUpdate,
-} from "../../../Features/CirurgiaSlice";
-
+  surgeryCreate,
+  surgeryDelete,
+  surgeryFetch,
+  surgeryUpdate,
+} from "../../../Features/SurgerySlice";
 const DoutorOperacao = () => {
-  const { cirurgias: cirurgias } = useSelector((state) => state.cirurgias);
+  const { surgerys: surgerys } = useSelector((state) => state.surgerys);
 
   const auth = useSelector((state) => {
     return state.auth;
@@ -74,15 +73,6 @@ const DoutorOperacao = () => {
   const [CirurgiaValue, setCirurgiaValue] = useState(initData);
   const [loading, setLoading] = useState(false);
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    toast.warning("Logout com sucesso");
-
-    setTimeout(() => {
-      navigate("/");
-    }, "0");
-  };
-
   const HandleAddCirurgia = () => {
     setStatus(false);
   };
@@ -98,12 +88,12 @@ const DoutorOperacao = () => {
 
   const handleDelete = (id) => {
     //delete cirurgia
-    dispatch(cirurgiaDelete(id));
+    dispatch(surgeryDelete(id));
   };
 
   const handleUpdate = (id) => {
     //update no status da cirurgia
-    dispatch(cirurgiaUpdate(id)).then(() => {
+    dispatch(surgeryUpdate(id)).then(() => {
       setTimeout(() => {
         HandlelistenCirurgia();
       }, "2000");
@@ -118,7 +108,7 @@ const DoutorOperacao = () => {
 
     //add doador no banco de dados
     dispatch(
-      cirurgiaCreate({
+      surgeryCreate({
         cirurgiaPaciente: CirurgiaValue.cirurgiaPaciente,
         cirurgiaMedico: auth.name,
         cirurgiaAux1: CirurgiaValue.cirurgiaAux1,
@@ -140,15 +130,15 @@ const DoutorOperacao = () => {
   };
 
   useEffect(() => {
-    dispatch(cirurgiaFetch());
-  }, [dispatch, cirurgiaFetch]);
+    dispatch(surgeryFetch());
+  }, [dispatch, surgeryFetch]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 50 },
-    { field: "cirurgiaPaciente", headerName: "Nome do Paciente", width: 160 },
-    { field: "cirurgiaMedico", headerName: "Nome do Médico", width: 160 },
-    { field: "cirurgiaAux1", headerName: "Nome do Aux1", width: 140 },
-    { field: "cirurgiaAux2", headerName: "Nome do Aux2", width: 140 },
+    { field: "cirurgiaPaciente", headerName: "Paciente", width: 160 },
+    { field: "cirurgiaMedico", headerName: "Médico", width: 160 },
+    { field: "cirurgiaAux1", headerName: "Auxiliar", width: 140 },
+    { field: "cirurgiaAux2", headerName: "Auxiliar", width: 140 },
     { field: "cirurgiaRG", headerName: "RG do paciente", width: 150 },
     { field: "cirurgiaNumero", headerName: "Número", width: 120 },
     { field: "cirurgiaIdade", headerName: "Idade", type: "number", width: 60 },
@@ -156,7 +146,7 @@ const DoutorOperacao = () => {
     {
       field: "cirurgiaGenero",
       headerName: "Gênero",
-      width: 60,
+      width: 65,
       renderCell: (params) => {
         return (
           <img className="img-do-grid" src={`/upload/${params.value}`}></img>

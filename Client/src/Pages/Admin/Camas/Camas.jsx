@@ -12,11 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import EditCama from "../../../Components/Edit/EditCamas";
 
-import {
-  camaCreate,
-  camaFetch,
-  camaDelete,
-} from "../../../Features/CamaSlice";
+import { camaCreate, camaFetch, camaDelete } from "../../../Features/CamaSlice";
 
 const Camas = () => {
   const { camas: camas } = useSelector((state) => state.camas);
@@ -24,12 +20,12 @@ const Camas = () => {
   const dispatch = useDispatch();
 
   const initData = {
-    CamaNumero: "",
-    CamaQuarto: "",
-    CamaStatus: "circulo-vermelho.png", //tres nivies (disponivel, indisponivel, limpeza)
-    CamaNivel: "option-null",
-    CamaValor: "0",
-    CamaDetalhes: "",
+    Numero: "",
+    Quarto: "",
+    Status: "circulo-vermelho.png",
+    Nivel: "option-null",
+    Valor: "0",
+    Detalhes: "",
   };
 
   const [CamaValue, setCamaValue] = useState(initData);
@@ -49,19 +45,19 @@ const Camas = () => {
   const HandleCamaSubmit = async (e) => {
     e.preventDefault();
 
-    if(CamaValue.CamaNivel == "option-null"){
+    if (CamaValue.Nivel == "option-null") {
       toast.error("Escolha um nivel valido para a cama");
       return;
-    };
+    }
 
     dispatch(
       camaCreate({
-        camaNumero: CamaValue.CamaNumero,
-        camaQuarto: CamaValue.CamaQuarto,
-        camaStatus: CamaValue.CamaStatus, //tres status (disponivel, indisponivel, limpeza)
-        camaNivel: CamaValue.CamaNivel, //nivel da cama pq pode ser de uti, cama normal, ou cama media
-        camaValor: CamaValue.CamaValor,
-        camaDetalhes: CamaValue.CamaDetalhes,
+        Numero: CamaValue.Numero,
+        Quarto: CamaValue.Quarto,
+        Status: CamaValue.Status,
+        Nivel: CamaValue.Nivel,
+        Valor: CamaValue.Valor,
+        Detalhes: CamaValue.Detalhes,
       })
     ).then((res) => {
       if (res.payload.msg == "Cama já cadastrado") {
@@ -79,11 +75,11 @@ const Camas = () => {
   // CONSSEGUEM VER E MUDAR O STATUS DA CAMA, TALVEZ FAZER UMA TABELA DE HISTORICO
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "camaNumero", headerName: "Número da cama", width: 150 },
-    { field: "camaQuarto", headerName: "Quato da cama", width: 150 },
+    { field: "Id", headerName: "ID", width: 70 },
+    { field: "Numero", headerName: "Número da cama", width: 150 },
+    { field: "Quarto", headerName: "Quato da cama", width: 150 },
     {
-      field: "camaStatus",
+      field: "Status",
       headerName: "Status",
       width: 60,
       renderCell: (params) => {
@@ -93,12 +89,12 @@ const Camas = () => {
       },
     },
     {
-      field: "camaNivel",
+      field: "Nivel",
       headerName: "Nível da cama",
       width: 200,
     },
-    { field: "camaValor", headerName: "Valor da cama", width: 120 },
-    { field: "camaDetalhes", headerName: "Detalhes da cama", width: 250 },
+    { field: "Valor", headerName: "Valor da cama", width: 120 },
+    { field: "Detalhes", headerName: "Detalhes da cama", width: 250 },
     {
       field: "Ações",
       headerName: "Ações",
@@ -109,12 +105,12 @@ const Camas = () => {
         return (
           <div className="actions">
             <button
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row.Id)}
               className="delete"
             >
               Deletar
             </button>
-            <EditCama camaId={params.row.id}></EditCama>
+            <EditCama camaId={params.row.Id}></EditCama>
           </div>
         );
       },
@@ -132,7 +128,7 @@ const Camas = () => {
 
   useEffect(() => {
     dispatch(camaFetch());
-  }, [dispatch, camaFetch]);
+  }, [dispatch]);
 
   return (
     <div className="home-container">
@@ -155,9 +151,13 @@ const Camas = () => {
                   }}
                 >
                   <DataGrid
-                    rows={camas}
+                    rows={camas.map((cama, index) => ({
+                      ...cama,
+                      Id: cama.Id || index,
+                    }))}
                     columns={columns}
                     pageSize={10}
+                    getRowId={(row) => row.Id}
                     rowsPerPageOptions={[10]}
                     checkboxSelection
                   />
@@ -183,8 +183,8 @@ const Camas = () => {
                         <input
                           type="number"
                           placeholder="Número da cama"
-                          name="CamaNumero"
-                          value={CamaValue.CamaNumero}
+                          name="Numero"
+                          value={CamaValue.Numero}
                           onChange={(e) =>
                             HandleCamaChange(e.target.name, e.target.value)
                           }
@@ -198,8 +198,8 @@ const Camas = () => {
                         <input
                           type="number"
                           placeholder="Quarto da cama"
-                          name="CamaQuarto"
-                          value={CamaValue.CamaQuarto}
+                          name="Quarto"
+                          value={CamaValue.Quarto}
                           onChange={(e) =>
                             HandleCamaChange(e.target.name, e.target.value)
                           }
@@ -211,15 +211,17 @@ const Camas = () => {
                       <label>Status da cama</label>
                       <div className="inputdiv">
                         <select
-                          name="CamaStatus"
-                          value={CamaValue.CamaStatus}
+                          name="Status"
+                          value={CamaValue.Status}
                           onChange={(e) =>
                             HandleCamaChange(e.target.name, e.target.value)
                           }
                           required
                         >
                           <option value="circulo-verde.jpg">Disponível</option>
-                          <option value="circulo-vermelho.png">Indisponível</option>
+                          <option value="circulo-vermelho.png">
+                            Indisponível
+                          </option>
                           <option value="circulo-amarelo.png">Limpeza</option>
                         </select>
                       </div>
@@ -227,16 +229,18 @@ const Camas = () => {
                     <div>
                       <label>Nível da cama</label>
                       <div className="inputdiv">
-                      <select
-                          name="CamaNivel"
-                          value={CamaValue.CamaNivel}
+                        <select
+                          name="Nivel"
+                          value={CamaValue.Nivel}
                           onChange={(e) =>
                             HandleCamaChange(e.target.name, e.target.value)
                           }
                           required
                         >
                           <option value="option-null">Escolha uma opção</option>
-                          <option value="1 - Cama Completa">Cama Completa</option>
+                          <option value="1 - Cama Completa">
+                            Cama Completa
+                          </option>
                           <option value="2 - Cama Média">Cama Média</option>
                           <option value="3 - Cama Simples">Cama Simples</option>
                         </select>
@@ -247,8 +251,8 @@ const Camas = () => {
                       <div className="inputdiv">
                         <input
                           type="number"
-                          name="CamaValor"
-                          value={CamaValue.CamaValor}
+                          name="Valor"
+                          value={CamaValue.Valor}
                           onChange={(e) =>
                             HandleCamaChange(e.target.name, e.target.value)
                           }
@@ -264,8 +268,8 @@ const Camas = () => {
                           placeholder="Informações extras"
                           rows="4"
                           cols="50"
-                          name="CamaDetalhes"
-                          value={CamaValue.CamaDetalhes}
+                          name="Detalhes"
+                          value={CamaValue.Detalhes}
                           onChange={(e) =>
                             HandleCamaChange(e.target.name, e.target.value)
                           }
@@ -273,8 +277,12 @@ const Camas = () => {
                         />
                       </div>
                     </div>
-                    <button type="submit" className="formsubmitbutton">
-                      {loading ? "Loading..." : "Submit"}
+                    <button
+                      type="submit"
+                      className="formsubmitbutton"
+                      style={{ color: "white" }}
+                    >
+                      {loading ? "Loading..." : "Adicionar"}
                     </button>
                   </form>
                 </div>

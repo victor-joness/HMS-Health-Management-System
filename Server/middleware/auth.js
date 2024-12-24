@@ -37,4 +37,4 @@ const isUser = (req, res, next) => {
     });
 };
 
-module.exports = {auth, isAdmin, isUser};
+export default {auth, isAdmin, isUser};

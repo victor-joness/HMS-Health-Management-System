@@ -11,7 +11,7 @@ import { RiDeleteBin5Line, RiLockPasswordLine } from "react-icons/ri";
 import { BiUserPlus } from "react-icons/bi";
 
 import { useSelector } from "react-redux";
-import { getCargo } from "../../../Utils/GetFunctions";
+import { getRole } from "../../../Utils/GetFunctions";
 import { toast } from "react-toastify";
 import DoutorPerfilEditarSenha from "./Doutor-perfil-editar-senha/DoutorPerfilEditarSenha";
 
@@ -74,7 +74,7 @@ const DoutorPerfil = () => {
       <div className="home-container">
         <Navbar></Navbar>
         <div className="home-direita">
-          <Header title={"Perfil"} cargo={getCargo(auth)} />
+          <Header title={"Perfil"} cargo={getRole(auth)} />
 
           <div className="container-user-perfil">
             <div className="user-perfil-informacoes">
@@ -91,7 +91,7 @@ const DoutorPerfil = () => {
                     "background-color: rgba(157, 201, 209, 0.315); padding: 0.5rem; border-radius: 5px; margin-left: .5rem"
                   }
                 >
-                  {getCargo(auth)}
+                  {getRole(auth)}
                 </span>
               </p>
               <p>Celular: {auth.Numero}</p>

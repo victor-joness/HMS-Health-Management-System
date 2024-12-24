@@ -1,9 +1,8 @@
 import * as React from "react";
 import CardMedia from "@mui/material/CardMedia";
 import "./PacienteCard.css";
-import { Genero, PacienteStatus, TipoSanguineo } from "../Enums/Enums";
+import { BloodType, Gender, PatientStatus } from "../../Utils/Enum.ts";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 
 const PacienteCard = ({ paciente }) => {
   const PacineteTemplate = {
@@ -18,19 +17,17 @@ const PacienteCard = ({ paciente }) => {
     pacienteDetalhes: "Joao é um paciente frequente",
     pacienteImg: "IMG-USER.png",
     pacienteInfos: {
-      pacienteGenero: Genero.MASCULINO,
+      pacienteGenero: Gender.MASCULINO,
       pacientePeso: "80",
       pacienteTamanho: "170",
       pacientePressao: "10/80",
       pacienteGlucose: "",
-      pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+      pacienteTipoSanguineo: BloodType.O_POSITIVO,
       pacienteAlergia: "Amendoin",
       pacienteBPM: "75",
-      pacienteStatus: PacienteStatus.ALTA,
+      pacienteStatus: PatientStatus.ALTA,
     },
   };
-
-  const [isTransitioning, setIsTransitioning] = React.useState(false);
 
   const PacienteImg = `../../../public/upload/${paciente.pacienteImg}`;
   const statusClass = `PacienteStatus ${paciente.pacienteInfos.pacienteStatus}`;

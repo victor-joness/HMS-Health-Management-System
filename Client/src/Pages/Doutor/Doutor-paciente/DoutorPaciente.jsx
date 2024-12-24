@@ -8,11 +8,11 @@ import Navbar from "../../../Components/Navbar/Navbar";
 import PacientesContainer from "../../../Components/PacientesContainer/PacientesContainer";
 
 import {
-  PacienteStatus,
-  Genero,
-  TipoSanguineo,
-  PacienteFluxo,
-} from "../../../Components/Enums/Enums";
+  PatientStatus,
+  Gender,
+  BloodType,
+  PatientFlow,
+} from "../../../Utils/Enum.ts";
 
 import { converterStringParaData } from "../../../Utils/DateTime";
 
@@ -36,16 +36,16 @@ const DoutorPaciente = () => {
         "Victor é um paciente frequente e tbm gosta de chocolate e tem 20 anos",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
-        pacienteFluxo: PacienteFluxo.INTERNADO,
+        PatientStatus: PatientStatus.ALTA,
+        PatientFlow: PatientFlow.INTERNADO,
       },
     },
     {
@@ -63,16 +63,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.LEVE,
-        pacienteFluxo: PacienteFluxo.EM_ANALISE,
+        PatientStatus: PatientStatus.LEVE,
+        PatientFlow: PatientFlow.EM_ANALISE,
       },
     },
     {
@@ -90,16 +90,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.CRITICA,
-        pacienteFluxo: PacienteFluxo.INTERNADO,
+        PatientStatus: PatientStatus.CRITICA,
+        PatientFlow: PatientFlow.INTERNADO,
       },
     },
     {
@@ -117,16 +117,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.LEVE,
-        pacienteFluxo: PacienteFluxo.EM_ATENDIMENTO,
+        PatientStatus: PatientStatus.LEVE,
+        PatientFlow: PatientFlow.EM_ATENDIMENTO,
       },
     },
     {
@@ -144,16 +144,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.NENHUM,
-        pacienteFluxo: PacienteFluxo.CONCLUIDO,
+        PatientStatus: PatientStatus.NENHUM,
+        PatientFlow: PatientFlow.CONCLUIDO,
       },
     },
     {
@@ -171,16 +171,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.NORMAL,
-        pacienteFluxo: PacienteFluxo.EM_ESPERA,
+        PatientStatus: PatientStatus.NORMAL,
+        PatientFlow: PatientFlow.EM_ESPERA,
       },
     },
     {
@@ -198,16 +198,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.NENHUM,
-        pacienteFluxo: PacienteFluxo.INTERNADO,
+        PatientStatus: PatientStatus.NENHUM,
+        PatientFlow: PatientFlow.INTERNADO,
       },
     },
     {
@@ -225,15 +225,15 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.CRITICA,
+        PatientStatus: PatientStatus.CRITICA,
       },
     },
     {
@@ -251,16 +251,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
-        pacienteFluxo: PacienteFluxo.EM_COLETA,
+        PatientStatus: PatientStatus.ALTA,
+        PatientFlow: PatientFlow.EM_COLETA,
       },
     },
     {
@@ -278,16 +278,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.LEVE,
-        pacienteFluxo: PacienteFluxo.EM_ATENDIMENTO,
+        PatientStatus: PatientStatus.LEVE,
+        PatientFlow: PatientFlow.EM_ATENDIMENTO,
       },
     },
     {
@@ -305,16 +305,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.NORMAL,
-        pacienteFluxo: PacienteFluxo.EM_ATENDIMENTO,
+        PatientStatus: PatientStatus.NORMAL,
+        PatientFlow: PatientFlow.EM_ATENDIMENTO,
       },
     },
     {
@@ -332,16 +332,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.CRITICA,
-        pacienteFluxo: PacienteFluxo.CONCLUIDO,
+        PatientStatus: PatientStatus.CRITICA,
+        PatientFlow: PatientFlow.CONCLUIDO,
       },
     },
     {
@@ -359,16 +359,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
-        pacienteFluxo: PacienteFluxo.INTERNADO,
+        PatientStatus: PatientStatus.ALTA,
+        PatientFlow: PatientFlow.INTERNADO,
       },
     },
     {
@@ -386,16 +386,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.NENHUM,
-        pacienteFluxo: PacienteFluxo.EM_ESPERA,
+        PatientStatus: PatientStatus.NENHUM,
+        PatientFlow: PatientFlow.EM_ESPERA,
       },
     },
     {
@@ -413,16 +413,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.LEVE,
-        pacienteFluxo: PacienteFluxo.INTERNADO,
+        PatientStatus: PatientStatus.LEVE,
+        PatientFlow: PatientFlow.INTERNADO,
       },
     },
     {
@@ -439,16 +439,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.CRITICA,
-        pacienteFluxo: PacienteFluxo.EM_ANALISE,
+        PatientStatus: PatientStatus.CRITICA,
+        PatientFlow: PatientFlow.EM_ANALISE,
       },
     },
     {
@@ -465,16 +465,16 @@ const DoutorPaciente = () => {
       pacienteDetalhes: "Joao é um paciente frequente",
       pacienteImg: "IMG-USER.png",
       pacienteInfos: {
-        pacienteGenero: Genero.MASCULINO,
+        pacienteGender: Gender.MASCULINO,
         pacientePeso: "80",
         pacienteTamanho: "170",
         pacientePressao: "10/80",
         pacienteGlicose: "80",
-        pacienteTipoSanguineo: TipoSanguineo.O_POSITIVO,
+        pacienteBloodType: BloodType.O_POSITIVO,
         pacienteAlergia: "Amendoin",
         pacienteBPM: "75",
-        pacienteStatus: PacienteStatus.ALTA,
-        pacienteFluxo: PacienteFluxo.CONCLUIDO,
+        PatientStatus: PatientStatus.ALTA,
+        PatientFlow: PatientFlow.CONCLUIDO,
       },
     },
   ];
@@ -507,7 +507,7 @@ const DoutorPaciente = () => {
           paciente.pacienteName
             .toLowerCase()
             .includes(searchPalavra.toLowerCase()) &&
-          paciente.pacienteInfos.pacienteFluxo == searchCategoria
+          paciente.pacienteInfos.PatientFlow == searchCategoria
       );
     } else if (searchCategoria == "7") {
       filteredByCategory = pacientesStatic.filter((paciente) => {
@@ -515,9 +515,9 @@ const DoutorPaciente = () => {
           (paciente.pacienteName
             .toLowerCase()
             .includes(searchPalavra.toLowerCase()) &&
-            paciente.pacienteInfos.pacienteFluxo == 1) ||
-          paciente.pacienteInfos.pacienteFluxo == 2 ||
-          paciente.pacienteInfos.pacienteFluxo == 4
+            paciente.pacienteInfos.PatientFlow == 1) ||
+          paciente.pacienteInfos.PatientFlow == 2 ||
+          paciente.pacienteInfos.PatientFlow == 4
         );
       });
     } else if (
@@ -583,7 +583,7 @@ const DoutorPaciente = () => {
       (key) => prioridades[key]
     );
     const filteredItems = filteredByCategory.filter((paciente) =>
-      prioAtiva.includes(paciente.pacienteInfos.pacienteStatus)
+      prioAtiva.includes(paciente.pacienteInfos.PatientStatus)
     );
 
     setFilteredItems(filteredItems);
@@ -603,7 +603,7 @@ const DoutorPaciente = () => {
     );
 
     const prioItems = pacientesStatic.filter((paciente) =>
-      prioAtiva.includes(paciente.pacienteInfos.pacienteStatus)
+      prioAtiva.includes(paciente.pacienteInfos.PatientStatus)
     );
     setFilteredItems(prioItems);
   }, [prioridades]);

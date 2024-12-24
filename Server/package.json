@@ -2,20 +2,23 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.js",
     "devStart": "nodemon index.js",
     "test": "jest"
   },
-  "author": "",
+  "author": "Victor Mesquita",
   "license": "ISC",
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "http": "^0.0.1-security",
     "jest": "^29.6.1",
     "joi": "^17.8.3",
     "jsonwebtoken": "^9.0.0",
@@ -25,6 +28,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.1.2",
     "nodemon": "^2.0.20",
+    "pg": "^8.13.1",
     "supertest": "^6.3.3"
   },
   "devDependencies": {

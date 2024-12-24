@@ -81,3 +81,30 @@ Apois a implementação da (00008) devemos agora limitar as rotas dos usuarios, 
 
 ### (00008) -> (4) -> proteger as rotas da api
 Criar um middleware para que as rotas da api so esteja disponivel (ou enviar junto na requisição) um header/data que vai fazer a validação se o user está logado
+
+
+--SELECTS
+
+SELECT * FROM `erp-hospitalar`.users;
+
+--CALL
+
+CALL `erp-hospitalar`.`GetAllUsers`();
+
+--SHOW PROCEDURE
+
+ USE `erp-hospitalar`;
+SHOW CREATE PROCEDURE GetAllUsers;
+
+--CREATED PROCEDURE
+
+USE `erp-hospitalar`;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetAllUsers()
+BEGIN
+    SELECT * FROM users;
+END $$
+
+DELIMITER ;

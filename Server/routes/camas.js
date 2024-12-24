@@ -1,6 +1,8 @@
-const mysql = require("mysql2");
+import { Router } from "express";
+import mysql from "mysql2";
+import { sendResponse } from "../Utils/ResponseContainer.js";
 
-const router = require("express").Router();
+const router = Router();
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -11,134 +13,114 @@ const db = mysql.createConnection({
 
 db.connect();
 
-//GET ALL Camas
+// GET ALL Camas
 router.get("/getCamas", async (req, res) => {
   try {
-    db.query("SELECT * FROM camas", (err, result) => {
-      const camas = result;
-      res.status(200).send(camas);
+    db.query("CALL GetAllCamas()", (err, result) => {
+      if (err) {
+        return sendResponse(res, "error", 500, "Erro ao buscar camas", null);
+      }
+      sendResponse(
+        res,
+        "success",
+        200,
+        "Camas recuperadas com sucesso",
+        result[0]
+      );
     });
   } catch (error) {
-    console.log(error);
+    sendResponse(res, "error", 500, "Erro interno do servidor", null);
   }
 });
 
-//CREATE CAMA
+// CREATE Cama
 router.post("/", async (req, res) => {
-  const {
-    camaNumero,
-    camaQuarto,
-    camaStatus,
-    camaNivel,
-    camaValor,
-    camaDetalhes,
-  } = req.body;
+  const { Numero, Quarto, Status, Nivel, Valor, Detalhes } = req.body;
 
   try {
     db.query(
-      "INSERT INTO camas (camaNumero, camaQuarto, camaStatus, camaNivel, camaValor, camaDetalhes) VALUE (?,?,?,?,?,?)",
-      [camaNumero, camaQuarto, camaStatus, camaNivel, camaValor, camaDetalhes],
-      (error, response) => {
+      "CALL CreateCama(?, ?, ?, ?, ?, ?)",
+      [Numero, Quarto, Status, Nivel, Valor, Detalhes],
+      (error) => {
         if (error) {
-          console.log(error);
-          res.send(error);
+          console.error(error);
+          return sendResponse(
+            res,
+            "error",
+            500,
+            "Erro ao cadastrar cama",
+            null
+          );
         }
-        res.send({
-          msg: "Cama cadastrada com sucesso",
-          cama: {
-            camaNumero: camaNumero,
-            camaQuarto: camaQuarto,
-            camaStatus: camaStatus,
-            camaNivel: camaNivel,
-            camaValor: camaValor,
-            camaDetalhes: camaDetalhes,
-          },
+        sendResponse(res, "success", 201, "Cama cadastrada com sucesso", {
+          Numero,
+          Quarto,
+          Status,
+          Nivel,
+          Valor,
+          Detalhes,
         });
       }
     );
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    sendResponse(res, "error", 500, "Erro interno do servidor", null);
   }
 });
 
-/* update cama */
+// UPDATE Cama
 router.put("/:id", async (req, res) => {
-  const {
-    camaId,
-    camaNumero,
-    camaQuarto,
-    camaStatus,
-    camaNivel,
-    camaValor,
-    camaDetalhes,
-  } = req.body;
+  const { Numero, Quarto, Status, Nivel, Valor, Detalhes } = req.body;
+  const Id = req.params.id;
 
   try {
-    db.query("SELECT * FROM camas WHERE id = ?", [camaId], (err, result) => {
-      if (err) {
-        res.send(err);
-      }
-      if (result.length > 0) {
-        db.query(
-          "UPDATE camas SET camaNumero = ?, camaQuarto = ? ,camaStatus = ?, camaNivel = ?, camaValor = ?, camaDetalhes = ? WHERE id = ?",
-          [
-            camaNumero,
-            camaQuarto,
-            camaStatus,
-            camaNivel,
-            camaValor,
-            camaDetalhes,
-            camaId,
-          ],
-          (err, result) => {
-            if (err) {
-              res.send(err);
-            } else {
-              res.send({
-                msg: "mudaça feita com sucesso",
-                cama: {
-                  camaNumero:camaNumero,
-                  camaQuarto:camaQuarto,
-                  camaStatus:camaStatus,
-                  camaNivel:camaNivel,
-                  camaValor:camaValor,
-                  camaDetalhes:camaDetalhes,
-                  camaId:camaId,
-                },
-              });
-            }
-          }
-        );
-      }
-    });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
-/* delete cama */
-router.delete("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    db.query("SELECT * FROM camas WHERE id = ?", [id], (err, result) => {
-      if (err) {
-        res.send(err);
-      }
-      if (result.length > 0) {
-        db.query("DELETE FROM camas WHERE id = ?", [id], (err, result) => {
-          if (err) {
-            res.send(err);
-          } else {
-            res.send({ msg: "Cama deletada com Sucesso" });
-          }
+    db.query(
+      "CALL UpdateCama(?, ?, ?, ?, ?, ?, ?)",
+      [Id, Numero, Quarto, Status, Nivel, Valor, Detalhes],
+      (err) => {
+        if (err) {
+          console.error(err);
+          return sendResponse(
+            res,
+            "error",
+            500,
+            "Erro ao atualizar cama",
+            null
+          );
+        }
+        sendResponse(res, "success", 200, "Cama atualizada com sucesso", {
+          Id,
+          Numero,
+          Quarto,
+          Status,
+          Nivel,
+          Valor,
+          Detalhes,
         });
       }
-    });
+    );
   } catch (error) {
-    res.status(500).send(error);
+    console.error(error);
+    sendResponse(res, "error", 500, "Erro interno do servidor", null);
   }
 });
 
-db.end();
+// DELETE Cama
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
 
-module.exports = router;
+  try {
+    db.query("CALL DeleteCama(?)", [id], (err) => {
+      if (err) {
+        console.error(err);
+        return sendResponse(res, "error", 500, "Erro ao deletar cama", null);
+      }
+      sendResponse(res, "success", 200, "Cama deletada com sucesso", null);
+    });
+  } catch (error) {
+    console.error(error);
+    sendResponse(res, "error", 500, "Erro interno do servidor", null);
+  }
+});
+
+export default router;

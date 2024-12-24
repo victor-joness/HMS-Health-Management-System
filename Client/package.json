@@ -12,6 +12,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@million/lint": "^0.0.62",
+    "@mui/icons-material": "^6.1.8",
     "@mui/material": "^5.11.11",
     "@mui/x-data-grid": "^5.17.25",
     "@reduxjs/toolkit": "^1.9.3",
@@ -20,7 +21,6 @@
     "bcrypt": "^5.1.0",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
-    "million": "^3.0.4",
     "mock-aws-s3": "^4.0.2",
     "moment": "^2.29.4",
     "nock": "^13.3.0",
@@ -32,6 +32,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
     "react-toastify": "^9.1.1",
+    "react-use": "^17.5.1",
     "yup": "^1.0.0"
   },
   "devDependencies": {

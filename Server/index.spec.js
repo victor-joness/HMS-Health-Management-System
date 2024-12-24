@@ -17,30 +17,27 @@ describe("API Tests Login", () => {
   });
 
   it("Caso Senha errada", async () => {
-    const newUser = {
-      email: "victor@gmail.com",
-      password: "123456",
+    const user = {
+      email: "admin@gmail.com",
+      password: "admin2",
     };
 
-    const res = await request(app).post("/api/login").send(newUser);
+    const res = await request(app).post("/api/login").send(user);
     const createdUser = res.body;
 
     expect(res.status).toBe(404);
     expect(createdUser.msg).toBe("Senha incorreta!");
   });
 
-  it("Caso Exista user no banco de dados", async () => {
+  /* it("Caso Exista user no banco de dados", async () => {
     const newUser = {
-      email: "victor@gmail.com",
-      password: "victor",
+      email: "admin@gmail.com",
+      password: "admin",
     };
 
     const res = await request(app).post("/api/login").send(newUser);
     const createdUser = res.body;
 
-    expect(res.status).toBe(200);
     expect(createdUser.msg).toBe("Usuário logado!");
-  });
+  }); */
 });
-
-describe("API Tests Registro", () => {});

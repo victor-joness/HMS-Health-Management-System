@@ -1,8 +1,8 @@
-const { auth, isUser, isAdmin } = require("../middleware/auth");
-const bcript = require("bcrypt");
-const mysql = require("mysql2");
+import { Router } from "express";
+import bcrypt from "bcrypt";
+import mysql from "mysql2";
 
-const router = require("express").Router();
+const router = Router();
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
           res.send(err);
         }
         if (result.length == 0) {
-          bcript.hash(doutorPassword, saltRounds, (err, hash) => {
+          bcrypt.hash(doutorPassword, saltRounds, (err, hash) => {
             db.query(
               "INSERT INTO doutores (doutorName, doutorIdade, doutorNumero, doutorEmail, doutorSangue, doutorGenero,doutorAniversario, doutorEndereco, doutorEducacao, doutorDepartamento, docID, doutorPassword, doutorDetalhes, doutorImg) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
               [
@@ -138,7 +138,7 @@ router.put("/:id", async (req, res) => {
           res.send(err);
         }
         if (result.length > 0) {
-          bcript.hash(doutorPassword, saltRounds, (err, hash) => {
+          bcrypt.hash(doutorPassword, saltRounds, (err, hash) => {
             db.query(
               "UPDATE doutores SET doutorName = ?, doutorIdade = ? ,doutorNumero = ?, doutorEmail = ?, doutorSangue = ?, doutorGenero = ?, doutorAniversario = ?, doutorEndereco = ?, doutorEducacao = ?, doutorDepartamento = ? , doutorPassword = ?, doutorDetalhes = ? WHERE id = ?",
               [
@@ -231,7 +231,7 @@ router.post("/insert", async (req, res) => {
         res.send(err);
       }
       if (result.length == 0) {
-        bcript.hash(password, saltRounds, (err, hash) => {
+        bcrypt.hash(password, saltRounds, (err, hash) => {
           db.query(
             "INSERT INTO users (name, email, password, isAdmin, isDoutor, isEnfermeira,isPaciente, Img) VALUE (?,?,?,?,?,?,?,?)",
             [
@@ -263,4 +263,4 @@ router.post("/insert", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
