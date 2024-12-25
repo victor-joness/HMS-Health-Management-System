@@ -213,16 +213,20 @@ const userController = new UserController(userServices, loggingService);
  *         description: Usuário não encontrado
  */
 
-if (process.env.NODE_ENV !== "DEV") {
-  router.get("/", isAdmin, (req, res) => userController.getAllUsers(req, res));
-  router.post("/", isAdmin, (req, res) => userController.createUser(req, res));
-  router.delete("/:id", isAdmin, (req, res) => userController.deleteUser(req, res));
-  router.put("/:id", isAdmin, (req, res) => userController.updateUser(req, res));
-} else {
+if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => userController.getAllUsers(req, res));
   router.post("/", (req, res) => userController.createUser(req, res));
   router.delete("/:id", (req, res) => userController.deleteUser(req, res));
   router.put("/:id", (req, res) => userController.updateUser(req, res));
+} else {
+  router.get("/", isAdmin, (req, res) => userController.getAllUsers(req, res));
+  router.post("/", isAdmin, (req, res) => userController.createUser(req, res));
+  router.delete("/:id", isAdmin, (req, res) =>
+    userController.deleteUser(req, res)
+  );
+  router.put("/:id", isAdmin, (req, res) =>
+    userController.updateUser(req, res)
+  );
 }
 
 export default router;

@@ -40,6 +40,7 @@ export class BaseRepositoryImplementation<T> implements BaseRepository<T> {
   }
 
   async create(entity: T): Promise<T> {
+    console.log(entity)
     const dbEntity = this.mapper.fromEntityToDB(entity);
   
     const [createdEntity] = await db

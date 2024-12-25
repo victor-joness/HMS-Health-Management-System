@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar, integer, date, text, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, integer, date } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   Id: serial("id").primaryKey(), // Chave primária
@@ -7,6 +7,7 @@ export const usersTable = pgTable("users", {
   Password: varchar("password").notNull(), // Senha
   Role: integer("role").notNull(), // Enum de função do usuário
   Img: varchar("img"), // Imagem do usuário
+  Gender: varchar("gender"),
   Age: varchar("age"), // Idade como string
   PhoneNumber: varchar("phone_number"), // Número de telefone
   PhoneEmergency: varchar("phone_emergency"), // Telefone de emergência

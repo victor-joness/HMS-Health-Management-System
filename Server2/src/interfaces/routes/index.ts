@@ -36,6 +36,17 @@ router.use("/pharmacies", pharmaciesRoutes);
 router.use("/security", securityRoutes);
 router.use("/utilities", utilitiesRoutes);
 router.use("/statistics", statisticsRoutes);
+
+//outros
+/telemedicine -> telemedicina
+/audit -> registrar acesso
+/rh -> rh
+/discharges -> alta
+/admissions -> internamento
+/schedules -> turnos
+/emergency
+/ambulance
+/ehr -> prontuário eletrônico
 */
 
 export default router;

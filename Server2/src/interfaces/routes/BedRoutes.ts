@@ -14,7 +14,7 @@ const bedRepository = new BedRepositoryImplementation();
 const bedServices = new BedService(bedRepository);
 const bedController = new BedController(bedServices, loggingService);
 
-if (process.env.NODE_ENV !== "DEV") {
+if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => bedController.getAllBeds(req, res));
   router.post("/", (req, res) => bedController.createBed(req, res));
   router.put("/:id", (req, res) => bedController.updateBed(req, res));

@@ -2,7 +2,7 @@ import { Router } from "express";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
 import { LoggingService } from "../../core/services/LoggingService";
 import { SurgeryRepositoryImplementation } from "../../core/implementation/SurgeryRepositoryImplementation";
-import { SurgeryService } from "../../core/services/surgeryService";
+import { SurgeryService } from "../../core/services/SurgeryService";
 import { SurgeryController } from "../controllers/SurgeryController";
 import { isAdmin } from "../middlewares/AuthMiddleware";
 
@@ -335,7 +335,7 @@ const surgeryController = new SurgeryController(surgeryServices, loggingService)
  *                   type: string
  *                   example: Erro ao deletar cirurgia
  */
-if (process.env.NODE_ENV !== "DEV") {
+if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => surgeryController.getAllSurgerys(req, res));
   router.post("/", (req, res) => surgeryController.createSurgery(req, res));
   router.put("/:id", (req, res) => surgeryController.updateSurgery(req, res));

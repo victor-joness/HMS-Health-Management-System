@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import mysql from "mysql2/promise";
 import { UserRole } from "../Utils/Enum.js";
 import { sendResponse } from "../Utils/ResponseContainer.js";
-import { genAuthToken } from "../Utils/genAuthToken";
+import { genAuthToken } from "../Utils/genAuthToken.js";
 
 const router = Router();
 

@@ -141,7 +141,7 @@ const nurseController = new NurseController(nurseServices, loggingService);
  *         description: Não foi possível deletar o enfermeiro.
  */
 
-if (process.env.NODE_ENV !== "DEV") {
+if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => nurseController.getAllNurses(req, res));
   router.post("/", (req, res) => nurseController.createNurse(req, res));
   router.put("/:id", (req, res) => nurseController.updateNurse(req, res));

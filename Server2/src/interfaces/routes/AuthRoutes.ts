@@ -196,7 +196,7 @@ const authController = new AuthController(authServices, loggingService);
  *                   example: Token inválido ou expirado
  */
 
-if (process.env.NODE_ENV !== "DEV") {
+if (process.env.NODE_ENV === "DEV") {
   router.post("/login", (req, res) => authController.login(req, res));
   router.post("/register", (req, res) => authController.register(req, res));
 } else {

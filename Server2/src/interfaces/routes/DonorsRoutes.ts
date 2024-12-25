@@ -319,7 +319,7 @@ const donorController = new DonorsController(donorServices, loggingService);
  *                   example: Erro ao deletar doador
  */
 
-if (process.env.NODE_ENV !== "DEV") {
+if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => donorController.getAllDonors(req, res));
   router.post("/", (req, res) => donorController.createDonor(req, res));
   router.put("/:id", (req, res) => donorController.updateDonor(req, res));

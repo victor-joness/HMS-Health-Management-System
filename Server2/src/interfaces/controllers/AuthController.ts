@@ -22,12 +22,12 @@ export class AuthController {
 
   // Método de registro
   async register(req: Request, res: Response) {
-    const user = req.body;
     try {
-      const response = await this.authService.register(user);
+      const response = await this.authService.register(req.body);
 
       sendResponse(res, "ok", 201, "Usuário registrado com sucesso", response);
     } catch (error) {
+      console.log(error);
       sendResponse(res, "error", 500, "Erro ao registrar usuário", null);
       this.loggingService.log("error", "Erro ao registrar usuário", { error });
     }

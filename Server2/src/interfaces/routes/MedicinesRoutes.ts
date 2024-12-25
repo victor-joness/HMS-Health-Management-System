@@ -258,7 +258,7 @@ const medicinesController = new MedicinesController(
  *         description: Medicamento não encontrado.
  */
 
-if (process.env.NODE_ENV !== "DEV") {
+if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => medicinesController.getAllMedicines(req, res));
   router.post("/", (req, res) => medicinesController.createMedicine(req, res));
   router.put("/:id", (req, res) => medicinesController.updateMedicine(req, res));

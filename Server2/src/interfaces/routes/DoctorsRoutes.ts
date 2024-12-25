@@ -141,7 +141,7 @@ const doctorController = new DoctorController(doctorServices, loggingService);
  *         description: Não foi possível deletar o médico.
  */
 
-if (process.env.NODE_ENV !== "DEV") {
+if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => doctorController.getAllDoctors(req, res));
   router.post("/", (req, res) => doctorController.createDoctor(req, res));
   router.put("/:id", (req, res) => doctorController.updateDoctor(req, res));

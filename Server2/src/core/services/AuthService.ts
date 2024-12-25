@@ -4,6 +4,7 @@ import { genAuthToken } from "../../infrastructure/external-services/genAuthToke
 import { User } from "../entities/User";
 import { UserServices } from "./UserServices";
 import { UserRepositoryImplementation } from "../implementation/UserRepositoryImplementation";
+import { Gender } from "../../shared/utils/enum/GenderEnum";
 
 const saltRounds = 10;
 
@@ -34,51 +35,42 @@ export class AuthService {
     }
   }
 
-  // Método de registro de usuário
   async register(userData: any) {
     try {
-      const { name, email, password, img, phoneNumber, phoneEmergency } =
-        userData;
+      // Validação básica
+      if (!userData.Name || !userData.Email || !userData.Password) {
+        throw new Error("Dados obrigatórios ausentes");
+      }
 
-      // Verificar se o email já está registrado
-      const existingUser = await this.userServices.getUserByEmail(email);
+      const existingUser = await this.userServices.getUserByEmail(userData.Email);
       if (existingUser) {
         throw new Error("Email já está em uso");
       }
 
-      // Criptografar a senha
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const hashedPassword = await bcrypt.hash(userData.Password, saltRounds);
 
-      // Definir o papel do usuário, com valor padrão de "VIEWER"
-      const role = userData.role || UserRoleEnum.VIEWER;
+      const user: any = {
+        Name: userData.Name,
+        Email: userData.Email,
+        Password: hashedPassword,
+        Role: UserRoleEnum.PACIENTE,
+        Img: userData.Img ?? "default-img.png",
+        Gender: userData.Gender,
+        Age: userData.Age,
+        PhoneNumber: userData.PhoneNumber,
+        PhoneEmergency: userData.PhoneEmergency,
+        DeletionDate: null,
+        ModifiedDate: null,
+        CreationDate: new Date().toISOString(),
+      };
 
-      // Definir valores padrão para outros campos
-      const creationDate = new Date()
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " ");
-      const Img = img || "IMG-USER.png";
-      const phone = phoneNumber || null;
-      const emergencyPhone = phoneEmergency || null;
-
-      const createdUser = await this.userServices.createUser(
-        new User(
-          name,
-          email,
-          hashedPassword,
-          role,
-          Img,
-          phone,
-          emergencyPhone,
-          creationDate
-        )
-      );
+      const createdUser = await this.userServices.createUser(user);
 
       const token = genAuthToken(createdUser);
 
       return { createdUser, token };
     } catch (error) {
-      throw new Error();
+      throw new Error(`Erro ao registrar usuário, ${error}`);
     }
   }
 

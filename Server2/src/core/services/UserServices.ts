@@ -13,6 +13,7 @@ export class UserServices {
   }
 
   async createUser(user: User): Promise<User> {
+    console.log(user);
     if (
       isNullOrEmpty(user.Name) ||
       isNullOrEmpty(user.Email) ||
@@ -25,9 +26,7 @@ export class UserServices {
     if (existingUser) {
       throw new CreateError("Usuário com este e-mail já existe.");
     }
-
-    user.CreationDate = new Date().toISOString();
-
+    
     return this.userRepository.create(user);
   }
 
