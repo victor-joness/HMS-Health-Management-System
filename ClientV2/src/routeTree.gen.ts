@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as HomeIndexImport } from './routes/(Home)/index'
+import { Route as DashboardDashboardImport } from './routes/(Dashboard)/dashboard'
 import { Route as AuthRegisterImport } from './routes/(Auth)/register'
 import { Route as AuthLoginImport } from './routes/(Auth)/login'
 import { Route as AuthForgotPasswordImport } from './routes/(Auth)/forgot-password'
@@ -21,6 +22,12 @@ import { Route as AuthForgotPasswordImport } from './routes/(Auth)/forgot-passwo
 const HomeIndexRoute = HomeIndexImport.update({
   id: '/(Home)/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardDashboardRoute = DashboardDashboardImport.update({
+  id: '/(Dashboard)/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,6 +74,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterImport
       parentRoute: typeof rootRoute
     }
+    '/(Dashboard)/dashboard': {
+      id: '/(Dashboard)/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardDashboardImport
+      parentRoute: typeof rootRoute
+    }
     '/(Home)/': {
       id: '/(Home)/'
       path: '/'
@@ -83,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/dashboard': typeof DashboardDashboardRoute
   '/': typeof HomeIndexRoute
 }
 
@@ -90,6 +105,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/dashboard': typeof DashboardDashboardRoute
   '/': typeof HomeIndexRoute
 }
 
@@ -98,19 +114,21 @@ export interface FileRoutesById {
   '/(Auth)/forgot-password': typeof AuthForgotPasswordRoute
   '/(Auth)/login': typeof AuthLoginRoute
   '/(Auth)/register': typeof AuthRegisterRoute
+  '/(Dashboard)/dashboard': typeof DashboardDashboardRoute
   '/(Home)/': typeof HomeIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/forgot-password' | '/login' | '/register' | '/'
+  fullPaths: '/forgot-password' | '/login' | '/register' | '/dashboard' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/forgot-password' | '/login' | '/register' | '/'
+  to: '/forgot-password' | '/login' | '/register' | '/dashboard' | '/'
   id:
     | '__root__'
     | '/(Auth)/forgot-password'
     | '/(Auth)/login'
     | '/(Auth)/register'
+    | '/(Dashboard)/dashboard'
     | '/(Home)/'
   fileRoutesById: FileRoutesById
 }
@@ -119,6 +137,7 @@ export interface RootRouteChildren {
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  DashboardDashboardRoute: typeof DashboardDashboardRoute
   HomeIndexRoute: typeof HomeIndexRoute
 }
 
@@ -126,6 +145,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  DashboardDashboardRoute: DashboardDashboardRoute,
   HomeIndexRoute: HomeIndexRoute,
 }
 
@@ -142,6 +162,7 @@ export const routeTree = rootRoute
         "/(Auth)/forgot-password",
         "/(Auth)/login",
         "/(Auth)/register",
+        "/(Dashboard)/dashboard",
         "/(Home)/"
       ]
     },
@@ -153,6 +174,9 @@ export const routeTree = rootRoute
     },
     "/(Auth)/register": {
       "filePath": "(Auth)/register.tsx"
+    },
+    "/(Dashboard)/dashboard": {
+      "filePath": "(Dashboard)/dashboard.tsx"
     },
     "/(Home)/": {
       "filePath": "(Home)/index.tsx"

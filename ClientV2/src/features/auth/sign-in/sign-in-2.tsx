@@ -2,8 +2,21 @@ import { Link } from '@tanstack/react-router'
 import ViteLogo from '@/assets/vite.svg'
 import { UserAuthForm } from './components/user-auth-form'
 import Logo from '@/assets/LOGO.png'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Auth } from '@/types/Auth'
 
 export default function SignIn2() {
+  const Auth : Auth = useSelector((state: any) => state.auth);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (Auth.Id) {
+      navigate('/dashboard');
+    }
+  }, [Auth.Id, navigate])
+
   return (
     <div className='container relative grid h-svh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <div className='relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex'>

@@ -17,6 +17,7 @@ import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit';
 
 import authReducer, {loadUser} from './redux/authSlice'
+import { SidebarProvider } from './components/ui/sidebar'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,7 +78,7 @@ const store = configureStore({
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
-store.dispatch(loadUser());
+store.dispatch(loadUser(null));
 
 // Render the app
 const rootElement = document.getElementById('root')!
