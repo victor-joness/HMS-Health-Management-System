@@ -7,7 +7,7 @@ export class UserMapper {
 
   public static fromDBtoUser(user: any): User {
     return new User(
-      user.id,
+      user.Id,
       user.Name,
       user.Email,
       user.Password,

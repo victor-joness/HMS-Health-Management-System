@@ -5,7 +5,7 @@ export interface Auth {
     Token: string | null;
     Name: string;
     Email: string;
-    Role: UserRole | null;
+    Role: UserRole;
     Img: string;
     Age: string;
     PhoneNumber: string;

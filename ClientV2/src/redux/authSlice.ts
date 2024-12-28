@@ -45,54 +45,37 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-/* export const loginUser = createAsyncThunk(
+export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async (user: { email: string; password: string }, { rejectWithValue }) => {
+  async (user: { Email: string; Password: string }, { rejectWithValue }) => {
     try {
-      // Verifica se as credenciais são para o login estático
-      if (user.email === "admin@admin" && user.password === "admin") {
-        // Adiciona os valores fictícios diretamente no state
-        return {
-          name: "Admin User",
-          email: "admin@admin",
-          id: "1",
-          role: 0,
-          Img: "default-img.png",
-          Age: "30",
-          PhoneNumber: "123456789",
-          PhoneEmergency: "987654321",
-          loginStatus: "success",
-        };
-      }
-
-      // Caso contrário, realiza a requisição normal para a API
-      const response = await axios.post(`${url}/login`, {
-        email: user.email,
-        password: user.password,
+      const response = await axios.post(`${url}/auth/login`, {
+        Email: user.Email,
+        Password: user.Password,
       });
 
-      // Armazena o token recebido da API no localStorage
-      const token = response.data.data.token;
-      localStorage.setItem("token", token);
+      const Token = response.data.data.token;
+      localStorage.setItem("token", Token);
 
-      const userDecoded = jwtDecode<DecodedUser>(token);
+      const userDecoded = jwtDecode<DecodedUser>(Token);
       return {
-        token,
-        name: userDecoded.name,
-        email: userDecoded.email,
-        id: userDecoded.id,
-        role: userDecoded.role,
-        Img: userDecoded.img,
-        Age: userDecoded.age,
+        Token,
+        Id: userDecoded.Id,
+        Name: userDecoded.Name,
+        Email: userDecoded.Email,
+        Role: userDecoded.Role,
+        Img: userDecoded.Img,
+        Age: userDecoded.Age,
         PhoneNumber: userDecoded.PhoneNumber,
         PhoneEmergency: userDecoded.PhoneEmergency,
-        loginStatus: "success",
+        LoginStatus: "success",
       };
+
     } catch (error: any) {
       return rejectWithValue(error.response.data);
     }
   }
-); */
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -105,9 +88,9 @@ const authSlice = createSlice({
         return {
           ...state,
           Token,
+          Id: user.Id,
           Name: user.Name,
           Email: user.Email,
-          Id: user.Id,
           Role: user.Role,
           Img: user.Img,
           Age: user.Age,
@@ -153,9 +136,9 @@ const authSlice = createSlice({
           return {
             ...state,
             Token: action.payload,
+            Id: user.Id,
             Name: user.Name,
             Email: user.Email,
-            Id: user.Id,
             Role: user.Role,
             Img: user.Img,
             Age: user.Age,
@@ -181,29 +164,29 @@ const authSlice = createSlice({
       }
     );
 
-    /* builder.addCase(loginUser.pending, (state) => {
-      return { ...state, loginStatus: "pending" };
+    builder.addCase(loginUser.pending, (state) => {
+      return { ...state, LoginStatus: "pending" };
     });
 
     builder.addCase(
       loginUser.fulfilled,
       (state, action: PayloadAction<any>) => {
         if (action.payload) {
-          // Para login estático ou normal, preenche o estado com os dados
           return {
             ...state,
-            token: action.payload.token,
-            name: action.payload.name,
-            email: action.payload.email,
-            id: action.payload.id,
-            role: action.payload.role,
+            Token: action.payload.Token,
+            Id: action.payload.Id,
+            Name: action.payload.Name,
+            Email: action.payload.Email,
+            Role: action.payload.Role,
             Img: action.payload.Img,
             Age: action.payload.Age,
             PhoneNumber: action.payload.PhoneNumber,
             PhoneEmergency: action.payload.PhoneEmergency,
-            loginStatus: "success",
+            LoginStatus: "success",
           };
         } else {
+          console.log(action.payload);
           toast.error("Senha ou email incorretos");
           return state;
         }
@@ -211,13 +194,14 @@ const authSlice = createSlice({
     );
 
     builder.addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
+      console.log("teste")
       toast.error("Senha ou email incorretos");
       return {
         ...state,
-        loginStatus: "rejected",
-        loginError: action.payload,
+        LoginStatus: "rejected",
+        LoginError: action.payload,
       };
-    }); */
+    });
   },
 });
 

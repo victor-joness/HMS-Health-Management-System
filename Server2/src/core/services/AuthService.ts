@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import { UserRoleEnum } from "../../shared/utils/enum/UserRoleEnum";
 import { genAuthToken } from "../../infrastructure/external-services/genAuthToken";
-import { User } from "../entities/User";
 import { UserServices } from "./UserServices";
 import { UserRepositoryImplementation } from "../implementation/UserRepositoryImplementation";
-import { Gender } from "../../shared/utils/enum/GenderEnum";
+import { NotFoundError } from "../../shared/errors/NotFoundError";
+import { CreateError } from "../../shared/errors/CreateError";
 
 const saltRounds = 10;
 
@@ -14,64 +14,54 @@ export class AuthService {
 
   constructor() {}
 
-  // Método de login
   async login(email: string, password: string) {
-    try {
-      const user = await this.userServices.getUserByEmail(email);
+    const user = await this.userServices.getUserByEmail(email);
 
-      if (!user) {
-        throw new Error("Usuário não encontrado");
-      }
-
-      const passwordMatch = await bcrypt.compare(password, user.Password);
-      if (!passwordMatch) {
-        throw new Error("Senha incorreta");
-      }
-
-      const token = genAuthToken(user);
-      return { user, token };
-    } catch (error) {
-      throw new Error();
+    if (!user) {
+      throw new NotFoundError("Usuário não encontrado");
     }
+
+    const passwordMatch = await bcrypt.compare(password, user.Password);
+    if (!passwordMatch) {
+      throw new Error("Senha incorreta");
+    }
+
+    const token = genAuthToken(user);
+    return { user, token };
   }
 
   async register(userData: any) {
-    try {
-      // Validação básica
-      if (!userData.Name || !userData.Email || !userData.Password) {
-        throw new Error("Dados obrigatórios ausentes");
-      }
-
-      const existingUser = await this.userServices.getUserByEmail(userData.Email);
-      if (existingUser) {
-        throw new Error("Email já está em uso");
-      }
-
-      const hashedPassword = await bcrypt.hash(userData.Password, saltRounds);
-
-      const user: any = {
-        Name: userData.Name,
-        Email: userData.Email,
-        Password: hashedPassword,
-        Role: UserRoleEnum.PACIENTE,
-        Img: userData.Img ?? "default-img.png",
-        Gender: userData.Gender,
-        Age: userData.Age,
-        PhoneNumber: userData.PhoneNumber,
-        PhoneEmergency: userData.PhoneEmergency,
-        DeletionDate: null,
-        ModifiedDate: null,
-        CreationDate: new Date().toISOString(),
-      };
-
-      const createdUser = await this.userServices.createUser(user);
-
-      const token = genAuthToken(createdUser);
-
-      return { createdUser, token };
-    } catch (error) {
-      throw new Error(`Erro ao registrar usuário, ${error}`);
+    if (!userData.Name || !userData.Email || !userData.Password) {
+      throw new CreateError("Dados obrigatórios ausentes");
     }
+
+    const existingUser = await this.userServices.getUserByEmail(userData.Email);
+    if (existingUser) {
+      throw new CreateError("Email já está em uso");
+    }
+
+    const hashedPassword = await bcrypt.hash(userData.Password, saltRounds);
+
+    const user: any = {
+      Name: userData.Name,
+      Email: userData.Email,
+      Password: hashedPassword,
+      Role: UserRoleEnum.PACIENTE,
+      Img: userData.Img ?? "default-img.png",
+      Gender: userData.Gender,
+      Age: userData.Age,
+      PhoneNumber: userData.PhoneNumber,
+      PhoneEmergency: userData.PhoneEmergency,
+      DeletionDate: null,
+      ModifiedDate: null,
+      CreationDate: new Date().toISOString(),
+    };
+
+    const createdUser = await this.userServices.createUser(user);
+
+    const token = genAuthToken(createdUser);
+
+    return { createdUser, token };
   }
 
   // Recuperação de senha

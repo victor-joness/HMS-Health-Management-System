@@ -29,10 +29,10 @@ const authController = new AuthController(authServices, loggingService);
  *           schema:
  *             type: object
  *             properties:
- *               email:
+ *               Email:
  *                 type: string
  *                 example: usuario@example.com
- *               password:
+ *               Password:
  *                 type: string
  *                 example: senha123
  *     responses:
@@ -43,19 +43,19 @@ const authController = new AuthController(authServices, loggingService);
  *             schema:
  *               type: object
  *               properties:
- *                 status:
+ *                 Status:
  *                   type: string
  *                   example: ok
- *                 code:
+ *                 Code:
  *                   type: integer
  *                   example: 200
- *                 message:
+ *                 Message:
  *                   type: string
  *                   example: Login realizado com sucesso
- *                 data:
+ *                 Data:
  *                   type: object
  *                   properties:
- *                     token:
+ *                     Token:
  *                       type: string
  *                       example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
  *       401:
@@ -65,13 +65,13 @@ const authController = new AuthController(authServices, loggingService);
  *             schema:
  *               type: object
  *               properties:
- *                 status:
+ *                 Status:
  *                   type: string
  *                   example: error
- *                 code:
+ *                 Code:
  *                   type: integer
  *                   example: 401
- *                 message:
+ *                 Message:
  *                   type: string
  *                   example: Email ou senha inválidos
  * 
@@ -86,15 +86,25 @@ const authController = new AuthController(authServices, loggingService);
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               Name:
  *                 type: string
  *                 example: João Silva
- *               email:
+ *               Email:
  *                 type: string
  *                 example: usuario@example.com
- *               password:
+ *               Password:
  *                 type: string
  *                 example: senha123
+ *               Gender:
+ *                 type: string
+ *                 enum: [MALE, FEMALE]
+ *                 example: MALE
+ *               Age:
+ *                 type: integer
+ *                 example: 30
+ *               PhoneNumber:
+ *                 type: string
+ *                 example: "+1234567890"
  *     responses:
  *       201:
  *         description: Usuário registrado com sucesso
@@ -103,27 +113,58 @@ const authController = new AuthController(authServices, loggingService);
  *             schema:
  *               type: object
  *               properties:
- *                 status:
+ *                 Status:
  *                   type: string
  *                   example: ok
- *                 code:
+ *                 Code:
  *                   type: integer
  *                   example: 201
- *                 message:
+ *                 Message:
  *                   type: string
  *                   example: Usuário registrado com sucesso
- *                 data:
+ *                 Data:
  *                   type: object
  *                   properties:
- *                     id:
+ *                     Id:
  *                       type: integer
  *                       example: 1
- *                     name:
+ *                     Name:
  *                       type: string
  *                       example: João Silva
- *                     email:
+ *                     Email:
  *                       type: string
  *                       example: usuario@example.com
+ *                     Age:
+ *                       type: string
+ *                       example: "18"
+ *                     CreationDate:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2024-12-27T23:57:30.189Z"
+ *                     DeletionDate:
+ *                       type: string
+ *                       nullable: true
+ *                       example: null
+ *                     Gender:
+ *                       type: string
+ *                       example: Masculino
+ *                     Img:
+ *                       type: string
+ *                       example: "default-img.png"
+ *                     ModifiedDate:
+ *                       type: string
+ *                       nullable: true
+ *                       example: null
+ *                     PhoneEmergency:
+ *                       type: string
+ *                       nullable: true
+ *                       example: null
+ *                     PhoneNumber:
+ *                       type: string
+ *                       example: "(88) 99999-9999"
+ *                     Role:
+ *                       type: integer
+ *                       example: 3
  *       400:
  *         description: Erro ao registrar usuário
  *         content:
@@ -131,13 +172,13 @@ const authController = new AuthController(authServices, loggingService);
  *             schema:
  *               type: object
  *               properties:
- *                 status:
+ *                 Status:
  *                   type: string
  *                   example: error
- *                 code:
+ *                 Code:
  *                   type: integer
  *                   example: 400
- *                 message:
+ *                 Message:
  *                   type: string
  *                   example: Erro ao registrar usuário
  * 
@@ -152,7 +193,7 @@ const authController = new AuthController(authServices, loggingService);
  *           schema:
  *             type: object
  *             properties:
- *               refreshToken:
+ *               RefreshToken:
  *                 type: string
  *                 example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
  *     responses:
@@ -163,19 +204,19 @@ const authController = new AuthController(authServices, loggingService);
  *             schema:
  *               type: object
  *               properties:
- *                 status:
+ *                 Status:
  *                   type: string
  *                   example: ok
- *                 code:
+ *                 Code:
  *                   type: integer
  *                   example: 200
- *                 message:
+ *                 Message:
  *                   type: string
  *                   example: Novo token gerado com sucesso
- *                 data:
+ *                 Data:
  *                   type: object
  *                   properties:
- *                     token:
+ *                     Token:
  *                       type: string
  *                       example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
  *       401:
@@ -185,16 +226,17 @@ const authController = new AuthController(authServices, loggingService);
  *             schema:
  *               type: object
  *               properties:
- *                 status:
+ *                 Status:
  *                   type: string
  *                   example: error
- *                 code:
+ *                 Code:
  *                   type: integer
  *                   example: 401
- *                 message:
+ *                 Message:
  *                   type: string
  *                   example: Token inválido ou expirado
  */
+
 
 if (process.env.NODE_ENV === "DEV") {
   router.post("/login", (req, res) => authController.login(req, res));
