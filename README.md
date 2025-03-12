@@ -90,15 +90,3 @@ Abra um Pull Request.
 
 ### Licença
 Este projeto está sob a licença MIT - veja o arquivo LICENSE para mais detalhes.
-
-### Explicação das Seções:
-- **Descrição**: Explica o projeto e os sistemas que ele integra.
-- **Funcionalidades**: Detalha as principais funcionalidades de cada módulo.
-- **Benefícios**: Apresenta os principais benefícios de integrar os sistemas em uma única plataforma.
-- **Tecnologias Usadas**: Lista as tecnologias e ferramentas utilizadas para o desenvolvimento.
-- **Como Usar**: Fornece um guia passo a passo para clonar, configurar e rodar o projeto.
-- **Contribuições**: Instruções sobre como contribuir com o projeto.
-- **Licença**: Informações sobre a licença do projeto.
-- **Autor**: Seu nome e link para o seu perfil do GitHub.
-
-Este README fornece uma visão geral completa do projeto, sua implementação, tecnologias e instruções detalhadas
