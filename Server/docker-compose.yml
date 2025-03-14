@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: api_HMS
+    restart: always
+    ports:
+      - "5005:5005"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+    volumes:
+      - .:/app
+      - .:/src
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: victorjones
+      POSTGRES_PASSWORD: 15062002
+      POSTGRES_DB: HMS
+    ports:
+      - "5555:5432"
+    networks:
+      - app_network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  #adminer:
+    #image: adminer
+    #container_name: adminer_container
+    #restart: always
+    #ports:
+      #- "8080:8080"
+    #networks:
+      #- app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  pgdata:
