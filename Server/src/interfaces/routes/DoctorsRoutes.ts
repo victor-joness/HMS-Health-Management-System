@@ -7,8 +7,11 @@ import { DoctorServices } from "../../core/services/DoctorServices";
 import { isAdmin } from "../middlewares/AuthMiddleware";
 import { UserRepositoryImplementation } from "../../core/implementation/UserRepositoryImplementation";
 import { UserServices } from "../../core/services/UserServices";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+
+const cacheService = new RedisCache();
 
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
@@ -17,7 +20,7 @@ const userRepository = new UserRepositoryImplementation();
 const userService = new UserServices(userRepository);
 
 const doctorRepository = new DoctorRepositoryImplementation();
-const doctorServices = new DoctorServices(doctorRepository, userRepository);
+const doctorServices = new DoctorServices(doctorRepository, userRepository, cacheService);
 
 const doctorController = new DoctorController(doctorServices, loggingService, userService);
 

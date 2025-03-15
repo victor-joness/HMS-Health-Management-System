@@ -14,8 +14,8 @@ dotenv.config();
 const app = express();
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 100,
+  windowMs: 15 * 60 * 1000,
+  max: parseInt(process.env.RATE_LIMIT || '100'),
   message: 'Muitas requisições deste IP, tente novamente em 15 minutos',
   standardHeaders: true,
   legacyHeaders: false,

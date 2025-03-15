@@ -3,13 +3,11 @@ import { CacheInterface } from "./CacheInterface/CacheInterface";
 
 export class RedisCache implements CacheInterface {
   private client: Redis;
-  private readonly DEFAULT_TTL = 3600; // 1 hora
+  private readonly DEFAULT_TTL = 3600; //1 hora
 
   constructor() {
-    this.client = new Redis({
-      host: process.env.REDIS_HOST || "localhost",
-      port: Number(process.env.REDIS_PORT) || 6379,
-      password: process.env.REDIS_PASSWORD,
+    this.client = new Redis(
+      process.env.REDIS_URL || "redis://default@127.0.0.1:6379", {
       retryStrategy: (times) => {
         const delay = Math.min(times * 50, 2000);
         return delay;
