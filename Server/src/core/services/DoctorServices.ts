@@ -17,7 +17,7 @@ export class DoctorServices {
     const cachedDoctors = await this.CacheService.get(cacheKey);
     if (cachedDoctors) {
       try {
-        const parsedData = JSON.parse(cachedDoctors);
+        const parsedData = JSON.parse(cachedDoctors.toString());
         if (Array.isArray(parsedData)) {
           return parsedData as Doctor[];
         }

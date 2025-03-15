@@ -5,6 +5,7 @@ import {
   integer,
   boolean,
   text,
+  date,
 } from "drizzle-orm/pg-core";
 
 export const nursesTable = pgTable("nurses", {
@@ -20,4 +21,7 @@ export const nursesTable = pgTable("nurses", {
   Notes: text("notes"), // Notas
   Certifications: text("certifications").array().notNull(), // Lista de certificações
   PatientsAssigned: text("patients_assigned").notNull(), // Pacientes atribuídos em JSON
+  Creation_date: date("creation_date").defaultNow().notNull(), // Data de criação
+  Modified_date: date("modified_date").defaultNow().notNull(), // Data de modificação
+  Deletion_date: date("deletion_date"), // Data de exclusão
 });

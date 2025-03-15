@@ -5,14 +5,23 @@ import { NurseController } from "../controllers/NurseController";
 import { LoggingService } from "../../core/services/LoggingService";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
 import { isAdmin } from "../middlewares/AuthMiddleware";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
+import { UserRepositoryImplementation } from "../../core/implementation/UserRepositoryImplementation";
+import { UserServices } from "../../core/services/UserServices";
 
 const router = Router();
+const cacheService = new RedisCache();
+
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
+const userRepository = new UserRepositoryImplementation();
+const userService = new UserServices(userRepository);
+
 const nurseRepository = new NurseRepositoryImplementation();
-const nurseServices = new NurseServices(nurseRepository);
-const nurseController = new NurseController(nurseServices, loggingService);
+const nurseServices = new NurseServices(nurseRepository, cacheService);
+
+const nurseController = new NurseController(nurseServices, loggingService,userService);
 
 //#region Swagger Docs
 
