@@ -1,7 +1,7 @@
 import { sendResponse } from "../../shared/utils/functions/ResponseTemplate";
 import { Request, Response } from "express";
 import { LoggingService } from "../../core/services/LoggingService";
-import { SurgeryService } from "../../core/services/surgeryService";
+import { SurgeryService } from "../../core/services/SurgeryService";
 
 export class SurgeryController {
   constructor(
