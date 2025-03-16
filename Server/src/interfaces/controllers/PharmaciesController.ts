@@ -55,12 +55,11 @@ export class PharmaciesController {
     }
   }
 
-  // Atualizar uma farmácia
   async updatePharmacy(req: Request, res: Response): Promise<void> {
     try {
       const pharmacyId = parseInt(req.params.id);
       const updatedPharmacy = req.body;
-      await this.pharmaciesServices.updatePharmacy(pharmacyId, updatedPharmacy);
+      await this.pharmaciesServices.updatePharmacy(updatedPharmacy);
       sendResponse(res, "ok", 200, "Farmácia atualizada com sucesso");
     } catch (error) {
       this.loggingService.log("error", "Erro ao atualizar farmácia", { error });
@@ -68,7 +67,6 @@ export class PharmaciesController {
     }
   }
 
-  // Obter farmácia por ID
   async getPharmacyById(req: Request, res: Response): Promise<void> {
     try {
       const pharmacyId = parseInt(req.params.id);
@@ -92,7 +90,6 @@ export class PharmaciesController {
     }
   }
 
-  // Obter farmácia por CNPJ
   async getPharmacyByCnpj(req: Request, res: Response): Promise<void> {
     try {
       const cnpj = req.params.cnpj;

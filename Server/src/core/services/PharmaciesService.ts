@@ -1,23 +1,49 @@
 import { Pharmacies } from "../entities/Pharmacies";
 import { PharmaciesRepository } from "../repositories/PharmaciesRepository";
+import { CacheInterface } from "../../infrastructure/cache/CacheInterface/CacheInterface";
 
 export class PharmaciesServices {
-  constructor(private PharmaciesRepository: PharmaciesRepository) {}
+  constructor(
+    private PharmaciesRepository: PharmaciesRepository,
+    private CacheService: CacheInterface
+  ) {}
 
-  async getAllPharmacies() {
-    return await this.PharmaciesRepository.getAll();
+  async getAllPharmacies(): Promise<Pharmacies[]> {
+    const cacheKey = "getAllPharmacies";
+    const cachedPharmacies = await this.CacheService.get(cacheKey);
+
+    if (cachedPharmacies) {
+      try {
+        const parsedData = JSON.parse(cachedPharmacies.toString());
+        if (Array.isArray(parsedData)) {
+          return parsedData as Pharmacies[];
+        }
+      } catch (error) {
+        console.error("Erro ao parsear o cache:", error);
+      }
+    }
+
+    const pharmacies = await this.PharmaciesRepository.getAll();
+    await this.CacheService.set(cacheKey, JSON.stringify(pharmacies));
+
+    return pharmacies;
   }
 
   async createPharmacy(pharmacy: Pharmacies) {
-    return await this.PharmaciesRepository.create(pharmacy);
+    const createdPharmacy = await this.PharmaciesRepository.create(pharmacy);
+    await this.CacheService.delete("getAllPharmacies");
+    return createdPharmacy;
   }
 
   async deletePharmacy(id: number) {
-    return await this.PharmaciesRepository.delete(id);
+    await this.PharmaciesRepository.delete(id);
+    await this.CacheService.delete("getAllPharmacies");
   }
 
-  async updatePharmacy(pharmacy: any, updatedPharmacy: any) {
-    return await this.PharmaciesRepository.update(pharmacy);
+  async updatePharmacy(pharmacy: Pharmacies) {
+    const updatedPharmacy = await this.PharmaciesRepository.update(pharmacy);
+    await this.CacheService.delete("getAllPharmacies");
+    return updatedPharmacy;
   }
 
   async getPharmacyById(id: number) {

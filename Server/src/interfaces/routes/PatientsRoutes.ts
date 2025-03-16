@@ -5,14 +5,16 @@ import { PatientRepositoryImplementation } from "../../core/implementation/Patie
 import { PatientService } from "../../core/services/PatientService";
 import { LoggingService } from "../../core/services/LoggingService";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+const cacheService = new RedisCache();
 
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
 const patientRepository = new PatientRepositoryImplementation();
-const patientServices = new PatientService(patientRepository);
+const patientServices = new PatientService(patientRepository, cacheService);
 const patientController = new PatientController(
   patientServices,
   loggingService

@@ -13,18 +13,6 @@ export class RedisCache implements CacheInterface {
         return delay;
       },
     });
-
-    this.setupErrorHandling();
-  }
-
-  private setupErrorHandling(): void {
-    this.client.on("error", (error) => {
-      console.error("Redis Error:", error);
-    });
-
-    this.client.on("connect", () => {
-      console.log("Redis connected successfully");
-    });
   }
 
   async set(

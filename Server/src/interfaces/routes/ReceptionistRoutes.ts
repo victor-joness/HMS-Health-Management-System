@@ -5,14 +5,16 @@ import { ReceptionistRepositoryImplementation } from "../../core/implementation/
 import { ReceptionistService } from "../../core/services/ReceptionistServices";
 import { LoggingService } from "../../core/services/LoggingService";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+const cacheService = new RedisCache();
 
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
 const receptionistRepository = new ReceptionistRepositoryImplementation();
-const receptionistService = new ReceptionistService(receptionistRepository);
+const receptionistService = new ReceptionistService(receptionistRepository, cacheService);
 const receptionistController = new ReceptionistController(
   receptionistService,
   loggingService

@@ -5,13 +5,16 @@ import { isAdmin } from "../middlewares/AuthMiddleware";
 import { BedRepositoryImplementation } from "../../core/implementation/BedRepositoryImplementation";
 import { BedService } from "../../core/services/BedService";
 import { BedController } from "../controllers/BedController";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+const cacheService = new RedisCache();
+
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
 const bedRepository = new BedRepositoryImplementation();
-const bedServices = new BedService(bedRepository);
+const bedServices = new BedService(bedRepository, cacheService);
 const bedController = new BedController(bedServices, loggingService);
 
 //#region Swagger Docs

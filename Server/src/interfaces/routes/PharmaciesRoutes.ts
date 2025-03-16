@@ -5,14 +5,17 @@ import { pharmaciesRepositoryImplementation } from "../../core/implementation/Ph
 import { PharmaciesServices } from "../../core/services/PharmaciesService";
 import { PharmaciesController } from "../controllers/PharmaciesController";
 import { isAdmin } from "../middlewares/AuthMiddleware";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+
+const cacheService = new RedisCache();
 
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
 const pharmaciesRepository = new pharmaciesRepositoryImplementation();
-const pharmaciesServices = new PharmaciesServices(pharmaciesRepository);
+const pharmaciesServices = new PharmaciesServices(pharmaciesRepository, cacheService);
 const pharmaciesController = new PharmaciesController(
   pharmaciesServices,
   loggingService

@@ -5,13 +5,15 @@ import { LoggingService } from "../../core/services/LoggingService";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
 import { UtilitiesRepositoryImplementation } from "../../core/implementation/UtilitiesRepositoryImplementation";
 import { isAdmin } from "../middlewares/AuthMiddleware";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+const cacheService = new RedisCache();
 
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 const utilityRepository = new UtilitiesRepositoryImplementation();
-const utilitiesService = new UtilitiesService(utilityRepository);
+const utilitiesService = new UtilitiesService(utilityRepository, cacheService);
 const utilitiesController = new UtilitiesController(utilitiesService, loggingService);
 
 //#region Swagger Documentation

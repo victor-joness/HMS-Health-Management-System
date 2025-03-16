@@ -5,13 +5,16 @@ import { DonorRepositoryImplementation } from "../../core/implementation/DonorRe
 import { DonorService } from "../../core/services/DonorService";
 import { DonorsController } from "../controllers/DonorsRoutes";
 import { isAdmin } from "../middlewares/AuthMiddleware";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+const cacheService = new RedisCache();
+
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
 const donorRepository = new DonorRepositoryImplementation();
-const donorServices = new DonorService(donorRepository);
+const donorServices = new DonorService(donorRepository, cacheService);
 const donorController = new DonorsController(donorServices, loggingService);
 
 //#region Swagger Docs

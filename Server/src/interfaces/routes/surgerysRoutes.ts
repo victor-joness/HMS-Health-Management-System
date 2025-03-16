@@ -5,13 +5,16 @@ import { SurgeryRepositoryImplementation } from "../../core/implementation/Surge
 import { SurgeryService } from "../../core/services/SurgeryService";
 import { SurgeryController } from "../controllers/SurgeryController";
 import { isAdmin } from "../middlewares/AuthMiddleware";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+const cacheService = new RedisCache();
+
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
 const surgeryRepository = new SurgeryRepositoryImplementation();
-const surgeryServices = new SurgeryService(surgeryRepository);
+const surgeryServices = new SurgeryService(surgeryRepository, cacheService);
 const surgeryController = new SurgeryController(surgeryServices, loggingService);
 
 //#region Swagger Docs

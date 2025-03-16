@@ -5,14 +5,16 @@ import { HumanResourcesEmployeeRepositoryImplementation } from "../../core/imple
 import { HumanResourcesEmployeeService } from "../../core/services/HumanResourcesEmployeeServices";
 import { LoggingService } from "../../core/services/LoggingService";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
 
 const router = Router();
+const cacheService = new RedisCache();
 
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
 const humanResourcesEmployeeRepository = new HumanResourcesEmployeeRepositoryImplementation();
-const humanResourcesEmployeeService = new HumanResourcesEmployeeService(humanResourcesEmployeeRepository);
+const humanResourcesEmployeeService = new HumanResourcesEmployeeService(humanResourcesEmployeeRepository, cacheService);
 const humanResourcesEmployeeController = new HumanResourcesEmployeeController(
   humanResourcesEmployeeService,
   loggingService
