@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 const databaseConfig = {
   maxConnections: 20,
@@ -12,20 +12,20 @@ const databaseConfig = {
 }
 
 const prodConfig = {
-  host: "postgres",
+  host: process.env.HOST_DOCKER,
   port: 5432,
-  database: "HMS",
-  user: "victorjones",
-  password: "15062002",
+  database: process.env.DATABASE_DOCKER,
+  user: process.env.USER_DOCKER,
+  password: process.env.SENHA_DOCKER,
   ...databaseConfig
 };
 
 const devConfig = {
-  host: "127.0.0.1",
+  host: process.env.HOST,
   port: 5432,
-  database: "HMSLOCAL",
-  user: "victorjones",
-  password: "15062002",
+  database: process.env.DATABASE,
+  user: process.env.USER,
+  password: process.env.SENHA,
   ...databaseConfig
 };
 

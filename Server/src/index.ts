@@ -9,7 +9,7 @@ import { setupSwagger } from "./infrastructure/external-services/SwaggerService"
 import { MetricsService } from './infrastructure/monitoring/MetricsService';
 import { register } from 'prom-client';
 
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 const app = express();
 
