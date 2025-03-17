@@ -1,10 +1,12 @@
 import { NurseRepository } from "../repositories/NurseRepository";
 import { Nurse } from "../entities/Nurse";
 import { CacheInterface } from "../../infrastructure/cache/CacheInterface/CacheInterface";
+import { UserRepository } from "../repositories/UserRepository";
 
 export class NurseServices {
   constructor(
     private NurseRepository: NurseRepository,
+    private UserRepository: UserRepository,
     private CacheService: CacheInterface
   ) {}
 
@@ -25,9 +27,21 @@ export class NurseServices {
     }
 
     const nurses = await this.NurseRepository.getAll();
-    await this.CacheService.set(cacheKey, JSON.stringify(nurses));
 
-    return nurses;
+    const nursesWithUserInfo = await Promise.all(
+      nurses.map(async (nurse) => {
+        const userInfo = await this.UserRepository.getById(nurse.UserId);
+        if (userInfo) {
+          const { Password, ...userWithoutPassword } = userInfo;
+          return { ...nurse, UserInfo: userWithoutPassword };
+        }
+        return nurse;
+      })
+    );
+  
+    await this.CacheService.set(cacheKey, JSON.stringify(nursesWithUserInfo));
+    
+    return nursesWithUserInfo;
   }
 
   async createNurse(nurseDTO: any, tx?: any): Promise<Nurse> {

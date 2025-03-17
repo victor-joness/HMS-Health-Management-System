@@ -33,7 +33,7 @@ export class DoctorServices {
         const userInfo = await this.UserRepository.getById(doctor.UserId);
         if (userInfo) {
           const { Password, ...userWithoutPassword } = userInfo;
-          return { ...doctor, userInfo: userWithoutPassword };
+          return { ...doctor, UserInfo: userWithoutPassword };
         }
         return doctor;
       })

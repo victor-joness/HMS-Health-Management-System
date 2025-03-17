@@ -10,6 +10,8 @@ import utilitiesRoutes from "./UtilitiesRoutes";
 import medicinesRoutes from "./MedicinesRoutes";
 import authRoutes from "./AuthRoutes";
 import bedRoutes from "./BedRoutes";
+import receptionistsRoutes from "./ReceptionistRoutes";
+import humanResourcesEmployees from "./HumanResourcesEmployeeRoutes";
 
 const router = Router();
 
@@ -25,6 +27,8 @@ router.use("/auth", authRoutes);
 router.use("/bed", bedRoutes);
 router.use("/pharmacies", pharmaciesRoutes);
 router.use("/utilities", utilitiesRoutes);
+router.use("/receptionists", receptionistsRoutes);
+router.use("/humanResourcesEmployees", humanResourcesEmployees);
 
 /* 
 router.use("/appointments", appointmentsRoutes);

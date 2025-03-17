@@ -7,6 +7,9 @@ import { CreateError } from "../../shared/errors/CreateError";
 import { UserRoleEnum } from "../../shared/utils/enum/UserRoleEnum";
 import { sendResponse } from "../../shared/utils/functions/ResponseTemplate";
 import { User } from "../../core/entities/User";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
 
 export class NurseController {
   constructor(
@@ -41,8 +44,8 @@ export class NurseController {
           Department,
           Specialization,
           YearsOfExperience,
-          Shift,
           SupervisingDoctor,
+          Qualifications,
           Certifications,
           WorkScheduleDetails,
           EmergencyAvailability,
@@ -58,31 +61,33 @@ export class NurseController {
         if (existingUser) throw new CreateError("Email já cadastrado");
         if (existingNurse) throw new CreateError("Nursing License Number já em uso");
 
+        const hashedPassword = await bcrypt.hash(Password, saltRounds);
+
         const userDTO: User = {
           Id: undefined,
-          Name,
-          Email,
-          Password,
+          Name: Name,
+          Email: Email,
+          Password: hashedPassword,
           Role: UserRoleEnum.ENFERMEIRA,
-          Gender,
-          Img,
-          Age,
-          PhoneNumber,
-          PhoneEmergency,
+          Gender: Gender,
+          Img: Img,
+          Age: Age,
+          PhoneNumber: PhoneNumber,
+          PhoneEmergency: PhoneEmergency,
           DeletionDate: null,
           ModifiedDate: null,
-          CreationDate,
+          CreationDate: CreationDate,
         };
 
         const user = await this.UserService.createUser(userDTO, tx);
 
         const nurseDTO = {
           UserId: user.Id,
+          Qualifications,
           NursingLicenseNumber,
           Department,
           Specialization,
           YearsOfExperience,
-          Shift,
           SupervisingDoctor,
           Certifications,
           WorkScheduleDetails: JSON.stringify(WorkScheduleDetails),
@@ -96,7 +101,8 @@ export class NurseController {
 
         const nurse = await this.NurseServices.createNurse(nurseDTO, tx);
 
-        return {...nurse, userInfo: user};
+        const { Password: _, ...userWithoutPassword } = user;
+        return { ...nurse, userInfo: userWithoutPassword };
       });
 
       sendResponse(res, "ok", 201, "Enfermeiro criado com sucesso", result);

@@ -11,16 +11,18 @@ export class NurseMapper {
       nurse.UserId,
       nurse.Qualifications,
       nurse.YearsOfExperience,
+      nurse.NursingLicenseNumber,
+      nurse.Specialization,
       nurse.Department,
       nurse.WorkScheduleDetails,
       nurse.PatientsAssigned,
       nurse.Certifications,
       nurse.Supervisor,
-      nurse.EmergencyResponseTraining,
+      nurse.EmergencyAvailability,
       nurse.Notes,
       nurse.DeletionDate,
       nurse.ModifiedDate,
-      nurse.CreationDate
+      nurse.CreationDate,
     );
   }
 }

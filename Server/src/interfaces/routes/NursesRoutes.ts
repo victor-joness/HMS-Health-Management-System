@@ -19,7 +19,7 @@ const userRepository = new UserRepositoryImplementation();
 const userService = new UserServices(userRepository);
 
 const nurseRepository = new NurseRepositoryImplementation();
-const nurseServices = new NurseServices(nurseRepository, cacheService);
+const nurseServices = new NurseServices(nurseRepository, userRepository, cacheService);
 
 const nurseController = new NurseController(nurseServices, loggingService,userService);
 

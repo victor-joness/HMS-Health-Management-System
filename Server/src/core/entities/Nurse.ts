@@ -10,12 +10,14 @@ export class Nurse extends BaseEntity {
     public UserId: number,
     public Qualifications: string[],
     public YearsOfExperience: number,
+    public NursingLicenseNumber: string,
+    public Specialization: string,
     public Department: DepartmentEnum,
     public WorkScheduleDetails: WorkScheduleDetails,
     public PatientsAssigned: PatientsAssigned,
     public Certifications: CertificationNurseEnum[],
     public Supervisor: string | null,
-    public EmergencyResponseTraining: boolean,
+    public EmergencyAvailability: boolean,
     public Notes: string | null,
 
     DeletionDate: string | null,
@@ -28,12 +30,14 @@ export class Nurse extends BaseEntity {
     this.UserId = UserId;
     this.Qualifications = Qualifications;
     this.YearsOfExperience = YearsOfExperience;
+    this.NursingLicenseNumber = NursingLicenseNumber;
+    this.Specialization = Specialization;
     this.Department = Department;
     this.WorkScheduleDetails = WorkScheduleDetails;
     this.PatientsAssigned = PatientsAssigned;
     this.Certifications = Certifications;
     this.Supervisor = Supervisor;
-    this.EmergencyResponseTraining = EmergencyResponseTraining;
+    this.EmergencyAvailability = EmergencyAvailability;
     this.Notes = Notes;
   }
 }

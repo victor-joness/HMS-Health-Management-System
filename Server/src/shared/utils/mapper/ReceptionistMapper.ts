@@ -7,25 +7,16 @@ export class ReceptionistMapper {
 
   public static fromDBtoReceptionist(receptionist: any): Receptionist {
     return new Receptionist(
+      receptionist.Id,
+      receptionist.UserId,
+      receptionist.Address,
+      receptionist.JobTitle,
+      receptionist.WorkScheduleDetails,
+      receptionist.EmergencyAvailability,
+      receptionist.Notes,
       receptionist.DeletionDate,
       receptionist.ModifiedDate,
       receptionist.CreationDate,
-      receptionist.Id,
-      receptionist.FullName,
-      receptionist.Email,
-      receptionist.PhoneNumber,
-      receptionist.Address,
-      receptionist.City,
-      receptionist.State,
-      receptionist.ZipCode,
-      receptionist.Gender,
-      receptionist.Birthday,
-      receptionist.IdentificationNumber,
-      receptionist.JobTitle,
-      receptionist.Department,
-      receptionist.WorkingHours,
-      receptionist.IsActive,
-      receptionist.Notes
     );
   }
 }

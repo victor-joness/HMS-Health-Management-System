@@ -1,21 +1,15 @@
-import { pgTable, serial, varchar, integer, boolean } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, integer, boolean, text } from "drizzle-orm/pg-core";
+import { usersTable } from "./usersTable";
 
 export const receptionistsTable = pgTable("receptionists", {
   Id: serial("id").primaryKey(), // Chave primária
-  FullName: varchar("fullname").notNull(), // Nome completo do recepcionista
-  Email: varchar("email").notNull(), // Endereço de e-mail
-  PhoneNumber: varchar("phonenumber").notNull(), // Número de telefone
-  Address: varchar("address").notNull(), // Endereço do recepcionista
-  City: varchar("city").notNull(), // Cidade onde o recepcionista reside
-  State: varchar("state").notNull(), // Estado onde o recepcionista reside
-  ZipCode: varchar("zipcode").notNull(), // CEP do endereço do recepcionista
-  Gender: varchar("gender").notNull(), // Gênero do recepcionista
-  Birthday: varchar("birthday").notNull(), // Data de nascimento
-  IdentificationNumber: varchar("identification_number").notNull(), // Número de identificação
+  UserId: integer("user_id")
+        .notNull()
+        .references(() => usersTable.Id),
   JobTitle: varchar("jobtitle").notNull(), // Cargo do recepcionista
-  Department: varchar("department").notNull(), // Departamento do recepcionista
-  WorkingHours: varchar("working_hours").notNull(), // Horário de trabalho
-  IsActive: boolean("is_active").notNull().default(true), // Indica se o recepcionista está ativo
+  WorkScheduleDetails: text("work_schedule_details").notNull(), // Horário de trabalho
+  EmergencyAvailability: boolean("emergency_availability"),
+  Address: varchar("address").notNull(), // Endereço
   Notes: varchar("notes"), // Observações opcionais
   DeletionDate: varchar("deletion_date"), // Data de exclusão (pode ser nula)
   ModifiedDate: varchar("modified_date"), // Data de modificação (pode ser nula)

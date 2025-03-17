@@ -28,7 +28,7 @@ const humanResourcesEmployeeController = new HumanResourcesEmployeeController(
  *   name: HumanResourcesEmployees
  *   description: Endpoints para gerenciar funcionários do RH.
  *
- * /api/human-resources-employees:
+ * /api/humanResourcesEmployees:
  *   get:
  *     summary: Obter todos os funcionários do RH
  *     tags: [HumanResourcesEmployees]
@@ -108,7 +108,7 @@ const humanResourcesEmployeeController = new HumanResourcesEmployeeController(
  *       404:
  *         description: Não foi possível criar o funcionário do RH.
  *
- * /api/human-resources-employees/{id}:
+ * /api/humanResourcesEmployees/{id}:
  *   get:
  *     summary: Obter informações de um funcionário do RH por ID
  *     tags: [HumanResourcesEmployees]

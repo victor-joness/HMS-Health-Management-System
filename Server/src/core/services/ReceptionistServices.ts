@@ -1,10 +1,12 @@
 import { ReceptionistRepository } from "../repositories/ReceptionistRepository";
 import { Receptionist } from "../entities/Receptionist";
 import { CacheInterface } from "../../infrastructure/cache/CacheInterface/CacheInterface";
+import { UserRepository } from "../repositories/UserRepository";
 
 export class ReceptionistService {
   constructor(
     private receptionistRepository: ReceptionistRepository,
+    private UserRepository: UserRepository,
     private CacheService: CacheInterface
   ) {}
 
@@ -21,16 +23,28 @@ export class ReceptionistService {
       } catch (error) {
         console.error("Erro ao parsear o cache:", error);
       }
-    }
-
+    } 
+    
     const receptionists = await this.receptionistRepository.getAll();
-    await this.CacheService.set(cacheKey, JSON.stringify(receptionists));
 
-    return receptionists;
+    const receptionistsWithUserInfo = await Promise.all(
+      receptionists.map(async (receptionist) => {
+        const userInfo = await this.UserRepository.getById(receptionist.UserId);
+        if (userInfo) {
+          const { Password, ...userWithoutPassword } = userInfo;
+          return { ...receptionist, UserInfo: userWithoutPassword };
+        }
+        return receptionist;
+      })
+    );
+  
+    await this.CacheService.set(cacheKey, JSON.stringify(receptionistsWithUserInfo));
+    
+    return receptionistsWithUserInfo;
   }
 
-  async createReceptionist(receptionist: Receptionist): Promise<Receptionist> {
-    const createdReceptionist = await this.receptionistRepository.create(receptionist);
+  async createReceptionist(receptionist: Receptionist, tx?: any): Promise<Receptionist> {
+    const createdReceptionist = await this.receptionistRepository.create(receptionist, tx);
     await this.CacheService.delete("getAllReceptionists");
     return createdReceptionist;
   }
@@ -48,5 +62,9 @@ export class ReceptionistService {
   async deleteReceptionist(id: number): Promise<void> {
     await this.receptionistRepository.delete(id);
     await this.CacheService.delete("getAllReceptionists");
+  }
+
+  async getByEmail(email: string): Promise<Receptionist | null>{
+    return await this.receptionistRepository.getByEmail(email);
   }
 }

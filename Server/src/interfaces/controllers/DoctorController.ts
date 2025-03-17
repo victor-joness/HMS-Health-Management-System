@@ -7,6 +7,9 @@ import { CreateError } from "../../shared/errors/CreateError";
 import { UserRoleEnum } from "../../shared/utils/enum/UserRoleEnum";
 import { sendResponse } from "../../shared/utils/functions/ResponseTemplate";
 import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
 
 export class DoctorController {
   constructor(
@@ -60,11 +63,13 @@ export class DoctorController {
         if (existingUser) throw new CreateError("Email já cadastrado");
         if (existingDoctor) throw new CreateError("Medical License Number já em uso");
 
+        const hashedPassword = await bcrypt.hash(Password, saltRounds);
+
         const userDTO: User = {
           Id: undefined,
           Name: Name,
           Email: Email,
-          Password: Password,
+          Password: hashedPassword,
           Role: UserRoleEnum.DOUTOR,
           Gender: Gender,
           Img: Img,
@@ -103,7 +108,8 @@ export class DoctorController {
 
         const doctor = await this.DoctorServices.createDoctor(doctorDTO, tx);
 
-        return {...doctor, userInfo: user};
+        const { Password: _, ...userWithoutPassword } = user;
+        return { ...doctor, userInfo: userWithoutPassword };
       });
 
       sendResponse(res, "ok", 201, "Médico criado com sucesso", result);

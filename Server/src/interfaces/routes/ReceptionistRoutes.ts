@@ -6,6 +6,8 @@ import { ReceptionistService } from "../../core/services/ReceptionistServices";
 import { LoggingService } from "../../core/services/LoggingService";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
 import { RedisCache } from "../../infrastructure/cache/RedisCache";
+import { UserRepositoryImplementation } from "../../core/implementation/UserRepositoryImplementation";
+import { UserServices } from "../../core/services/UserServices";
 
 const router = Router();
 const cacheService = new RedisCache();
@@ -13,10 +15,18 @@ const cacheService = new RedisCache();
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
+const userRepository = new UserRepositoryImplementation();
+const userService = new UserServices(userRepository);
+
 const receptionistRepository = new ReceptionistRepositoryImplementation();
-const receptionistService = new ReceptionistService(receptionistRepository, cacheService);
+const receptionistService = new ReceptionistService(
+  receptionistRepository,
+  userRepository,
+  cacheService
+);
 const receptionistController = new ReceptionistController(
   receptionistService,
+  userService,
   loggingService
 );
 
@@ -220,16 +230,34 @@ const receptionistController = new ReceptionistController(
 
 if (process.env.NODE_ENV === "DEV") {
   router.get("/", (req, res) => receptionistController.getAll(req, res));
-  router.post("/", (req, res) => receptionistController.createReceptionist(req, res));
-  router.put("/:id", (req, res) => receptionistController.updateReceptionist(req, res));
-  router.delete("/:id", (req, res) => receptionistController.deleteReceptionist(req, res));
-  router.get("/:id", (req, res) => receptionistController.getReceptionist(req, res));
+  router.post("/", (req, res) =>
+    receptionistController.createReceptionist(req, res)
+  );
+  router.put("/:id", (req, res) =>
+    receptionistController.updateReceptionist(req, res)
+  );
+  router.delete("/:id", (req, res) =>
+    receptionistController.deleteReceptionist(req, res)
+  );
+  router.get("/:id", (req, res) =>
+    receptionistController.getReceptionist(req, res)
+  );
 } else {
-  router.get("/", isAdmin, (req, res) => receptionistController.getAll(req, res));
-  router.post("/", isAdmin, (req, res) => receptionistController.createReceptionist(req, res));
-  router.put("/:id", isAdmin, (req, res) => receptionistController.updateReceptionist(req, res));
-  router.delete("/:id", isAdmin, (req, res) => receptionistController.deleteReceptionist(req, res));
-  router.get("/:id", isAdmin, (req, res) => receptionistController.getReceptionist(req, res));
+  router.get("/", isAdmin, (req, res) =>
+    receptionistController.getAll(req, res)
+  );
+  router.post("/", isAdmin, (req, res) =>
+    receptionistController.createReceptionist(req, res)
+  );
+  router.put("/:id", isAdmin, (req, res) =>
+    receptionistController.updateReceptionist(req, res)
+  );
+  router.delete("/:id", isAdmin, (req, res) =>
+    receptionistController.deleteReceptionist(req, res)
+  );
+  router.get("/:id", isAdmin, (req, res) =>
+    receptionistController.getReceptionist(req, res)
+  );
 }
 
 export default router;

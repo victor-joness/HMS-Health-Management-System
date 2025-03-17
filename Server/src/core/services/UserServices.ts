@@ -4,7 +4,6 @@ import { CreateError } from "../../shared/errors/CreateError";
 import { NotFoundError } from "../../shared/errors/NotFoundError";
 import { UpdateUserDTO } from "../../shared/utils/dtos/UpdateUserDTO";
 import { isNullOrEmpty } from "../../shared/utils/functions/IsNullOrEmpty";
-import { CreateUserDTO } from "../../shared/utils/dtos/CreateUserDTO";
 import { PgTransaction } from "drizzle-orm/pg-core";
 
 export class UserServices {

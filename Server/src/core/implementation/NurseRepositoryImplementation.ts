@@ -20,7 +20,7 @@ export class NurseRepositoryImplementation
     const result = await db
       .select()
       .from(nursesTable)
-      .where(sql`license_number = ${licenseNumber}`)
+      .where(sql`nursing_license_number = ${licenseNumber}`)
       .limit(1)
   
     return result.length > 0 ? this.mapper.fromDBToEntity(result[0]) : null;
