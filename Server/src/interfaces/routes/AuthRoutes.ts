@@ -4,12 +4,29 @@ import { LoggingService } from "../../core/services/LoggingService";
 import { AuthService } from "../../core/services/AuthService";
 import { AuthController } from "../controllers/AuthController";
 import { isAdmin } from "../middlewares/AuthMiddleware";
+import { UserServices } from "../../core/services/UserServices";
+import { UserRepositoryImplementation } from "../../core/implementation/UserRepositoryImplementation";
+import { RedisCache } from "../../infrastructure/cache/RedisCache";
+import { HospitalsRepositoryImplementation } from "../../core/implementation/HospitalsRepositoryImplementation";
+import { HospitalsServices } from "../../core/services/HospitalsService";
 
 const router = Router();
+const cacheService = new RedisCache();
+
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
-const authServices = new AuthService();
+const userRepository = new UserRepositoryImplementation();
+const userServices = new UserServices(userRepository);
+
+const hospitalRepository = new HospitalsRepositoryImplementation();
+const hospitalServices = new HospitalsServices(hospitalRepository);
+
+const authServices = new AuthService(
+  userServices,
+  hospitalServices,
+  cacheService
+);
 const authController = new AuthController(authServices, loggingService);
 
 //#region Swagger Docs
@@ -19,7 +36,7 @@ const authController = new AuthController(authServices, loggingService);
  * tags:
  *   - name: Auth
  *     description: API para autenticação de usuários
- * 
+ *
  * /api/auth/login:
  *   post:
  *     summary: Realiza login de um usuário
@@ -76,7 +93,7 @@ const authController = new AuthController(authServices, loggingService);
  *                 Message:
  *                   type: string
  *                   example: Email ou senha inválidos
- * 
+ *
  * /api/auth/register:
  *   post:
  *     summary: Registra um novo usuário
@@ -192,7 +209,9 @@ if (process.env.NODE_ENV === "DEV") {
   router.post("/register", (req, res) => authController.register(req, res));
 } else {
   router.post("/login", isAdmin, (req, res) => authController.login(req, res));
-  router.post("/register", isAdmin, (req, res) => authController.register(req, res));
+  router.post("/register", isAdmin, (req, res) =>
+    authController.register(req, res)
+  );
 }
 
 export default router;

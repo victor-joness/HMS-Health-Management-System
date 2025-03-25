@@ -5,17 +5,21 @@ import { UserServices } from "./UserServices";
 import { UserRepositoryImplementation } from "../implementation/UserRepositoryImplementation";
 import { NotFoundError } from "../../shared/errors/NotFoundError";
 import { CreateError } from "../../shared/errors/CreateError";
+import { CacheInterface } from "../../infrastructure/cache/CacheInterface/CacheInterface";
+import { HospitalsServices } from "./HospitalsService";
+import { PgTransaction } from "drizzle-orm/pg-core";
 
 const saltRounds = 10;
 
 export class AuthService {
-  private userRepository = new UserRepositoryImplementation();
-  private userServices = new UserServices(this.userRepository);
-
-  constructor() {}
+  constructor(
+    private UserServices: UserServices,
+    private HospitalServices: HospitalsServices,
+    private CacheService: CacheInterface
+  ) {}
 
   async login(email: string, password: string) {
-    const user = await this.userServices.getUserByEmail(email);
+    const user = await this.UserServices.getUserByEmail(email);
 
     if (!user) {
       throw new NotFoundError("Usuário não encontrado");
@@ -26,7 +30,9 @@ export class AuthService {
       throw new Error("Senha incorreta");
     }
 
-    const token = genAuthToken(user);
+    const userDTO = {...user, HospitalInfo: await this.HospitalServices.getHospitalById(user.HospitalId)};
+
+    const token = genAuthToken(userDTO);
     return { user, token };
   }
 
@@ -35,7 +41,7 @@ export class AuthService {
       throw new CreateError("Dados obrigatórios ausentes");
     }
 
-    const existingUser = await this.userServices.getUserByEmail(userData.Email);
+    const existingUser = await this.UserServices.getUserByEmail(userData.Email);
     if (existingUser) {
       throw new CreateError("Email já está em uso");
     }
@@ -52,12 +58,13 @@ export class AuthService {
       Age: userData.Age,
       PhoneNumber: userData.PhoneNumber,
       PhoneEmergency: userData.PhoneEmergency,
+      HospitalId: userData.HospitalId,
       DeletionDate: null,
       ModifiedDate: null,
       CreationDate: new Date().toISOString(),
     };
 
-    const createdUser = await this.userServices.createUser(user);
+    const createdUser = await this.UserServices.createUser(user);
 
     const token = genAuthToken(createdUser);
 

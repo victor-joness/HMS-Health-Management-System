@@ -26,7 +26,7 @@ export const nursesTable = pgTable("nurses", {
   Certifications: text("certifications").array().notNull(),
   Address: varchar("address").notNull(),
   PatientsAssigned: text("patients_assigned"),
-  Creation_date: date("creation_date").defaultNow().notNull(),
-  Modified_date: date("modified_date").defaultNow().notNull(),
-  Deletion_date: date("deletion_date"),
+  CreationDate: date("creation_date").defaultNow().notNull(),
+  ModifiedDate: date("modified_date").defaultNow().notNull(),
+  DeletionDate: date("deletion_date"),
 });

@@ -1,11 +1,18 @@
 import { Request, Response } from "express";
-import { HumanResourcesEmployeeService } from "../../core/services/HumanResourcesEmployeeServices";
+import { HumanResourcesEmployeeService } from "../../core/services/HumanResourcesEmployeeService";
 import { LoggingService } from "../../core/services/LoggingService";
 import { sendResponse } from "../../shared/utils/functions/ResponseTemplate";
+import { UserServices } from "../../core/services/UserServices";
+import { CreateError } from "../../shared/errors/CreateError";
+import { db } from "../../infrastructure/database/db";
+import { User } from "../../core/entities/User";
+import { HashService } from "../../infrastructure/services/HashService";
+import { UserRoleEnum } from "../../shared/utils/enum/UserRoleEnum";
 
 export class HumanResourcesEmployeeController {
   constructor(
     private humanResourcesEmployeeService: HumanResourcesEmployeeService,
+    private UserService: UserServices,
     private loggingService: LoggingService
   ) {}
 
@@ -26,19 +33,82 @@ export class HumanResourcesEmployeeController {
   }
 
   async createHumanResourcesEmployee(req: Request, res: Response): Promise<void> {
-    try {
-      const employee = await this.humanResourcesEmployeeService.createHumanResourcesEmployee(req.body);
-      sendResponse(res, "ok", 201, "Funcionário do RH criado com sucesso", employee);
-    } catch (error) {
-      sendResponse(res, "error", 404, "Erro ao criar funcionário do RH", null);
-      this.loggingService.log("error", "Erro ao criar funcionário do RH", {
-        error,
-        body: req.body,
-        method: "HumanResourcesEmployee/createEmployee",
-        status: 404,
-      });
-    }
-  }
+        try {
+          const result = await db.transaction(async (tx) => {
+            const { 
+              Name,
+              Email,
+              Password,
+              Gender,
+              Img,
+              Age,
+              PhoneNumber,
+              PhoneEmergency,
+              CreationDate,
+              Notes,
+              WorkScheduleDetails,
+              Address,
+              HospitalId
+            } = req.body;
+    
+            const [existingUser] = await Promise.all([
+              this.UserService.getUserByEmail(Email),
+            ]);
+    
+            if (existingUser) throw new CreateError("Email já cadastrado");
+    
+            const userDTO: User = {
+              Id: undefined,
+              Name: Name,                 
+              Email: Email,       
+              Password: await new HashService().hash(Password),
+              Role: UserRoleEnum.RH,
+              Gender: Gender,       
+              Img: Img,
+              Age: Age,
+              PhoneNumber: PhoneNumber,
+              PhoneEmergency: PhoneEmergency,
+              DeletionDate: null,
+              ModifiedDate: null,
+              CreationDate: CreationDate,
+              HospitalId: HospitalId
+            };
+    
+            const user = await this.UserService.createUser(userDTO, tx);
+    
+            const humanResourcesEmployeeDTO: any = {
+              UserId: user.Id,
+              JobTitle: "RH",
+              Address:Address,
+              WorkScheduleDetails: JSON.stringify(WorkScheduleDetails),
+              Notes: Notes,
+              DeletionDate: null,
+              ModifiedDate: null,
+              CreationDate: new Date().toISOString(),
+            };
+    
+            const humanResourcesEmployee = await this.humanResourcesEmployeeService.createHumanResourcesEmployee(humanResourcesEmployeeDTO, tx);
+    
+            const { Password: _, ...userWithoutPassword } = user;
+            return { ...humanResourcesEmployee, UserInfo: userWithoutPassword };
+          });
+    
+          sendResponse(res, "ok", 201, "funcionário do RH criado com sucesso", result);
+        } catch (error) {
+          this.loggingService.log("error", "Erro ao criar funcionário do RH", {
+            error,
+            body: req.body,
+            method: "HumanResourcesEmployee/createEmployee",
+            status: 404,
+          });
+  
+          if (error instanceof CreateError) {
+            sendResponse(res, "error", 404, error.message, null);
+          } else {
+            sendResponse(res, "error", 404, "Erro ao criar funcionário do RH", null);
+          }
+        }
+      }
 
   async getHumanResourcesEmployeeById(req: Request, res: Response): Promise<void> {
     try {

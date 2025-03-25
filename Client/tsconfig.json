@@ -1,16 +1,13 @@
 {
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
   "compilerOptions": {
-    "jsx": "react",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "target": "ES6",  // Mude para ES6 ou superior
-    "lib": ["ES6", "DOM", "ES2021"],   // Especifica as bibliotecas necessárias para ES6
-    "strict": true
-  },
-  "include": [
-    "./**/*.ts",
-    "./**/*.tsx",
-    "./declarations.d.ts"
-, "src/Pages/Home/Home.jsx", "src/Pages/Register/Register.jsx"  ]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }

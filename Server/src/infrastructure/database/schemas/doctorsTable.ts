@@ -29,7 +29,7 @@ export const doctorsTable = pgTable("doctors", {
   Certifications: text("certifications").array().notNull().default([]), // Lista de certificações (garantindo array por padrão)
   PatientsAssigned: integer("patients_assigned").array().default([]), // Pacientes atribuídos (inteiros armazenados como array)
   Address: varchar("address").notNull(), // Endereço
-  Creation_date: date("creation_date").defaultNow().notNull(), // Data de criação
-  Modified_date: date("modified_date").defaultNow().notNull(), // Data de modificação
-  Deletion_date: date("deletion_date"), // Data de exclusão
+  CreationDate: date("creation_date").defaultNow().notNull(), // Data de criação
+  ModifiedDate: date("modified_date").defaultNow().notNull(), // Data de modificação
+  DeletionDate: date("deletion_date"), // Data de exclusão
 });

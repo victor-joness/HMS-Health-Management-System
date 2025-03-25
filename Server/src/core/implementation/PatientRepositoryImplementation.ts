@@ -1,6 +1,6 @@
 import { PatientRepository } from "../repositories/PatientRepository";
 import { Patient } from "../entities/Patient";
-import { pacientsTable } from "../../infrastructure/database/schemas/pacientsTable";
+import { patientsTable } from "../../infrastructure/database/schemas/patientsTable";
 import { BaseRepositoryImplementation } from "./BaseRepositoryImplementation";
 import { PatientMapper } from "../../shared/utils/mapper/PatientMapper";
 
@@ -9,7 +9,7 @@ export class PatientRepositoryImplementation
   implements PatientRepository
 {
   constructor() {
-    super(pacientsTable, {
+    super(patientsTable, {
       fromEntityToDB: PatientMapper.fromPatientToDB,
       fromDBToEntity: PatientMapper.fromDBtoPatient,
     });

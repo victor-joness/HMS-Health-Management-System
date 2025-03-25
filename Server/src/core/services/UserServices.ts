@@ -13,7 +13,7 @@ export class UserServices {
     return this.userRepository.getAll();
   }
 
-  async createUser(user: User, tx: PgTransaction<any, any, any>): Promise<User> {
+  async createUser(user: User, tx?: PgTransaction<any, any, any>): Promise<User> {
     if (
       isNullOrEmpty(user.Name) ||
       isNullOrEmpty(user.Email) ||

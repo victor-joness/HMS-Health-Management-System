@@ -12,6 +12,7 @@ import authRoutes from "./AuthRoutes";
 import bedRoutes from "./BedRoutes";
 import receptionistsRoutes from "./ReceptionistRoutes";
 import humanResourcesEmployees from "./HumanResourcesEmployeeRoutes";
+import hospitalsRoutes from "./HospitalsRoutes";
 
 const router = Router();
 
@@ -29,6 +30,7 @@ router.use("/pharmacies", pharmaciesRoutes);
 router.use("/utilities", utilitiesRoutes);
 router.use("/receptionists", receptionistsRoutes);
 router.use("/humanResourcesEmployees", humanResourcesEmployees);
+router.use("/hospitals", hospitalsRoutes);
 
 /* 
 router.use("/appointments", appointmentsRoutes);

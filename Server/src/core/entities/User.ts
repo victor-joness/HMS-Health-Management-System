@@ -1,6 +1,7 @@
 import { Gender } from "../../shared/utils/enum/GenderEnum";
 import { UserRoleEnum } from "../../shared/utils/enum/UserRoleEnum";
 import { BaseEntity } from "./BaseEntity";
+import { HospitalInfo } from "./commonTypes/HospitalInfo";
 
 export class User extends BaseEntity {
   constructor(
@@ -9,6 +10,7 @@ export class User extends BaseEntity {
     public Email: string,
     public Password: string,
     public Role: UserRoleEnum,
+    public HospitalId: number,
     public Img?: string,
     public Gender?: Gender,
     public Age?: string | null,
@@ -30,6 +32,7 @@ export class User extends BaseEntity {
     this.Email = Email;
     this.Password = Password;
     this.Role = Role;
+    this.HospitalId = HospitalId;
     this.Img = Img;
     this.Gender = Gender;
     this.Age = Age;

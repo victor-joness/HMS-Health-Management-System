@@ -30,7 +30,7 @@ export class NurseController {
   async createNurse(req: Request, res: Response): Promise<void> {
     try {
       const result = await db.transaction(async (tx) => {
-        const { 
+        const {
           Name,
           Email,
           NursingLicenseNumber,
@@ -50,7 +50,8 @@ export class NurseController {
           WorkScheduleDetails,
           EmergencyAvailability,
           Notes,
-          Address
+          Address,
+          HospitalId,
         } = req.body;
 
         const [existingUser, existingNurse] = await Promise.all([
@@ -59,7 +60,8 @@ export class NurseController {
         ]);
 
         if (existingUser) throw new CreateError("Email já cadastrado");
-        if (existingNurse) throw new CreateError("Nursing License Number já em uso");
+        if (existingNurse)
+          throw new CreateError("Nursing License Number já em uso");
 
         const hashedPassword = await bcrypt.hash(Password, saltRounds);
 
@@ -69,6 +71,7 @@ export class NurseController {
           Email: Email,
           Password: hashedPassword,
           Role: UserRoleEnum.ENFERMEIRA,
+          HospitalId: HospitalId,
           Gender: Gender,
           Img: Img,
           Age: Age,
@@ -95,14 +98,14 @@ export class NurseController {
           Notes,
           Address,
           DeletionDate: null,
-          ModifiedDate: null,
-          CreationDate: new Date().toISOString(),
+          ModifiedDate: CreationDate,
+          CreationDate: CreationDate,
         };
 
         const nurse = await this.NurseServices.createNurse(nurseDTO, tx);
 
         const { Password: _, ...userWithoutPassword } = user;
-        return { ...nurse, userInfo: userWithoutPassword };
+        return { ...nurse, UserInfo: userWithoutPassword };
       });
 
       sendResponse(res, "ok", 201, "Enfermeiro criado com sucesso", result);
@@ -135,7 +138,13 @@ export class NurseController {
       const updatedNurse = await this.NurseServices.deleteNurse(nurseId);
       await this.UserService.deleteUser(nurse.UserId);
 
-      sendResponse(res, "ok", 200, "Enfermeiro deletado com sucesso", updatedNurse);
+      sendResponse(
+        res,
+        "ok",
+        200,
+        "Enfermeiro deletado com sucesso",
+        updatedNurse
+      );
     } catch (error) {
       sendResponse(res, "error", 404, "Erro ao deletar enfermeiro", null);
     }
@@ -151,7 +160,13 @@ export class NurseController {
       }
 
       const updatedNurse = await this.NurseServices.updateNurse(req.body);
-      sendResponse(res, "ok", 200, "Enfermeiro atualizado com sucesso", updatedNurse);
+      sendResponse(
+        res,
+        "ok",
+        200,
+        "Enfermeiro atualizado com sucesso",
+        updatedNurse
+      );
     } catch (error) {
       sendResponse(res, "error", 404, "Erro ao atualizar enfermeiro", null);
     }

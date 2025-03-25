@@ -6,7 +6,7 @@ export class Receptionist extends BaseEntity {
     public Id: number, // Identificador único do recepcionista
     public UserId: number,
     public Address: string,
-    public JobTitle: string, // Cargo do recepcionista
+    public JobTitle: string,
     public WorkScheduleDetails: WorkScheduleDetails,
     public EmergencyAvailability: boolean,
     public Notes: string | null, // Observações opcionais sobre o recepcionista

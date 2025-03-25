@@ -1,0 +1,32 @@
+{
+  "translations": {
+    "Common": {
+      "Cancel": "Cancel",
+      "Confirm": "Confirm",
+      "Ok": "OK",
+      "Close": "Close",
+      "Loading": "Loading...",
+      "Search": "Search",
+      "Error": "Error",
+      "Success": "Success",
+      "Info": "Info",
+      "Warning": "Warning",
+      "Yes": "Yes",
+      "No": "No"
+    },
+    "Error": {
+      "NotFound": "No results found",
+      "NoData": "No data available",
+      "NoConnection": "No internet connection",
+      "ServerError": "Server error",
+      "Unknown": "Unknown error"
+    },
+    "Auth": {
+      "Name": "Name",
+      "Email": "Email",
+      "Password": "Password",
+      "Login": "Login",
+      "Register": "Register"
+    }
+  }
+}

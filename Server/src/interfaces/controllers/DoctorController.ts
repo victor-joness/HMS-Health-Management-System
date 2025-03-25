@@ -52,7 +52,8 @@ export class DoctorController {
           Specialization,
           EmergencyAvailability,
           Notes,
-          Address
+          Address,
+          HospitalId
         } = req.body;
 
         const [existingUser, existingDoctor] = await Promise.all([
@@ -71,6 +72,7 @@ export class DoctorController {
           Email: Email,
           Password: hashedPassword,
           Role: UserRoleEnum.DOUTOR,
+          HospitalId: HospitalId,
           Gender: Gender,
           Img: Img,
           Age: Age,
@@ -102,14 +104,14 @@ export class DoctorController {
           Notes: Notes,
           Address: Address,
           DeletionDate: null,
-          ModifiedDate: null,
+          ModifiedDate: new Date().toISOString(),
           CreationDate: new Date().toISOString(),
         };
 
         const doctor = await this.DoctorServices.createDoctor(doctorDTO, tx);
 
         const { Password: _, ...userWithoutPassword } = user;
-        return { ...doctor, userInfo: userWithoutPassword };
+        return { ...doctor, UserInfo: userWithoutPassword };
       });
 
       sendResponse(res, "ok", 201, "Médico criado com sucesso", result);

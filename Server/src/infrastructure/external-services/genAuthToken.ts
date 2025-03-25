@@ -1,7 +1,6 @@
-import { User } from "../../core/entities/User";
 import jwt from "jsonwebtoken";
 
-export const genAuthToken = (user: User): string => {
+export const genAuthToken = (user: any): string => {
   const secretKey = process.env.JWT_SECRET_KEY;
   const token = jwt.sign(
     {
@@ -11,8 +10,10 @@ export const genAuthToken = (user: User): string => {
       Role: user.Role,
       Img: user.Img,
       Age: user.Age,
+      Gender: user.Gender,
       PhoneNumber: user.PhoneNumber,
       PhoneEmergency: user.PhoneEmergency,
+      HospitalInfo: user.HospitalInfo,
       CreationDate: user.CreationDate,
     },
     secretKey as string
@@ -25,11 +26,9 @@ export const decodeAuthToken = (token: string): any => {
   const secretKey = process.env.JWT_SECRET_KEY;
 
   try {
-    // Verifica e decodifica o token
     const decodedToken = jwt.verify(token, secretKey as string);
     return decodedToken;
   } catch (error) {
-    // Se ocorrer algum erro de verificação ou decodificação, você pode retornar um erro ou null
     throw new Error("Token inválido ou expirado");
   }
 };

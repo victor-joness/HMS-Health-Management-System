@@ -57,7 +57,6 @@ const doctorController = new DoctorController(doctorServices, loggingService, us
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Doctor'
  *     responses:
  *       201:
  *         description: Médico criado com sucesso.
@@ -107,7 +106,6 @@ const doctorController = new DoctorController(doctorServices, loggingService, us
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Doctor'
  *     responses:
  *       200:
  *         description: Médico atualizado com sucesso.

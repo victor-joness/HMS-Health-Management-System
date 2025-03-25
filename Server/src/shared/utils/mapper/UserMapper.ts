@@ -12,6 +12,7 @@ export class UserMapper {
       user.Email,
       user.Password,
       user.Role,
+      user.HospitalId,
       user.Img,
       user.Gender,
       user.Age,

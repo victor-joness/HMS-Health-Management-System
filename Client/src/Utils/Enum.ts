@@ -1,4 +1,4 @@
-export enum UserRole {
+export enum UserRoleEnum {
   ADMIN = 0,
   DOUTOR = 1,
   ENFERMEIRA = 2,
@@ -36,7 +36,7 @@ export enum BloodType {
   AB_NEGATIVO = 8,
 }
 
-export enum PatientFlow {
+export enum PatientFluxo {
   EM_ESPERA = 1,
   EM_ATENDIMENTO = 2,
   EM_COLETA = 3,
@@ -61,11 +61,14 @@ export enum SurgeryStatus {
 }
 
 export enum PatientStatus {
+  NENHUM = "Nenhum",
   ESTAVEL = "Estavel",
+  NORMAL = "Normal",
   CRITICO = "Critico",
   FALECIDO = "Falecido",
   RECUPERADO = "Recuperado",
   TRANSFERIDO = "Transferido",
+  ALTA= "Alta",
   OUTRO = "Outro",
 };
 
@@ -83,4 +86,51 @@ export enum TypeFile
   URL = "URL",
   FILE = "FileName",
   INVALID = "Invalid"
+}
+
+export enum DepartmentEnum {
+  Pediatrics = "Pediatrics",
+  Emergency = "Emergency",
+  Oncology = "Oncology",
+  Surgery = "Surgery",
+  ICU = "ICU",
+  Cardiology = "Cardiology",
+}
+
+export enum SpecialtyEnum {
+  NEUROLOGY = "Neurology",
+  CARDIOLOGY = "Cardiology",
+  DERMATOLOGY = "Dermatology",
+  PEDIATRICS = "Pediatrics",
+}
+
+export enum CertificationEnum {
+  MD = "MD",
+  FACS = "FACS",
+  PhD = "PhD",
+  MBBS = "MBBS",
+}
+
+export enum MedicinesTypeEnum{
+  TABLET = 1,
+  CAPSULE = 2,
+  LIQUID = 3,
+  INJECTION = 4,
+  SYRUP = 5,
+  OTHER = 6,
+}
+
+export enum PatientAtendimentTypeEnum {
+  CONSULTA = 1,
+  EXAME = 2,
+  CIRURGIA = 3,
+  OUTRO = 4,
+}
+
+export enum IdentificationType {
+  RG = "RG",
+  CPF = "CPF",
+  PASSAPORTE = "PASSAPORTE",
+  CNH = "CNH",
+  OUTRO = "OUTRO",  
 }

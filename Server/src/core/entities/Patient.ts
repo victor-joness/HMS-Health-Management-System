@@ -1,16 +1,14 @@
-import { EmergencyContacts } from "./commonTypes/EmergencyContacts";
 import { MedicalHistory } from "./commonTypes/MedicalHistory";
-import { WorkInfo } from "./commonTypes/WorkInfo";
 import { Report } from "./commonTypes/Report";
 import { BaseEntity } from "./BaseEntity";
+import { IdentificationType, PatientAtendimentTypeEnum } from "../../shared/utils/enum/PatientEnums";
 
 export class Patient extends BaseEntity {
   constructor(
     public Id: number,
     public UserId: number,
-    public AddressId: number,
     public Medications: string[],
-    public EmergencyContacts: EmergencyContacts[],
+    public EmergencyContact: string,
     public InsuranceDetailsId: number,
     public MedicalHistory: MedicalHistory[],
     public PreferredDoctorId: number,
@@ -19,21 +17,22 @@ export class Patient extends BaseEntity {
     public Disabilities: string[],
     public OrganDonor: boolean,
     public AdditionalNotes: string | null,
-    public WorkInfo: WorkInfo | null,
+    public WorkInfo: string,
     public Report: Report,
-    public Identification: null,
-
-    DeletionDate: string | null,
-    ModifiedDate: string | null,
-    CreationDate: string
+    public IdentificationNumber: string,
+    public IdentificationType: IdentificationType,
+    public PatientAtendimentType: PatientAtendimentTypeEnum,
+    public Address: string,
+    public DeletionDate: string | null,
+    public ModifiedDate: string | null,
+    public CreationDate: string
   ) {
     super(DeletionDate, ModifiedDate, CreationDate);
 
     this.Id = Id;
     this.UserId = UserId;
-    this.AddressId = AddressId;
     this.Medications = Medications;
-    this.EmergencyContacts = EmergencyContacts;
+    this.EmergencyContact = EmergencyContact;
     this.InsuranceDetailsId = InsuranceDetailsId;
     this.MedicalHistory = MedicalHistory;
     this.PreferredDoctorId = PreferredDoctorId;
@@ -44,6 +43,9 @@ export class Patient extends BaseEntity {
     this.AdditionalNotes = AdditionalNotes;
     this.WorkInfo = WorkInfo;
     this.Report = Report;
-    this.Identification = Identification;
+    this.IdentificationNumber = IdentificationNumber;
+    this.IdentificationType = IdentificationType;
+    this.PatientAtendimentType = PatientAtendimentType;
+    this.Address = Address;
   }
 }

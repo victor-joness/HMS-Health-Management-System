@@ -11,6 +11,7 @@ export const usersTable = pgTable("users", {
   Age: varchar("age"), // Idade como string
   PhoneNumber: varchar("phone_number"), // Número de telefone
   PhoneEmergency: varchar("phone_emergency"), // Telefone de emergência
+  HospitalId:integer("hospital_id").notNull(),
   DeletionDate: date("deletion_date"), // Data de exclusão (pode ser nula)
   ModifiedDate: date("modified_date"), // Data de modificação (pode ser nula)
   CreationDate: date("creation_date").defaultNow().notNull(), // Data de criação com valor padrão atual

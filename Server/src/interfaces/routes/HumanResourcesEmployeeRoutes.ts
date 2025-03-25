@@ -2,10 +2,12 @@ import { Router } from "express";
 import { isAdmin } from "../middlewares/AuthMiddleware";
 import { HumanResourcesEmployeeController } from "../controllers/humanResourcesEmployeeController";
 import { HumanResourcesEmployeeRepositoryImplementation } from "../../core/implementation/HumanResourcesEmployeeRepositoryImplementation";
-import { HumanResourcesEmployeeService } from "../../core/services/HumanResourcesEmployeeServices";
+import { HumanResourcesEmployeeService } from "../../core/services/HumanResourcesEmployeeService";
 import { LoggingService } from "../../core/services/LoggingService";
 import { LogRepositoryImplementation } from "../../core/implementation/LogRepositoryImplementation";
 import { RedisCache } from "../../infrastructure/cache/RedisCache";
+import { UserRepositoryImplementation } from "../../core/implementation/UserRepositoryImplementation";
+import { UserServices } from "../../core/services/UserServices";
 
 const router = Router();
 const cacheService = new RedisCache();
@@ -13,10 +15,14 @@ const cacheService = new RedisCache();
 const loggingRepository = new LogRepositoryImplementation();
 const loggingService = new LoggingService(loggingRepository);
 
+const userRepository = new UserRepositoryImplementation();
+const userService = new UserServices(userRepository);
+
 const humanResourcesEmployeeRepository = new HumanResourcesEmployeeRepositoryImplementation();
-const humanResourcesEmployeeService = new HumanResourcesEmployeeService(humanResourcesEmployeeRepository, cacheService);
+const humanResourcesEmployeeService = new HumanResourcesEmployeeService(humanResourcesEmployeeRepository,userRepository, cacheService);
 const humanResourcesEmployeeController = new HumanResourcesEmployeeController(
   humanResourcesEmployeeService,
+  userService,
   loggingService
 );
 
