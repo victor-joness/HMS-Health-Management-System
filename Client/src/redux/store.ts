@@ -6,6 +6,7 @@ import pharmacyReducer from "./PharmacySlice"
 import receptionistsReducer from "./ReceptionistsSlice"
 import humanResourcesEmployees from "./HumanResourcesEmployeesSlice"
 import patientsReducer from "./PatientsSlice"
+import financesReducer from "./FinanceSlice"
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     receptionists: receptionistsReducer,
     humanResourcesEmployees:humanResourcesEmployees,
     patients: patientsReducer,
+    finances: financesReducer,
   }
 })
 

@@ -22,6 +22,7 @@ import { Route as ResourcesAmbulanceImport } from './routes/(Resources)/ambulanc
 import { Route as ReceptionistReceptionistImport } from './routes/(Receptionist)/receptionist'
 import { Route as PharmacyPharmacyImport } from './routes/(Pharmacy)/pharmacy'
 import { Route as NurseNurseImport } from './routes/(Nurse)/nurse'
+import { Route as FinanceFinanceImport } from './routes/(Finance)/finance'
 import { Route as DoctorDoctorImport } from './routes/(Doctor)/doctor'
 import { Route as DashboardDashboardImport } from './routes/(Dashboard)/dashboard'
 import { Route as AuthRegisterImport } from './routes/(Auth)/register'
@@ -159,6 +160,12 @@ const NurseNurseRoute = NurseNurseImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const FinanceFinanceRoute = FinanceFinanceImport.update({
+  id: '/(Finance)/finance',
+  path: '/finance',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const DoctorDoctorRoute = DoctorDoctorImport.update({
   id: '/(Doctor)/doctor',
   path: '/doctor',
@@ -253,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/doctor'
       fullPath: '/doctor'
       preLoaderRoute: typeof DoctorDoctorImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Finance)/finance': {
+      id: '/(Finance)/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceFinanceImport
       parentRoute: typeof rootRoute
     }
     '/(Nurse)/nurse': {
@@ -418,6 +432,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof AuthRegisterRoute
   '/dashboard': typeof DashboardDashboardRoute
   '/doctor': typeof DoctorDoctorRoute
+  '/finance': typeof FinanceFinanceRoute
   '/nurse': typeof NurseNurseRoute
   '/pharmacy': typeof PharmacyPharmacyRoute
   '/receptionist': typeof ReceptionistReceptionistRoute
@@ -444,6 +459,7 @@ export interface FileRoutesByTo {
   '/register': typeof AuthRegisterRoute
   '/dashboard': typeof DashboardDashboardRoute
   '/doctor': typeof DoctorDoctorRoute
+  '/finance': typeof FinanceFinanceRoute
   '/nurse': typeof NurseNurseRoute
   '/pharmacy': typeof PharmacyPharmacyRoute
   '/receptionist': typeof ReceptionistReceptionistRoute
@@ -472,6 +488,7 @@ export interface FileRoutesById {
   '/(Auth)/register': typeof AuthRegisterRoute
   '/(Dashboard)/dashboard': typeof DashboardDashboardRoute
   '/(Doctor)/doctor': typeof DoctorDoctorRoute
+  '/(Finance)/finance': typeof FinanceFinanceRoute
   '/(Nurse)/nurse': typeof NurseNurseRoute
   '/(Pharmacy)/pharmacy': typeof PharmacyPharmacyRoute
   '/(Receptionist)/receptionist': typeof ReceptionistReceptionistRoute
@@ -501,6 +518,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard'
     | '/doctor'
+    | '/finance'
     | '/nurse'
     | '/pharmacy'
     | '/receptionist'
@@ -526,6 +544,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard'
     | '/doctor'
+    | '/finance'
     | '/nurse'
     | '/pharmacy'
     | '/receptionist'
@@ -552,6 +571,7 @@ export interface FileRouteTypes {
     | '/(Auth)/register'
     | '/(Dashboard)/dashboard'
     | '/(Doctor)/doctor'
+    | '/(Finance)/finance'
     | '/(Nurse)/nurse'
     | '/(Pharmacy)/pharmacy'
     | '/(Receptionist)/receptionist'
@@ -580,6 +600,7 @@ export interface RootRouteChildren {
   AuthRegisterRoute: typeof AuthRegisterRoute
   DashboardDashboardRoute: typeof DashboardDashboardRoute
   DoctorDoctorRoute: typeof DoctorDoctorRoute
+  FinanceFinanceRoute: typeof FinanceFinanceRoute
   NurseNurseRoute: typeof NurseNurseRoute
   PharmacyPharmacyRoute: typeof PharmacyPharmacyRoute
   ReceptionistReceptionistRoute: typeof ReceptionistReceptionistRoute
@@ -601,6 +622,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRegisterRoute: AuthRegisterRoute,
   DashboardDashboardRoute: DashboardDashboardRoute,
   DoctorDoctorRoute: DoctorDoctorRoute,
+  FinanceFinanceRoute: FinanceFinanceRoute,
   NurseNurseRoute: NurseNurseRoute,
   PharmacyPharmacyRoute: PharmacyPharmacyRoute,
   ReceptionistReceptionistRoute: ReceptionistReceptionistRoute,
@@ -631,6 +653,7 @@ export const routeTree = rootRoute
         "/(Auth)/register",
         "/(Dashboard)/dashboard",
         "/(Doctor)/doctor",
+        "/(Finance)/finance",
         "/(Nurse)/nurse",
         "/(Pharmacy)/pharmacy",
         "/(Receptionist)/receptionist",
@@ -674,6 +697,9 @@ export const routeTree = rootRoute
     },
     "/(Doctor)/doctor": {
       "filePath": "(Doctor)/doctor.tsx"
+    },
+    "/(Finance)/finance": {
+      "filePath": "(Finance)/finance.tsx"
     },
     "/(Nurse)/nurse": {
       "filePath": "(Nurse)/nurse.tsx"

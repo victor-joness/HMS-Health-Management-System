@@ -12,7 +12,7 @@ import PacienteCard from './PacienteCard'
 
 const PatientsContainer = ({ pacientesData }: any) => {
   const [currentPage, setCurrentPage] = useState(1)
-  const cardsPerPage = 12
+  const cardsPerPage = 10
 
   const indexOfLastCard = currentPage * cardsPerPage
   const indexOfFirstCard = indexOfLastCard - cardsPerPage
@@ -39,7 +39,7 @@ const PatientsContainer = ({ pacientesData }: any) => {
           <p className='text-xl text-gray-700'>Nenhum paciente encontrado.</p>
         )}
 
-        {currentPacientes.length > 12 && (
+        {currentPacientes.length > 10 && (
           <Pagination className='mb-10'>
             <PaginationContent>
               <PaginationItem>

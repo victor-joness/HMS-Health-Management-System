@@ -134,3 +134,27 @@ export enum IdentificationType {
   CNH = "CNH",
   OUTRO = "OUTRO",  
 }
+
+export enum TransactionTypeEnum {
+  INCOME = 1,
+  EXPENSE = 2
+}
+
+export enum TransactionStatusEnum {
+  PENDING = 1,
+  COMPLETED = 2,
+  CANCELED = 3,
+  REFUNDED = 4
+}
+
+export enum PaymentMethodEnum {
+  CREDIT_CARD = 1,
+  DEBIT_CARD = 2,
+  BANK_TRANSFER = 3,
+  PAYPAL = 4,
+  CASH = 5,
+  PIX = 6,
+  BOLETO = 7,
+  CRIPTO = 8,
+  OTHER = 9,
+}
