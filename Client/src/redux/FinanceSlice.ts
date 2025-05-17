@@ -3,6 +3,7 @@ import { FinanceEmployee } from '@/entities/FinanceEmployee'
 import { Transaction } from '@/entities/Transaction'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { url } from './api'
+import { toast } from 'react-toastify'
 
 interface FinancesState {
   financesEmployee: FinanceEmployee[]
@@ -27,7 +28,7 @@ const initialState: FinancesState = {
 export const getAllFinances = createAsyncThunk(
   'finances/getAllFinances',
   async () => {
-    const response = await axios.get(`${url}/finance`)
+    const response = await axios.get(`${url}/financeEmployees`)
     return response.data.data
   }
 )
@@ -35,7 +36,7 @@ export const getAllFinances = createAsyncThunk(
 export const createFinance = createAsyncThunk(
   'finances/createFinance',
   async (finance: Partial<FinanceEmployee>) => {
-    const response = await axios.post(`${url}/finance`, finance)
+    const response = await axios.post(`${url}/financeEmployees`, finance)
     return response.data.data
   }
 )
@@ -43,7 +44,7 @@ export const createFinance = createAsyncThunk(
 export const updateFinance = createAsyncThunk(
   'finances/updateFinance',
   async (finance: FinanceEmployee) => {
-    const response = await axios.put(`${url}/finance/${finance.Id}`, finance)
+    const response = await axios.put(`${url}/financeEmployees/${finance.Id}`, finance)
     return response.data.data
   }
 )
@@ -51,7 +52,7 @@ export const updateFinance = createAsyncThunk(
 export const deleteFinance = createAsyncThunk(
   'finances/deleteFinance',
   async (id: number) => {
-    await axios.delete(`${url}/finance/${id}`)
+    await axios.delete(`${url}/financeEmployees/${id}`)
     return id
   }
 )
@@ -99,6 +100,12 @@ const financesSlice = createSlice({
       .addCase(createFinance.fulfilled, (state, action) => {
         state.financesEmployee.push(action.payload)
         state.createStatus = 'success'
+        toast.success('Financeiro criado com sucesso!');
+      })
+      .addCase(createFinance.rejected, (state) => {
+        state.createStatus = 'failed'
+        state.status = 'failed'
+        toast.success('Error ao criar financeiro');
       })
       .addCase(updateFinance.fulfilled, (state, action) => {
         const index = state.financesEmployee.findIndex(

@@ -126,8 +126,6 @@ export default function FinanceAdmin({ auth }: FinanceAdminProps) {
           </TabsContent>
         </Tabs>
       </Main>
-
-      
     </>
   )
 }

@@ -7,8 +7,7 @@ import useDialogState from '@/hooks/use-dialog-state'
 import { Main } from '@/components/layout/main'
 import { DataTable } from '@/components/table/entity-Table'
 import { transactionColumns } from './components/transaction-columns'
-import { FinanceEmployeeActionDialog } from './components/financeEmployee-action-dialog'
-import { FinanceEmployeeDeleteDialog } from './components/financeEmployee-delete-dialog'
+import { TransactionDeleteDialog } from './components/transaction-delete-dialog'
 import TransactionContextProvider, {
     type TransactionDialogType,
   } from './context/transaction-context'
@@ -77,7 +76,7 @@ export default function FinanceEmployeePage() {
             currentRow={currentRow}
           /> */}
 
-          <FinanceEmployeeDeleteDialog
+          <TransactionDeleteDialog
             key={`finance-employee-delete-${currentRow.Id}`}
             open={open === 'delete'}
             onOpenChange={(isOpen) => {

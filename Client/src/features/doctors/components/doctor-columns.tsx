@@ -1,9 +1,10 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { Checkbox } from '@/components/ui/checkbox'
 import LongText from '@/components/long-text'
 import { Doctor } from '@/entities/Doctor'
 import { DataTableColumnHeader } from '../../../components/table/data-table-column-header'
 import { DataTableRowActions } from '../../../components/table/data-table-row-actions'
+
+const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }) as keyof Doctor['WorkScheduleDetails'];
 
 export const doctorColumns: ColumnDef<Doctor>[] = [
   /* {
@@ -87,6 +88,16 @@ export const doctorColumns: ColumnDef<Doctor>[] = [
     enableHiding: false,
     accessorFn: (row) => row.EmergencyAvailability,
   },
+  {
+      accessorKey: "Horário de trabalho",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Horário de trabalho" />
+      ),
+      cell: ({ row }) => (
+        console.log(currentDay),
+        <div>{row.original.WorkScheduleDetails[currentDay] || 'N/A'}</div>
+      ),
+    },
   {
     accessorKey: 'Imagem',
     header: ({ column }) => (

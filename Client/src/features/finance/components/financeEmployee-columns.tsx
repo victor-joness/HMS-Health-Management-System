@@ -3,16 +3,18 @@ import { FinanceEmployee } from '@/entities/FinanceEmployee'
 import { DataTableColumnHeader } from '@/components/table/data-table-column-header'
 import { DataTableRowActions } from '@/components/table/data-table-row-actions'
 
+const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }) as keyof FinanceEmployee['WorkScheduleDetails'];
+
 export const financeEmployeeColumns: ColumnDef<FinanceEmployee>[] = [
   {
-    accessorKey: 'UserInfo.Name',
+    accessorKey: 'Nome',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Name' />
+      <DataTableColumnHeader column={column} title='Nome' />
     ),
     cell: ({ row }) => <div>{row.original.UserInfo.Name || 'N/A'}</div>,
   },
   {
-    accessorKey: 'UserInfo.Email',
+    accessorKey: 'Email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Email' />
     ),
@@ -26,58 +28,18 @@ export const financeEmployeeColumns: ColumnDef<FinanceEmployee>[] = [
     cell: ({ row }) => <div>{row.original.Address || 'N/A'}</div>,
   }, */
   {
-    accessorKey: 'WorkScheduleDetails.Monday',
+    accessorKey: "Horário de trabalho",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Monday' />
+      <DataTableColumnHeader column={column} title="Horário de trabalho" />
     ),
-    cell: ({ row }) => <div>{row.original.WorkScheduleDetails.Monday || 'N/A'}</div>,
+    cell: ({ row }) => (
+      <div>{row.original.WorkScheduleDetails[currentDay] || 'N/A'}</div>
+    ),
   },
   {
-    accessorKey: 'WorkScheduleDetails.Tuesday',
+    accessorKey: 'Notas',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Tuesday' />
-    ),
-    cell: ({ row }) => <div>{row.original.WorkScheduleDetails.Tuesday || 'N/A'}</div>,
-  },
-  {
-    accessorKey: 'WorkScheduleDetails.Wednesday',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Wednesday' />
-    ),
-    cell: ({ row }) => <div>{row.original.WorkScheduleDetails.Wednesday || 'N/A'}</div>,
-  },
-  {
-    accessorKey: 'WorkScheduleDetails.Thursday',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Thursday' />
-    ),
-    cell: ({ row }) => <div>{row.original.WorkScheduleDetails.Thursday || 'N/A'}</div>,
-  },
-  {
-    accessorKey: 'WorkScheduleDetails.Friday',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Friday' />
-    ),
-    cell: ({ row }) => <div>{row.original.WorkScheduleDetails.Friday || 'N/A'}</div>,
-  },
-  {
-    accessorKey: 'WorkScheduleDetails.Saturday',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Saturday' />
-    ),
-    cell: ({ row }) => <div>{row.original.WorkScheduleDetails.Saturday || 'N/A'}</div>,
-  },
-  {
-    accessorKey: 'WorkScheduleDetails.Sunday',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Sunday' />
-    ),
-    cell: ({ row }) => <div>{row.original.WorkScheduleDetails.Sunday || 'N/A'}</div>,
-  },
-  {
-    accessorKey: 'Notes',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Notes' />
+      <DataTableColumnHeader column={column} title='Notas' />
     ),
     cell: ({ row }) => <div>{row.original.Notes || 'N/A'}</div>,
   },

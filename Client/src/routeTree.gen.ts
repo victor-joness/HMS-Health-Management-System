@@ -22,9 +22,11 @@ import { Route as ResourcesAmbulanceImport } from './routes/(Resources)/ambulanc
 import { Route as ReceptionistReceptionistImport } from './routes/(Receptionist)/receptionist'
 import { Route as PharmacyPharmacyImport } from './routes/(Pharmacy)/pharmacy'
 import { Route as NurseNurseImport } from './routes/(Nurse)/nurse'
+import { Route as LaboratoryLaboratoryImport } from './routes/(Laboratory)/laboratory'
 import { Route as FinanceFinanceImport } from './routes/(Finance)/finance'
 import { Route as DoctorDoctorImport } from './routes/(Doctor)/doctor'
 import { Route as DashboardDashboardImport } from './routes/(Dashboard)/dashboard'
+import { Route as CalendarCalendarImport } from './routes/(Calendar)/calendar'
 import { Route as AuthRegisterImport } from './routes/(Auth)/register'
 import { Route as AuthLoginImport } from './routes/(Auth)/login'
 import { Route as AuthForgotPasswordImport } from './routes/(Auth)/forgot-password'
@@ -160,6 +162,12 @@ const NurseNurseRoute = NurseNurseImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LaboratoryLaboratoryRoute = LaboratoryLaboratoryImport.update({
+  id: '/(Laboratory)/laboratory',
+  path: '/laboratory',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const FinanceFinanceRoute = FinanceFinanceImport.update({
   id: '/(Finance)/finance',
   path: '/finance',
@@ -175,6 +183,12 @@ const DoctorDoctorRoute = DoctorDoctorImport.update({
 const DashboardDashboardRoute = DashboardDashboardImport.update({
   id: '/(Dashboard)/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CalendarCalendarRoute = CalendarCalendarImport.update({
+  id: '/(Calendar)/calendar',
+  path: '/calendar',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -248,6 +262,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterImport
       parentRoute: typeof rootRoute
     }
+    '/(Calendar)/calendar': {
+      id: '/(Calendar)/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarCalendarImport
+      parentRoute: typeof rootRoute
+    }
     '/(Dashboard)/dashboard': {
       id: '/(Dashboard)/dashboard'
       path: '/dashboard'
@@ -267,6 +288,13 @@ declare module '@tanstack/react-router' {
       path: '/finance'
       fullPath: '/finance'
       preLoaderRoute: typeof FinanceFinanceImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Laboratory)/laboratory': {
+      id: '/(Laboratory)/laboratory'
+      path: '/laboratory'
+      fullPath: '/laboratory'
+      preLoaderRoute: typeof LaboratoryLaboratoryImport
       parentRoute: typeof rootRoute
     }
     '/(Nurse)/nurse': {
@@ -430,9 +458,11 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/calendar': typeof CalendarCalendarRoute
   '/dashboard': typeof DashboardDashboardRoute
   '/doctor': typeof DoctorDoctorRoute
   '/finance': typeof FinanceFinanceRoute
+  '/laboratory': typeof LaboratoryLaboratoryRoute
   '/nurse': typeof NurseNurseRoute
   '/pharmacy': typeof PharmacyPharmacyRoute
   '/receptionist': typeof ReceptionistReceptionistRoute
@@ -457,9 +487,11 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/calendar': typeof CalendarCalendarRoute
   '/dashboard': typeof DashboardDashboardRoute
   '/doctor': typeof DoctorDoctorRoute
   '/finance': typeof FinanceFinanceRoute
+  '/laboratory': typeof LaboratoryLaboratoryRoute
   '/nurse': typeof NurseNurseRoute
   '/pharmacy': typeof PharmacyPharmacyRoute
   '/receptionist': typeof ReceptionistReceptionistRoute
@@ -486,9 +518,11 @@ export interface FileRoutesById {
   '/(Auth)/forgot-password': typeof AuthForgotPasswordRoute
   '/(Auth)/login': typeof AuthLoginRoute
   '/(Auth)/register': typeof AuthRegisterRoute
+  '/(Calendar)/calendar': typeof CalendarCalendarRoute
   '/(Dashboard)/dashboard': typeof DashboardDashboardRoute
   '/(Doctor)/doctor': typeof DoctorDoctorRoute
   '/(Finance)/finance': typeof FinanceFinanceRoute
+  '/(Laboratory)/laboratory': typeof LaboratoryLaboratoryRoute
   '/(Nurse)/nurse': typeof NurseNurseRoute
   '/(Pharmacy)/pharmacy': typeof PharmacyPharmacyRoute
   '/(Receptionist)/receptionist': typeof ReceptionistReceptionistRoute
@@ -516,9 +550,11 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/register'
+    | '/calendar'
     | '/dashboard'
     | '/doctor'
     | '/finance'
+    | '/laboratory'
     | '/nurse'
     | '/pharmacy'
     | '/receptionist'
@@ -542,9 +578,11 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/register'
+    | '/calendar'
     | '/dashboard'
     | '/doctor'
     | '/finance'
+    | '/laboratory'
     | '/nurse'
     | '/pharmacy'
     | '/receptionist'
@@ -569,9 +607,11 @@ export interface FileRouteTypes {
     | '/(Auth)/forgot-password'
     | '/(Auth)/login'
     | '/(Auth)/register'
+    | '/(Calendar)/calendar'
     | '/(Dashboard)/dashboard'
     | '/(Doctor)/doctor'
     | '/(Finance)/finance'
+    | '/(Laboratory)/laboratory'
     | '/(Nurse)/nurse'
     | '/(Pharmacy)/pharmacy'
     | '/(Receptionist)/receptionist'
@@ -598,9 +638,11 @@ export interface RootRouteChildren {
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  CalendarCalendarRoute: typeof CalendarCalendarRoute
   DashboardDashboardRoute: typeof DashboardDashboardRoute
   DoctorDoctorRoute: typeof DoctorDoctorRoute
   FinanceFinanceRoute: typeof FinanceFinanceRoute
+  LaboratoryLaboratoryRoute: typeof LaboratoryLaboratoryRoute
   NurseNurseRoute: typeof NurseNurseRoute
   PharmacyPharmacyRoute: typeof PharmacyPharmacyRoute
   ReceptionistReceptionistRoute: typeof ReceptionistReceptionistRoute
@@ -620,9 +662,11 @@ const rootRouteChildren: RootRouteChildren = {
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  CalendarCalendarRoute: CalendarCalendarRoute,
   DashboardDashboardRoute: DashboardDashboardRoute,
   DoctorDoctorRoute: DoctorDoctorRoute,
   FinanceFinanceRoute: FinanceFinanceRoute,
+  LaboratoryLaboratoryRoute: LaboratoryLaboratoryRoute,
   NurseNurseRoute: NurseNurseRoute,
   PharmacyPharmacyRoute: PharmacyPharmacyRoute,
   ReceptionistReceptionistRoute: ReceptionistReceptionistRoute,
@@ -651,9 +695,11 @@ export const routeTree = rootRoute
         "/(Auth)/forgot-password",
         "/(Auth)/login",
         "/(Auth)/register",
+        "/(Calendar)/calendar",
         "/(Dashboard)/dashboard",
         "/(Doctor)/doctor",
         "/(Finance)/finance",
+        "/(Laboratory)/laboratory",
         "/(Nurse)/nurse",
         "/(Pharmacy)/pharmacy",
         "/(Receptionist)/receptionist",
@@ -692,6 +738,9 @@ export const routeTree = rootRoute
     "/(Auth)/register": {
       "filePath": "(Auth)/register.tsx"
     },
+    "/(Calendar)/calendar": {
+      "filePath": "(Calendar)/calendar.tsx"
+    },
     "/(Dashboard)/dashboard": {
       "filePath": "(Dashboard)/dashboard.tsx"
     },
@@ -700,6 +749,9 @@ export const routeTree = rootRoute
     },
     "/(Finance)/finance": {
       "filePath": "(Finance)/finance.tsx"
+    },
+    "/(Laboratory)/laboratory": {
+      "filePath": "(Laboratory)/laboratory.tsx"
     },
     "/(Nurse)/nurse": {
       "filePath": "(Nurse)/nurse.tsx"

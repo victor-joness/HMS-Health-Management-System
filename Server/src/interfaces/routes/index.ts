@@ -13,6 +13,7 @@ import bedRoutes from "./BedRoutes";
 import receptionistsRoutes from "./ReceptionistRoutes";
 import humanResourcesEmployees from "./HumanResourcesEmployeeRoutes";
 import hospitalsRoutes from "./HospitalsRoutes";
+import financeEmployees from "./FinanceEmployeeRoutes";
 
 const router = Router();
 
@@ -31,6 +32,7 @@ router.use("/utilities", utilitiesRoutes);
 router.use("/receptionists", receptionistsRoutes);
 router.use("/humanResourcesEmployees", humanResourcesEmployees);
 router.use("/hospitals", hospitalsRoutes);
+router.use("/financeEmployees", financeEmployees);
 
 /* 
 router.use("/appointments", appointmentsRoutes);
