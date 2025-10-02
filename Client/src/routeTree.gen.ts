@@ -15,6 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as HelpCenterIndexImport } from './routes/help-center/index'
 import { Route as HomeIndexImport } from './routes/(Home)/index'
+import { Route as StockStockImport } from './routes/(Stock)/stock'
 import { Route as RhRhImport } from './routes/(Rh)/rh'
 import { Route as ResourcesRoomsImport } from './routes/(Resources)/rooms'
 import { Route as ResourcesEquipmentsImport } from './routes/(Resources)/equipments'
@@ -22,7 +23,10 @@ import { Route as ResourcesAmbulanceImport } from './routes/(Resources)/ambulanc
 import { Route as ReceptionistReceptionistImport } from './routes/(Receptionist)/receptionist'
 import { Route as PharmacyPharmacyImport } from './routes/(Pharmacy)/pharmacy'
 import { Route as NurseNurseImport } from './routes/(Nurse)/nurse'
+import { Route as MonitoringMonitoringImport } from './routes/(Monitoring)/monitoring'
+import { Route as MedicalRecordsMedicalRecordsImport } from './routes/(MedicalRecords)/medical-records'
 import { Route as LaboratoryLaboratoryImport } from './routes/(Laboratory)/laboratory'
+import { Route as FinancePaymentsImport } from './routes/(Finance)/payments'
 import { Route as FinanceFinanceImport } from './routes/(Finance)/finance'
 import { Route as DoctorDoctorImport } from './routes/(Doctor)/doctor'
 import { Route as DashboardDashboardImport } from './routes/(Dashboard)/dashboard'
@@ -30,7 +34,14 @@ import { Route as CalendarCalendarImport } from './routes/(Calendar)/calendar'
 import { Route as AuthRegisterImport } from './routes/(Auth)/register'
 import { Route as AuthLoginImport } from './routes/(Auth)/login'
 import { Route as AuthForgotPasswordImport } from './routes/(Auth)/forgot-password'
+import { Route as AppointmentAppointmentImport } from './routes/(Appointment)/appointment'
+import { Route as AccessTermsAndConditionsImport } from './routes/(Access)/terms-and-conditions'
+import { Route as AccessReleaseAccessImport } from './routes/(Access)/release-access'
+import { Route as AccessPrivacyPolicyImport } from './routes/(Access)/privacy-policy'
+import { Route as AccessIntegrationsImport } from './routes/(Access)/integrations'
+import { Route as AccessAuditsImport } from './routes/(Access)/audits'
 import { Route as PatientsPatientsIndexImport } from './routes/(Patients)/patients/index'
+import { Route as MedicalRecordsMedicalRecordsIdImport } from './routes/(MedicalRecords)/medical-records/$id'
 import { Route as PatientsPatientsProfileIdIndexImport } from './routes/(Patients)/patients/profile/$id/index'
 
 // Create Virtual Routes
@@ -120,6 +131,12 @@ const SettingsAccountLazyRoute = SettingsAccountLazyImport.update({
   import('./routes/settings/account.lazy').then((d) => d.Route),
 )
 
+const StockStockRoute = StockStockImport.update({
+  id: '/(Stock)/stock',
+  path: '/stock',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const RhRhRoute = RhRhImport.update({
   id: '/(Rh)/rh',
   path: '/rh',
@@ -162,9 +179,28 @@ const NurseNurseRoute = NurseNurseImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const MonitoringMonitoringRoute = MonitoringMonitoringImport.update({
+  id: '/(Monitoring)/monitoring',
+  path: '/monitoring',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MedicalRecordsMedicalRecordsRoute =
+  MedicalRecordsMedicalRecordsImport.update({
+    id: '/(MedicalRecords)/medical-records',
+    path: '/medical-records',
+    getParentRoute: () => rootRoute,
+  } as any)
+
 const LaboratoryLaboratoryRoute = LaboratoryLaboratoryImport.update({
   id: '/(Laboratory)/laboratory',
   path: '/laboratory',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FinancePaymentsRoute = FinancePaymentsImport.update({
+  id: '/(Finance)/payments',
+  path: '/payments',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -210,11 +246,54 @@ const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AppointmentAppointmentRoute = AppointmentAppointmentImport.update({
+  id: '/(Appointment)/appointment',
+  path: '/appointment',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AccessTermsAndConditionsRoute = AccessTermsAndConditionsImport.update({
+  id: '/(Access)/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AccessReleaseAccessRoute = AccessReleaseAccessImport.update({
+  id: '/(Access)/release-access',
+  path: '/release-access',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AccessPrivacyPolicyRoute = AccessPrivacyPolicyImport.update({
+  id: '/(Access)/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AccessIntegrationsRoute = AccessIntegrationsImport.update({
+  id: '/(Access)/integrations',
+  path: '/integrations',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AccessAuditsRoute = AccessAuditsImport.update({
+  id: '/(Access)/audits',
+  path: '/audits',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const PatientsPatientsIndexRoute = PatientsPatientsIndexImport.update({
   id: '/(Patients)/patients/',
   path: '/patients/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const MedicalRecordsMedicalRecordsIdRoute =
+  MedicalRecordsMedicalRecordsIdImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => MedicalRecordsMedicalRecordsRoute,
+  } as any)
 
 const PatientsPatientsProfileIdIndexRoute =
   PatientsPatientsProfileIdIndexImport.update({
@@ -239,6 +318,48 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Access)/audits': {
+      id: '/(Access)/audits'
+      path: '/audits'
+      fullPath: '/audits'
+      preLoaderRoute: typeof AccessAuditsImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Access)/integrations': {
+      id: '/(Access)/integrations'
+      path: '/integrations'
+      fullPath: '/integrations'
+      preLoaderRoute: typeof AccessIntegrationsImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Access)/privacy-policy': {
+      id: '/(Access)/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof AccessPrivacyPolicyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Access)/release-access': {
+      id: '/(Access)/release-access'
+      path: '/release-access'
+      fullPath: '/release-access'
+      preLoaderRoute: typeof AccessReleaseAccessImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Access)/terms-and-conditions': {
+      id: '/(Access)/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof AccessTermsAndConditionsImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Appointment)/appointment': {
+      id: '/(Appointment)/appointment'
+      path: '/appointment'
+      fullPath: '/appointment'
+      preLoaderRoute: typeof AppointmentAppointmentImport
       parentRoute: typeof rootRoute
     }
     '/(Auth)/forgot-password': {
@@ -290,11 +411,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceFinanceImport
       parentRoute: typeof rootRoute
     }
+    '/(Finance)/payments': {
+      id: '/(Finance)/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof FinancePaymentsImport
+      parentRoute: typeof rootRoute
+    }
     '/(Laboratory)/laboratory': {
       id: '/(Laboratory)/laboratory'
       path: '/laboratory'
       fullPath: '/laboratory'
       preLoaderRoute: typeof LaboratoryLaboratoryImport
+      parentRoute: typeof rootRoute
+    }
+    '/(MedicalRecords)/medical-records': {
+      id: '/(MedicalRecords)/medical-records'
+      path: '/medical-records'
+      fullPath: '/medical-records'
+      preLoaderRoute: typeof MedicalRecordsMedicalRecordsImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Monitoring)/monitoring': {
+      id: '/(Monitoring)/monitoring'
+      path: '/monitoring'
+      fullPath: '/monitoring'
+      preLoaderRoute: typeof MonitoringMonitoringImport
       parentRoute: typeof rootRoute
     }
     '/(Nurse)/nurse': {
@@ -344,6 +486,13 @@ declare module '@tanstack/react-router' {
       path: '/rh'
       fullPath: '/rh'
       preLoaderRoute: typeof RhRhImport
+      parentRoute: typeof rootRoute
+    }
+    '/(Stock)/stock': {
+      id: '/(Stock)/stock'
+      path: '/stock'
+      fullPath: '/stock'
+      preLoaderRoute: typeof StockStockImport
       parentRoute: typeof rootRoute
     }
     '/settings/account': {
@@ -402,6 +551,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChatsIndexLazyImport
       parentRoute: typeof ChatsRouteLazyImport
     }
+    '/(MedicalRecords)/medical-records/$id': {
+      id: '/(MedicalRecords)/medical-records/$id'
+      path: '/$id'
+      fullPath: '/medical-records/$id'
+      preLoaderRoute: typeof MedicalRecordsMedicalRecordsIdImport
+      parentRoute: typeof MedicalRecordsMedicalRecordsImport
+    }
     '/(Patients)/patients/': {
       id: '/(Patients)/patients/'
       path: '/patients'
@@ -452,9 +608,29 @@ const SettingsRouteLazyRouteChildren: SettingsRouteLazyRouteChildren = {
 const SettingsRouteLazyRouteWithChildren =
   SettingsRouteLazyRoute._addFileChildren(SettingsRouteLazyRouteChildren)
 
+interface MedicalRecordsMedicalRecordsRouteChildren {
+  MedicalRecordsMedicalRecordsIdRoute: typeof MedicalRecordsMedicalRecordsIdRoute
+}
+
+const MedicalRecordsMedicalRecordsRouteChildren: MedicalRecordsMedicalRecordsRouteChildren =
+  {
+    MedicalRecordsMedicalRecordsIdRoute: MedicalRecordsMedicalRecordsIdRoute,
+  }
+
+const MedicalRecordsMedicalRecordsRouteWithChildren =
+  MedicalRecordsMedicalRecordsRoute._addFileChildren(
+    MedicalRecordsMedicalRecordsRouteChildren,
+  )
+
 export interface FileRoutesByFullPath {
   '/chats': typeof ChatsRouteLazyRouteWithChildren
   '/settings': typeof SettingsRouteLazyRouteWithChildren
+  '/audits': typeof AccessAuditsRoute
+  '/integrations': typeof AccessIntegrationsRoute
+  '/privacy-policy': typeof AccessPrivacyPolicyRoute
+  '/release-access': typeof AccessReleaseAccessRoute
+  '/terms-and-conditions': typeof AccessTermsAndConditionsRoute
+  '/appointment': typeof AppointmentAppointmentRoute
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
@@ -462,7 +638,10 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardDashboardRoute
   '/doctor': typeof DoctorDoctorRoute
   '/finance': typeof FinanceFinanceRoute
+  '/payments': typeof FinancePaymentsRoute
   '/laboratory': typeof LaboratoryLaboratoryRoute
+  '/medical-records': typeof MedicalRecordsMedicalRecordsRouteWithChildren
+  '/monitoring': typeof MonitoringMonitoringRoute
   '/nurse': typeof NurseNurseRoute
   '/pharmacy': typeof PharmacyPharmacyRoute
   '/receptionist': typeof ReceptionistReceptionistRoute
@@ -470,6 +649,7 @@ export interface FileRoutesByFullPath {
   '/equipments': typeof ResourcesEquipmentsRoute
   '/rooms': typeof ResourcesRoomsRoute
   '/rh': typeof RhRhRoute
+  '/stock': typeof StockStockRoute
   '/settings/account': typeof SettingsAccountLazyRoute
   '/settings/appearance': typeof SettingsAppearanceLazyRoute
   '/settings/display': typeof SettingsDisplayLazyRoute
@@ -478,12 +658,19 @@ export interface FileRoutesByFullPath {
   '/': typeof HomeIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/chats/': typeof ChatsIndexLazyRoute
+  '/medical-records/$id': typeof MedicalRecordsMedicalRecordsIdRoute
   '/patients': typeof PatientsPatientsIndexRoute
   '/patients/profile/$id': typeof PatientsPatientsProfileIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/settings': typeof SettingsRouteLazyRouteWithChildren
+  '/audits': typeof AccessAuditsRoute
+  '/integrations': typeof AccessIntegrationsRoute
+  '/privacy-policy': typeof AccessPrivacyPolicyRoute
+  '/release-access': typeof AccessReleaseAccessRoute
+  '/terms-and-conditions': typeof AccessTermsAndConditionsRoute
+  '/appointment': typeof AppointmentAppointmentRoute
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
@@ -491,7 +678,10 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardDashboardRoute
   '/doctor': typeof DoctorDoctorRoute
   '/finance': typeof FinanceFinanceRoute
+  '/payments': typeof FinancePaymentsRoute
   '/laboratory': typeof LaboratoryLaboratoryRoute
+  '/medical-records': typeof MedicalRecordsMedicalRecordsRouteWithChildren
+  '/monitoring': typeof MonitoringMonitoringRoute
   '/nurse': typeof NurseNurseRoute
   '/pharmacy': typeof PharmacyPharmacyRoute
   '/receptionist': typeof ReceptionistReceptionistRoute
@@ -499,6 +689,7 @@ export interface FileRoutesByTo {
   '/equipments': typeof ResourcesEquipmentsRoute
   '/rooms': typeof ResourcesRoomsRoute
   '/rh': typeof RhRhRoute
+  '/stock': typeof StockStockRoute
   '/settings/account': typeof SettingsAccountLazyRoute
   '/settings/appearance': typeof SettingsAppearanceLazyRoute
   '/settings/display': typeof SettingsDisplayLazyRoute
@@ -507,6 +698,7 @@ export interface FileRoutesByTo {
   '/': typeof HomeIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/chats': typeof ChatsIndexLazyRoute
+  '/medical-records/$id': typeof MedicalRecordsMedicalRecordsIdRoute
   '/patients': typeof PatientsPatientsIndexRoute
   '/patients/profile/$id': typeof PatientsPatientsProfileIdIndexRoute
 }
@@ -515,6 +707,12 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/chats': typeof ChatsRouteLazyRouteWithChildren
   '/settings': typeof SettingsRouteLazyRouteWithChildren
+  '/(Access)/audits': typeof AccessAuditsRoute
+  '/(Access)/integrations': typeof AccessIntegrationsRoute
+  '/(Access)/privacy-policy': typeof AccessPrivacyPolicyRoute
+  '/(Access)/release-access': typeof AccessReleaseAccessRoute
+  '/(Access)/terms-and-conditions': typeof AccessTermsAndConditionsRoute
+  '/(Appointment)/appointment': typeof AppointmentAppointmentRoute
   '/(Auth)/forgot-password': typeof AuthForgotPasswordRoute
   '/(Auth)/login': typeof AuthLoginRoute
   '/(Auth)/register': typeof AuthRegisterRoute
@@ -522,7 +720,10 @@ export interface FileRoutesById {
   '/(Dashboard)/dashboard': typeof DashboardDashboardRoute
   '/(Doctor)/doctor': typeof DoctorDoctorRoute
   '/(Finance)/finance': typeof FinanceFinanceRoute
+  '/(Finance)/payments': typeof FinancePaymentsRoute
   '/(Laboratory)/laboratory': typeof LaboratoryLaboratoryRoute
+  '/(MedicalRecords)/medical-records': typeof MedicalRecordsMedicalRecordsRouteWithChildren
+  '/(Monitoring)/monitoring': typeof MonitoringMonitoringRoute
   '/(Nurse)/nurse': typeof NurseNurseRoute
   '/(Pharmacy)/pharmacy': typeof PharmacyPharmacyRoute
   '/(Receptionist)/receptionist': typeof ReceptionistReceptionistRoute
@@ -530,6 +731,7 @@ export interface FileRoutesById {
   '/(Resources)/equipments': typeof ResourcesEquipmentsRoute
   '/(Resources)/rooms': typeof ResourcesRoomsRoute
   '/(Rh)/rh': typeof RhRhRoute
+  '/(Stock)/stock': typeof StockStockRoute
   '/settings/account': typeof SettingsAccountLazyRoute
   '/settings/appearance': typeof SettingsAppearanceLazyRoute
   '/settings/display': typeof SettingsDisplayLazyRoute
@@ -538,6 +740,7 @@ export interface FileRoutesById {
   '/(Home)/': typeof HomeIndexRoute
   '/help-center/': typeof HelpCenterIndexRoute
   '/chats/': typeof ChatsIndexLazyRoute
+  '/(MedicalRecords)/medical-records/$id': typeof MedicalRecordsMedicalRecordsIdRoute
   '/(Patients)/patients/': typeof PatientsPatientsIndexRoute
   '/(Patients)/patients/profile/$id/': typeof PatientsPatientsProfileIdIndexRoute
 }
@@ -547,6 +750,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/chats'
     | '/settings'
+    | '/audits'
+    | '/integrations'
+    | '/privacy-policy'
+    | '/release-access'
+    | '/terms-and-conditions'
+    | '/appointment'
     | '/forgot-password'
     | '/login'
     | '/register'
@@ -554,7 +763,10 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/doctor'
     | '/finance'
+    | '/payments'
     | '/laboratory'
+    | '/medical-records'
+    | '/monitoring'
     | '/nurse'
     | '/pharmacy'
     | '/receptionist'
@@ -562,6 +774,7 @@ export interface FileRouteTypes {
     | '/equipments'
     | '/rooms'
     | '/rh'
+    | '/stock'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -570,11 +783,18 @@ export interface FileRouteTypes {
     | '/'
     | '/help-center'
     | '/chats/'
+    | '/medical-records/$id'
     | '/patients'
     | '/patients/profile/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/settings'
+    | '/audits'
+    | '/integrations'
+    | '/privacy-policy'
+    | '/release-access'
+    | '/terms-and-conditions'
+    | '/appointment'
     | '/forgot-password'
     | '/login'
     | '/register'
@@ -582,7 +802,10 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/doctor'
     | '/finance'
+    | '/payments'
     | '/laboratory'
+    | '/medical-records'
+    | '/monitoring'
     | '/nurse'
     | '/pharmacy'
     | '/receptionist'
@@ -590,6 +813,7 @@ export interface FileRouteTypes {
     | '/equipments'
     | '/rooms'
     | '/rh'
+    | '/stock'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -598,12 +822,19 @@ export interface FileRouteTypes {
     | '/'
     | '/help-center'
     | '/chats'
+    | '/medical-records/$id'
     | '/patients'
     | '/patients/profile/$id'
   id:
     | '__root__'
     | '/chats'
     | '/settings'
+    | '/(Access)/audits'
+    | '/(Access)/integrations'
+    | '/(Access)/privacy-policy'
+    | '/(Access)/release-access'
+    | '/(Access)/terms-and-conditions'
+    | '/(Appointment)/appointment'
     | '/(Auth)/forgot-password'
     | '/(Auth)/login'
     | '/(Auth)/register'
@@ -611,7 +842,10 @@ export interface FileRouteTypes {
     | '/(Dashboard)/dashboard'
     | '/(Doctor)/doctor'
     | '/(Finance)/finance'
+    | '/(Finance)/payments'
     | '/(Laboratory)/laboratory'
+    | '/(MedicalRecords)/medical-records'
+    | '/(Monitoring)/monitoring'
     | '/(Nurse)/nurse'
     | '/(Pharmacy)/pharmacy'
     | '/(Receptionist)/receptionist'
@@ -619,6 +853,7 @@ export interface FileRouteTypes {
     | '/(Resources)/equipments'
     | '/(Resources)/rooms'
     | '/(Rh)/rh'
+    | '/(Stock)/stock'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -627,6 +862,7 @@ export interface FileRouteTypes {
     | '/(Home)/'
     | '/help-center/'
     | '/chats/'
+    | '/(MedicalRecords)/medical-records/$id'
     | '/(Patients)/patients/'
     | '/(Patients)/patients/profile/$id/'
   fileRoutesById: FileRoutesById
@@ -635,6 +871,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   ChatsRouteLazyRoute: typeof ChatsRouteLazyRouteWithChildren
   SettingsRouteLazyRoute: typeof SettingsRouteLazyRouteWithChildren
+  AccessAuditsRoute: typeof AccessAuditsRoute
+  AccessIntegrationsRoute: typeof AccessIntegrationsRoute
+  AccessPrivacyPolicyRoute: typeof AccessPrivacyPolicyRoute
+  AccessReleaseAccessRoute: typeof AccessReleaseAccessRoute
+  AccessTermsAndConditionsRoute: typeof AccessTermsAndConditionsRoute
+  AppointmentAppointmentRoute: typeof AppointmentAppointmentRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
@@ -642,7 +884,10 @@ export interface RootRouteChildren {
   DashboardDashboardRoute: typeof DashboardDashboardRoute
   DoctorDoctorRoute: typeof DoctorDoctorRoute
   FinanceFinanceRoute: typeof FinanceFinanceRoute
+  FinancePaymentsRoute: typeof FinancePaymentsRoute
   LaboratoryLaboratoryRoute: typeof LaboratoryLaboratoryRoute
+  MedicalRecordsMedicalRecordsRoute: typeof MedicalRecordsMedicalRecordsRouteWithChildren
+  MonitoringMonitoringRoute: typeof MonitoringMonitoringRoute
   NurseNurseRoute: typeof NurseNurseRoute
   PharmacyPharmacyRoute: typeof PharmacyPharmacyRoute
   ReceptionistReceptionistRoute: typeof ReceptionistReceptionistRoute
@@ -650,6 +895,7 @@ export interface RootRouteChildren {
   ResourcesEquipmentsRoute: typeof ResourcesEquipmentsRoute
   ResourcesRoomsRoute: typeof ResourcesRoomsRoute
   RhRhRoute: typeof RhRhRoute
+  StockStockRoute: typeof StockStockRoute
   HomeIndexRoute: typeof HomeIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
   PatientsPatientsIndexRoute: typeof PatientsPatientsIndexRoute
@@ -659,6 +905,12 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   ChatsRouteLazyRoute: ChatsRouteLazyRouteWithChildren,
   SettingsRouteLazyRoute: SettingsRouteLazyRouteWithChildren,
+  AccessAuditsRoute: AccessAuditsRoute,
+  AccessIntegrationsRoute: AccessIntegrationsRoute,
+  AccessPrivacyPolicyRoute: AccessPrivacyPolicyRoute,
+  AccessReleaseAccessRoute: AccessReleaseAccessRoute,
+  AccessTermsAndConditionsRoute: AccessTermsAndConditionsRoute,
+  AppointmentAppointmentRoute: AppointmentAppointmentRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
@@ -666,7 +918,11 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardDashboardRoute: DashboardDashboardRoute,
   DoctorDoctorRoute: DoctorDoctorRoute,
   FinanceFinanceRoute: FinanceFinanceRoute,
+  FinancePaymentsRoute: FinancePaymentsRoute,
   LaboratoryLaboratoryRoute: LaboratoryLaboratoryRoute,
+  MedicalRecordsMedicalRecordsRoute:
+    MedicalRecordsMedicalRecordsRouteWithChildren,
+  MonitoringMonitoringRoute: MonitoringMonitoringRoute,
   NurseNurseRoute: NurseNurseRoute,
   PharmacyPharmacyRoute: PharmacyPharmacyRoute,
   ReceptionistReceptionistRoute: ReceptionistReceptionistRoute,
@@ -674,6 +930,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesEquipmentsRoute: ResourcesEquipmentsRoute,
   ResourcesRoomsRoute: ResourcesRoomsRoute,
   RhRhRoute: RhRhRoute,
+  StockStockRoute: StockStockRoute,
   HomeIndexRoute: HomeIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
   PatientsPatientsIndexRoute: PatientsPatientsIndexRoute,
@@ -692,6 +949,12 @@ export const routeTree = rootRoute
       "children": [
         "/chats",
         "/settings",
+        "/(Access)/audits",
+        "/(Access)/integrations",
+        "/(Access)/privacy-policy",
+        "/(Access)/release-access",
+        "/(Access)/terms-and-conditions",
+        "/(Appointment)/appointment",
         "/(Auth)/forgot-password",
         "/(Auth)/login",
         "/(Auth)/register",
@@ -699,7 +962,10 @@ export const routeTree = rootRoute
         "/(Dashboard)/dashboard",
         "/(Doctor)/doctor",
         "/(Finance)/finance",
+        "/(Finance)/payments",
         "/(Laboratory)/laboratory",
+        "/(MedicalRecords)/medical-records",
+        "/(Monitoring)/monitoring",
         "/(Nurse)/nurse",
         "/(Pharmacy)/pharmacy",
         "/(Receptionist)/receptionist",
@@ -707,6 +973,7 @@ export const routeTree = rootRoute
         "/(Resources)/equipments",
         "/(Resources)/rooms",
         "/(Rh)/rh",
+        "/(Stock)/stock",
         "/(Home)/",
         "/help-center/",
         "/(Patients)/patients/",
@@ -729,6 +996,24 @@ export const routeTree = rootRoute
         "/settings/profile"
       ]
     },
+    "/(Access)/audits": {
+      "filePath": "(Access)/audits.tsx"
+    },
+    "/(Access)/integrations": {
+      "filePath": "(Access)/integrations.tsx"
+    },
+    "/(Access)/privacy-policy": {
+      "filePath": "(Access)/privacy-policy.tsx"
+    },
+    "/(Access)/release-access": {
+      "filePath": "(Access)/release-access.tsx"
+    },
+    "/(Access)/terms-and-conditions": {
+      "filePath": "(Access)/terms-and-conditions.tsx"
+    },
+    "/(Appointment)/appointment": {
+      "filePath": "(Appointment)/appointment.tsx"
+    },
     "/(Auth)/forgot-password": {
       "filePath": "(Auth)/forgot-password.tsx"
     },
@@ -750,8 +1035,20 @@ export const routeTree = rootRoute
     "/(Finance)/finance": {
       "filePath": "(Finance)/finance.tsx"
     },
+    "/(Finance)/payments": {
+      "filePath": "(Finance)/payments.tsx"
+    },
     "/(Laboratory)/laboratory": {
       "filePath": "(Laboratory)/laboratory.tsx"
+    },
+    "/(MedicalRecords)/medical-records": {
+      "filePath": "(MedicalRecords)/medical-records.tsx",
+      "children": [
+        "/(MedicalRecords)/medical-records/$id"
+      ]
+    },
+    "/(Monitoring)/monitoring": {
+      "filePath": "(Monitoring)/monitoring.tsx"
     },
     "/(Nurse)/nurse": {
       "filePath": "(Nurse)/nurse.tsx"
@@ -773,6 +1070,9 @@ export const routeTree = rootRoute
     },
     "/(Rh)/rh": {
       "filePath": "(Rh)/rh.tsx"
+    },
+    "/(Stock)/stock": {
+      "filePath": "(Stock)/stock.tsx"
     },
     "/settings/account": {
       "filePath": "settings/account.lazy.tsx",
@@ -803,6 +1103,10 @@ export const routeTree = rootRoute
     "/chats/": {
       "filePath": "chats/index.lazy.tsx",
       "parent": "/chats"
+    },
+    "/(MedicalRecords)/medical-records/$id": {
+      "filePath": "(MedicalRecords)/medical-records/$id.tsx",
+      "parent": "/(MedicalRecords)/medical-records"
     },
     "/(Patients)/patients/": {
       "filePath": "(Patients)/patients/index.tsx"

@@ -40,6 +40,7 @@ import {
   IconMessage,
   IconHours24,
   IconColorFilter,
+  IconCalendar,
 } from '@tabler/icons-react'
 import { t } from 'i18next'
 import { type SidebarData } from '../types'
@@ -59,6 +60,16 @@ export const sidebarData: SidebarData = {
           title: t('Sidebar.Dashboard'),
           url: '/dashboard',
           icon: IconLayoutDashboard,
+        },
+        {
+          title: t('Sidebar.Monitoring'),
+          url: '/monitoring',
+          icon: IconEye,
+        },
+        {
+          title: t('Sidebar.MedicalRecords'),
+          url: '/medical-records',
+          icon: IconFileText,
         },
         {
           title: t('Sidebar.Department'),
@@ -111,6 +122,11 @@ export const sidebarData: SidebarData = {
           title: t('Sidebar.Patients'),
           url: '/patients',
           icon: IconUsersGroup,
+        },
+        {
+          title: t('Sidebar.Appointment'),
+          url: '/appointment',
+          icon: IconCalendar,
         },
         {
           title: t('Sidebar.Calendar'),

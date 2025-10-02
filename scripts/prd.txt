@@ -1,0 +1,70 @@
+Nome do Produto:
+Sistema Integrado de Gerenciamento Hospitalar (HMS+)
+
+Objetivo:
+Desenvolver um sistema hospitalar altamente integrado que centralize e automatize a gestão operacional, clínica, financeira e emergencial de instituições de saúde, otimizando processos, reduzindo custos e melhorando a experiência do paciente.
+
+Módulos Integrados:
+
+1. ERP (Enterprise Resource Planning)
+- Gestão financeira e contábil
+- Controle de compras e fornecedores
+- Gerenciamento de estoque e almoxarifado
+- Administração de recursos humanos (folha, ponto, escalas)
+
+2. EMS (Emergency Medical Services)
+- Roteamento e alocação de ambulâncias
+- Comunicação em tempo real entre ambulâncias e hospitais
+- Painel de triagem de emergência
+
+3. LIMS (Laboratory Information Management System)
+- Cadastro e rastreamento de amostras
+- Automação de pedidos de exames
+- Armazenamento e entrega digital de laudos laboratoriais
+
+4. PMS (Practice Management System)
+- Agendamento de consultas e exames
+- Cadastro e prontuário de pacientes
+- Gestão de filas e fluxo de atendimento
+
+5. RIS (Radiology Information System)
+- Solicitação e agendamento de exames de imagem
+- Visualização DICOM integrada
+- Armazenamento e compartilhamento seguro de imagens
+
+6. EHR (Electronic Health Record)
+- Histórico médico digital unificado por paciente
+- Registro de diagnósticos, prescrições e procedimentos
+- Compartilhamento entre setores (clínica, laboratório, emergência)
+
+Público-Alvo:
+- Hospitais privados e públicos
+- Clínicas médicas de médio e grande porte
+- Laboratórios e centros de diagnóstico por imagem
+- Equipes de emergência e ambulatórios
+
+Funcionalidades Principais:
+- Dashboard administrativo para gestão geral da instituição
+- Controle de permissões e acesso por setor/profissional
+- Notificações em tempo real (ex: exame pronto, paciente em risco)
+- Integração com sistemas externos (APIs para convênios, farmácias, etc.)
+- Armazenamento seguro em nuvem com backup automatizado
+- Interface web responsiva e aplicação mobile para profissionais
+
+Tecnologias Sugeridas:
+- Frontend: React
+- Backend: Node.js
+- Banco de Dados: PostgreSQL (relacional) + MongoDB (dados médicos)
+- Infraestrutura: Docker, Kubernetes, AWS ou GCP
+- Segurança: Autenticação com OAuth2 ou jwt
+
+Requisitos de Teste:
+- Testes unitários, de integração e E2E
+- Validação de interoperabilidade entre módulos
+- Testes de desempenho e escalabilidade
+
+Métricas de Sucesso:
+- Redução de 30% no tempo médio de atendimento
+- Redução de erros de prontuário em 40%
+- Agilidade de resposta a emergências aumentada em 25%
+- Aumento da taxa de ocupação de exames e consultas em 20%

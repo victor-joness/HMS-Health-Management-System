@@ -17,6 +17,8 @@ import { sidebarData } from './data/sidebar-data'
 const rolePermissions: { [key: string]: string[] } = {
   ADMIN: [
     t('Sidebar.Dashboard'),
+    t('Sidebar.Monitoring'),
+    t('Sidebar.MedicalRecords'),
     t('Sidebar.Department'),
     t('Sidebar.Doctor'),
     t('Sidebar.Nurse'),
@@ -24,6 +26,7 @@ const rolePermissions: { [key: string]: string[] } = {
     t('Sidebar.Emergency'),
     t('Sidebar.Rooms'),
     t('Sidebar.Ambulances'),
+    t('Sidebar.Appointment'),
     t('Sidebar.Calendar'),
     t('Sidebar.Laboratory'),
     t('Sidebar.Pharmacy'),
@@ -57,6 +60,8 @@ const rolePermissions: { [key: string]: string[] } = {
   ],
   PACIENTE: [
     t('Sidebar.Dashboard'),
+    t('Sidebar.PrivacyPolicy'),
+    t('Sidebar.TermsAndConditions'),
     '',
     t('Sidebar.Profile'),
     t('Sidebar.Account'),
@@ -71,6 +76,8 @@ const rolePermissions: { [key: string]: string[] } = {
     t('Sidebar.Calendar'),
     t('Sidebar.Patients'),
     t('Sidebar.Emergency'),
+    t('Sidebar.PrivacyPolicy'),
+    t('Sidebar.TermsAndConditions'),
     '',
     t('Sidebar.Department'),
     t('Sidebar.Services'),
@@ -86,6 +93,8 @@ const rolePermissions: { [key: string]: string[] } = {
   ],
   ENFERMEIRA: [
     t('Sidebar.Dashboard'),
+    t('Sidebar.PrivacyPolicy'),
+    t('Sidebar.TermsAndConditions'),
     '',
     t('Sidebar.Profile'),
     t('Sidebar.Account'),
@@ -103,6 +112,8 @@ const rolePermissions: { [key: string]: string[] } = {
     t('Sidebar.Dashboard'),
     t('Sidebar.Calendar'),
     t('Sidebar.Patients'),
+    t('Sidebar.PrivacyPolicy'),
+    t('Sidebar.TermsAndConditions'),
     '',
     t('Sidebar.Profile'),
     t('Sidebar.Account'),

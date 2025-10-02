@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconArrowDown, IconArrowUp, IconArrowRight, IconLineScan} from '@tabler/icons-react'
+import { IconArrowDown, IconArrowUp, IconArrowRight, IconLineScan, IconFileText, IconClock, IconUser, IconActivity } from '@tabler/icons-react'
 import { Auth } from '@/entities/Auth'
 import { Patient } from '@/entities/Patients'
 import { Report } from '@/entities/Report'
@@ -10,6 +10,13 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { mockMedicalRecords } from '@/features/medical-records/data/mock-medical-records'
+import { MedicalRecord } from '@/entities/MedicalRecord'
+import { useLocation } from 'react-router-dom'
 
 type PatientProfileProps = {
   Patient: Patient
@@ -57,6 +64,9 @@ const PatientProfile: React.FC<PatientProfileProps> = ({ Patient, Auth }) => {
     (Number(Patient.Report.BloodPressure.split('/')[0]) /
       Number(Patient.Report.BloodPressure.split('/')[1])) *
     100
+
+  const location = useLocation()
+  const medicalRecord = location.state?.medicalRecord as MedicalRecord | undefined
 
   console.log(Patient)
 
@@ -172,8 +182,203 @@ const PatientProfile: React.FC<PatientProfileProps> = ({ Patient, Auth }) => {
             </div>
 
             <div className='w-full flex gap-6 mt-4'> 
-            <div className='w-full bg-gray-50 p-6 rounded-lg shadow-md'>
-                <h2 className='text-xl font-bold mb-4'>Historico</h2>
+              <div className='w-full bg-gray-50 p-6 rounded-lg shadow-md'>
+                <h2 className='text-xl font-bold mb-4'>Histórico Médico</h2>
+                
+                <Tabs defaultValue="overview" className="w-full">
+                  <TabsList className="grid w-full grid-cols-4">
+                    <TabsTrigger value="overview">Visão Geral</TabsTrigger>
+                    <TabsTrigger value="visits">Visitas</TabsTrigger>
+                    <TabsTrigger value="exams">Exames</TabsTrigger>
+                    <TabsTrigger value="medications">Medicamentos</TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value="overview" className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <IconUser className="h-5 w-5 mr-2" />
+                            Informações Básicas
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="font-medium">Status:</span>
+                              <Badge variant={Patient.Report.PatientStatus === 'ALTA' ? 'default' : 'secondary'}>
+                                {Patient.Report.PatientStatus}
+                              </Badge>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="font-medium">Fluxo:</span>
+                              <Badge variant="outline">
+                                {Patient.Report.PatientFluxo}
+                              </Badge>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="font-medium">Tipo Sanguíneo:</span>
+                              <span>{Patient.Report.BloodType}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="font-medium">Doador de Órgãos:</span>
+                              <span>{Patient.OrganDonor ? 'Sim' : 'Não'}</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <IconActivity className="h-5 w-5 mr-2" />
+                            Condições Médicas
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div>
+                              <h4 className="font-semibold mb-2">Alergias:</h4>
+                              <div className="flex flex-wrap gap-1">
+                                {Patient.Report.Allergies.map((allergy, index) => (
+                                  <Badge key={index} variant="destructive">
+                                    {allergy}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold mb-2">Doenças Crônicas:</h4>
+                              <div className="flex flex-wrap gap-1">
+                                {Patient.Report.ChronicDiseases.map((disease, index) => (
+                                  <Badge key={index} variant="secondary">
+                                    {disease}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold mb-2">Sintomas:</h4>
+                              <div className="flex flex-wrap gap-1">
+                                {Patient.Report.Symptoms.map((symptom, index) => (
+                                  <Badge key={index} variant="outline">
+                                    {symptom}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {medicalRecord && (
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <IconFileText className="h-5 w-5 mr-2" />
+                            Último Prontuário
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                              <div>
+                                <h4 className="font-semibold">Queixa Principal</h4>
+                                <p className="text-sm text-muted-foreground">{medicalRecord.chiefComplaint}</p>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold">Diagnóstico</h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {medicalRecord.diagnosis.map((diag, index) => (
+                                    <Badge key={index} variant="secondary">
+                                      {diag}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold">Tratamento</h4>
+                                <p className="text-sm text-muted-foreground">{medicalRecord.treatmentPlan.recommendations.join(', ')}</p>
+                              </div>
+                            </div>
+                            <div className="flex justify-end">
+                              <Button variant="outline" size="sm">
+                                Ver Prontuário Completo
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+                  </TabsContent>
+
+                  <TabsContent value="visits" className="space-y-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Histórico de Visitas</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          <div className="border rounded-lg p-4">
+                            <div className="flex justify-between items-start mb-2">
+                              <div>
+                                <h4 className="font-semibold">Última Visita</h4>
+                                <p className="text-sm text-muted-foreground">{Patient.LastVisitDate}</p>
+                              </div>
+                              <Badge variant="default">Concluída</Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              {Patient.Report.Diagnosis} - {Patient.Report.Treatment}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value="exams" className="space-y-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Exames Realizados</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-2">
+                          {Patient.Report.Exams.map((exam, index) => (
+                            <div key={index} className="flex justify-between items-center p-3 border rounded-lg">
+                              <div>
+                                <h4 className="font-medium">{exam}</h4>
+                                <p className="text-sm text-muted-foreground">Data: {Patient.LastVisitDate}</p>
+                              </div>
+                              <Badge variant="default">Concluído</Badge>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value="medications" className="space-y-4">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Medicamentos Prescritos</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-2">
+                          {Patient.Report.Medications.map((medication, index) => (
+                            <div key={index} className="flex justify-between items-center p-3 border rounded-lg">
+                              <div>
+                                <h4 className="font-medium">{medication}</h4>
+                                <p className="text-sm text-muted-foreground">Prescrito em: {Patient.LastVisitDate}</p>
+                              </div>
+                              <Badge variant="outline">Ativo</Badge>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
               </div>
             </div>
           </div>
